@@ -1,0 +1,19 @@
+<svg viewBox="0 0 80 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bordeaux: High straight shoulders, cylindrical body -->
+  <!-- Cork/capsule -->
+  <rect x="34" y="0" width="12" height="8" fill="currentColor"/>
+  <!-- Neck -->
+  <rect x="32" y="8" width="16" height="55" fill="currentColor"/>
+  <!-- Collar ring -->
+  <rect x="28" y="63" width="24" height="6" fill="currentColor"/>
+  <!-- Shoulders (sharp, angular) -->
+  <path d="M28 69 L12 95 L12 95" fill="currentColor"/>
+  <path d="M52 69 L68 95 L68 95" fill="currentColor"/>
+  <rect x="12" y="89" width="56" height="6" fill="currentColor"/>
+  <path d="M28 69 L12 95 L68 95 L52 69 Z" fill="currentColor"/>
+  <!-- Body (straight cylinder) -->
+  <rect x="12" y="95" width="56" height="160" fill="currentColor"/>
+  <!-- Base/punt -->
+  <rect x="8" y="255" width="64" height="8" fill="currentColor"/>
+  <rect x="12" y="263" width="56" height="4" fill="currentColor"/>
+</svg>

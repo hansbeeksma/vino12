@@ -1,0 +1,16 @@
+<svg viewBox="0 0 80 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bourgogne: Sloping shoulders, wider belly -->
+  <!-- Cork/capsule -->
+  <rect x="34" y="0" width="12" height="8" fill="currentColor"/>
+  <!-- Neck (longer, thinner) -->
+  <rect x="33" y="8" width="14" height="60" fill="currentColor"/>
+  <!-- Collar ring -->
+  <rect x="30" y="68" width="20" height="5" fill="currentColor"/>
+  <!-- Shoulders (smooth, sloping curve) -->
+  <path d="M30 73 Q30 73 28 85 Q22 105 14 130 L14 130 L66 130 Q58 105 52 85 Q50 73 50 73 Z" fill="currentColor"/>
+  <!-- Body (wider, gently tapering) -->
+  <path d="M14 130 L12 245 L68 245 L66 130 Z" fill="currentColor"/>
+  <!-- Base -->
+  <rect x="8" y="245" width="64" height="8" fill="currentColor"/>
+  <rect x="10" y="253" width="60" height="4" fill="currentColor"/>
+</svg>
