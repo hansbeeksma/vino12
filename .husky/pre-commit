@@ -3,3 +3,6 @@ bash ~/Development/shared/pre-commit-gitleaks.sh
 
 # Code quality checks
 npx lint-staged
+
+# Run tests
+npx vitest run --reporter=dot
