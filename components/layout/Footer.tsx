@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export function Footer() {
   return (
     <footer className="bg-ink text-champagne border-t-brutal border-wine">
@@ -12,9 +14,7 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="font-accent text-xs uppercase tracking-widest mb-4 text-wine">
-              Info
-            </h4>
+            <h4 className="font-accent text-xs uppercase tracking-widest mb-4 text-wine">Info</h4>
             <ul className="space-y-2 font-body text-lg">
               <li>
                 <a href="#collectie" className="hover:text-wine">
@@ -48,15 +48,31 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t-2 border-champagne/20 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-accent text-xs text-champagne/40">
-            &copy; 2026 Vino12. Alle rechten voorbehouden.
-          </p>
-          <p className="font-accent text-xs text-champagne/40">
+        <div className="mt-12 pt-8 border-t-2 border-champagne/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+            <p className="font-accent text-xs text-champagne/40">
+              &copy; 2026 Vino12. Alle rechten voorbehouden.
+            </p>
+            <nav className="flex gap-4">
+              <Link
+                href="/voorwaarden"
+                className="font-accent text-xs text-champagne/40 hover:text-wine"
+              >
+                Algemene Voorwaarden
+              </Link>
+              <Link
+                href="/privacy"
+                className="font-accent text-xs text-champagne/40 hover:text-wine"
+              >
+                Privacy
+              </Link>
+            </nav>
+          </div>
+          <p className="font-accent text-xs text-champagne/30 text-center">
             Concept prototype — niet voor commercieel gebruik
           </p>
         </div>
       </div>
     </footer>
-  );
+  )
 }
