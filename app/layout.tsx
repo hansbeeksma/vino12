@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Space_Mono, Darker_Grotesque } from 'next/font/google'
 import { CartDrawer } from '@/components/shop/CartDrawer'
+import { AgeGate } from '@/components/compliance/AgeGate'
 import './globals.css'
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -53,6 +54,7 @@ export default function RootLayout({
       className={`${ibmPlexMono.variable} ${spaceMono.variable} ${darkerGrotesque.variable}`}
     >
       <body className="bg-offwhite text-ink antialiased">
+        <AgeGate />
         {children}
         <CartDrawer />
       </body>
