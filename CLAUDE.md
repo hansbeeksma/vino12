@@ -1,35 +1,69 @@
-# Vino12
+# VINO12 - Project Configuration
 
-Premium wijnbox webshop - 12 flessen (6 rood, 6 wit).
-Neo-brutalism design met echte wijnafbeeldingen en Stripe checkout.
+**See:** `~/.claude/CLAUDE.md` for global configuration
+**Plane Project:** VINO (identifier), UUID: c8eac7b1-5a7c-429f-9fee-9b21ef62013c
 
-## Stack
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS (neo-brutalism theme)
-- Framer Motion (animations)
-- Swiper (carousel)
-- Stripe (checkout/payments)
+---
 
-## Design System
-- No border-radius anywhere
-- 4-6px solid borders
-- Hard shadows: `4px 4px 0px rgba(0,0,0,0.8)`
-- IBM Plex Mono (display), Darker Grotesque (body), Space Mono (labels)
-- Colors: wine (#722F37), burgundy (#660033), emerald (#00674F), champagne (#F7E6CA), offwhite (#FAFAF5)
+## Quick Reference
 
-## Key Architecture
-- Wine data: `data/wines.json` (12 wines with image paths)
-- Cart: React Context + localStorage (`lib/cart-context.tsx`)
-- Checkout: `/api/checkout` → Stripe hosted checkout
-- Images: `public/images/wines/` (sourced from timetowine.nl)
+Dit project gebruikt de globale configuratie van `~/.claude/CLAUDE.md`.
 
-## Scripts
-- `npx tsx scripts/scrape-wines.ts` — Download wine images
-- `npx tsx scripts/vino12.ts <cmd>` — CLI (dev/build/deploy/check)
+### Plane Integration
 
-## Environment Variables
-- `STRIPE_SECRET_KEY` — Stripe server-side key
-- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` — Stripe client-side key
-- `STRIPE_WEBHOOK_SECRET` — Stripe webhook verification
-- `NEXT_PUBLIC_SITE_URL` — Site URL (https://vino12.com)
+| Setting            | Value                                |
+| ------------------ | ------------------------------------ |
+| Project Identifier | VINO                                 |
+| Project UUID       | c8eac7b1-5a7c-429f-9fee-9b21ef62013c |
+| Sync Library       | `~/.cleo/lib/plane-sync.sh`          |
+
+### Tech Stack
+
+| Component  | Keuze                               |
+| ---------- | ----------------------------------- |
+| Framework  | Next.js 14 (App Router)             |
+| Database   | Supabase (PostgreSQL 17)            |
+| Payment    | Mollie (iDEAL native)               |
+| Email      | Resend + react-email                |
+| Cache      | @rooseveltops/cache-layer + Upstash |
+| UI         | Shadcn/ui + Tailwind CSS            |
+| State      | Zustand                             |
+| Monitoring | Sentry + OpenTelemetry              |
+| Hosting    | Vercel                              |
+
+### Route Structure
+
+- `(shop)/` - Publieke winkel (NL: `/wijnen`, `/winkelwagen`, `/afrekenen`)
+- `admin/` - Admin dashboard
+- `api/` - API routes (EN: `/api/products`, `/api/checkout`, `/api/webhooks/mollie`)
+
+### Compliance
+
+- **Leeftijdsverificatie**: 18+ gate, server cookie, middleware check
+- **GDPR**: Cookie consent, data export/deletion endpoints
+- **PCI DSS**: Mollie hosted payment page (SAQ-A compliant)
+
+### Daily Workflow
+
+```bash
+# Pull issues from Plane
+source ~/.cleo/lib/plane-sync.sh
+plane-sync pull --project VINO
+
+# Start CLEO session
+cleo session start --scope epic:T001 --auto-focus
+
+# Complete task
+cleo complete T###
+
+# Push to Plane (via MCP)
+# State updates happen automatically via plane-mcp-workflow.md
+```
+
+---
+
+**Voor volledige configuratie, zie:**
+
+- Global config: `~/.claude/CLAUDE.md`
+- Plane workflow: `~/.claude/rules/plane-mcp-workflow.md`
+- MCP reference: `~/.claude/docs/MCP-REFERENCE.md`

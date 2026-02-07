@@ -1,14 +1,27 @@
 ---
 status: IN_PROGRESS
 last_updated: 2026-02-07
-lifecycle_reason: Premium wine box webshop - live on vino12.com with Stripe checkout
+lifecycle_reason: Project bootstrap - wine e-commerce webshop
 ---
 
-# Vino12 - State
+# VINO12 - Wine E-Commerce Webshop
 
-## Project
-- **Type:** Consumer product
-- **Stack:** Next.js 14, TypeScript, Tailwind CSS, Framer Motion
-- **Design:** Neo-brutalism wine theme
-- **Domain:** vino12.com (Vercel)
-- **Payments:** Stripe (iDEAL + card, NL/BE/DE)
+## Overview
+
+Wine e-commerce webshop met dropship fulfillment model, gericht op de Nederlandse markt.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Database**: Supabase (PostgreSQL 17)
+- **Payment**: Mollie (iDEAL native)
+- **Email**: Resend + react-email
+- **Cache**: @rooseveltops/cache-layer + Upstash
+- **UI**: Shadcn/ui + Tailwind CSS
+- **State**: Zustand
+- **Monitoring**: Sentry + OpenTelemetry
+- **Hosting**: Vercel
+
+## Current Phase
+
+Sprint 0: Infrastructure setup

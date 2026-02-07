@@ -1,0 +1,74 @@
+# VINO12 - Gitleaks Configuration
+# Extends default gitleaks rules with custom patterns
+
+title = "VINO12 Gitleaks Config"
+
+[extend]
+useDefault = true
+
+# Custom rules for our stack
+[[rules]]
+id = "mollie-api-key"
+description = "Mollie API Key"
+regex = '''(live|test)_[a-zA-Z0-9]{20,}'''
+tags = ["mollie", "secret"]
+
+[[rules]]
+id = "mollie-profile-id"
+description = "Mollie Profile ID"
+regex = '''pfl_[a-zA-Z0-9]{10,}'''
+tags = ["mollie", "secret"]
+
+[[rules]]
+id = "resend-api-key"
+description = "Resend API Key"
+regex = '''re_[a-zA-Z0-9]{20,}'''
+tags = ["resend", "secret"]
+
+[[rules]]
+id = "stripe-live-key"
+description = "Stripe Live Secret Key"
+regex = '''sk_live_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret", "critical"]
+
+[[rules]]
+id = "stripe-test-key"
+description = "Stripe Test Secret Key"
+regex = '''sk_test_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret"]
+
+[[rules]]
+id = "supabase-service-role"
+description = "Supabase Service Role Key"
+regex = '''eyJ[a-zA-Z0-9_-]{50,}\.eyJ[a-zA-Z0-9_-]{50,}\.[\w-]{50,}'''
+tags = ["supabase", "jwt", "secret"]
+[rules.allowlist]
+paths = [
+  '''package-lock\.json''',
+  '''pnpm-lock\.yaml''',
+  '''yarn\.lock''',
+  '''\.test\.(ts|js|tsx|jsx)$''',
+  '''__tests__/''',
+  '''\.spec\.(ts|js|tsx|jsx)$''',
+]
+
+[[rules]]
+id = "upstash-redis-token"
+description = "Upstash Redis Token"
+regex = '''AX[a-zA-Z0-9]{30,}'''
+tags = ["upstash", "redis", "secret"]
+
+# Global allowlist
+[allowlist]
+paths = [
+  '''node_modules/''',
+  '''\.next/''',
+  '''dist/''',
+  '''build/''',
+  '''\.turbo/''',
+  '''package-lock\.json''',
+  '''pnpm-lock\.yaml''',
+  '''yarn\.lock''',
+  '''\.gitleaks\.toml''',
+  '''\.github/workflows/''',
+]

@@ -1,0 +1,196 @@
+rules:
+  # OWASP A01:2025 - Broken Access Control
+  - id: missing-auth-check
+    pattern-either:
+      - pattern: |
+          app.$METHOD($PATH, async ($REQ, $RES) => {
+            ...
+          })
+      - pattern: |
+          router.$METHOD($PATH, async ($REQ, $RES) => {
+            ...
+          })
+    pattern-not-inside: |
+      router.$METHOD($PATH, $MIDDLEWARE, ...)
+    message: >
+      Endpoint missing authentication/authorization middleware.
+      Add auth middleware to prevent broken access control.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A01:2025 - Broken Access Control"
+      cwe: "CWE-284"
+      category: security
+
+  # OWASP A02:2025 - Cryptographic Failures
+  - id: weak-crypto
+    pattern-either:
+      - pattern: crypto.createHash('md5')
+      - pattern: crypto.createHash('sha1')
+      - pattern: bcrypt.hash($PWD, $ROUNDS)
+    pattern-not: bcrypt.hash($PWD, 12)
+    message: >
+      Weak cryptographic algorithm detected.
+      Use SHA-256 or stronger, and bcrypt with rounds >= 12.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A02:2025 - Cryptographic Failures"
+      cwe: "CWE-327"
+
+  # OWASP A03:2025 - Injection
+  - id: sql-injection-risk
+    pattern-either:
+      - pattern: |
+          $DB.query($SQL + $USER_INPUT)
+      - pattern: |
+          $DB.query(`...${$VAR}...`)
+      - pattern: |
+          $DB.raw($SQL + $VAR)
+    message: >
+      Potential SQL injection vulnerability.
+      Use parameterized queries or ORM methods.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A03:2025 - Injection"
+      cwe: "CWE-89"
+
+  - id: command-injection-risk
+    pattern-either:
+      - pattern: |
+          exec($CMD + $USER_INPUT)
+      - pattern: |
+          execSync($CMD + $USER_INPUT)
+      - pattern: |
+          spawn($CMD, [$USER_INPUT])
+    message: >
+      Potential command injection vulnerability.
+      Sanitize user input before executing shell commands.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A03:2025 - Injection"
+      cwe: "CWE-78"
+
+  # OWASP A04:2025 - Insecure Design
+  - id: hardcoded-secrets
+    patterns:
+      - pattern-either:
+          - pattern: |
+              const $VAR = "$SECRET"
+          - pattern: |
+              let $VAR = "$SECRET"
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: .*(SECRET|KEY|TOKEN|PASSWORD|API_KEY).*
+      - metavariable-regex:
+          metavariable: $SECRET
+          regex: ^[a-zA-Z0-9]{20,}$
+    message: >
+      Hardcoded secret detected.
+      Use environment variables instead.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A04:2025 - Insecure Design"
+      cwe: "CWE-798"
+
+  # OWASP A05:2025 - Security Misconfiguration
+  - id: cors-allow-all
+    pattern-either:
+      - pattern: |
+          cors({ origin: '*' })
+      - pattern: |
+          app.use(cors({ origin: '*' }))
+    message: >
+      CORS configured to allow all origins.
+      Restrict to specific origins in production.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A05:2025 - Security Misconfiguration"
+      cwe: "CWE-942"
+
+  # OWASP A06:2025 - Vulnerable Components
+  - id: eval-usage
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+    message: >
+      eval() or Function() constructor detected.
+      Avoid dynamic code execution.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A06:2025 - Vulnerable Components"
+      cwe: "CWE-95"
+
+  # OWASP A07:2025 - Authentication Failures
+  - id: weak-session-config
+    pattern-either:
+      - pattern: |
+          session({
+            secret: $SECRET,
+            cookie: { secure: false }
+          })
+      - pattern: |
+          session({
+            secret: $SECRET,
+            cookie: { httpOnly: false }
+          })
+    message: >
+      Weak session configuration detected.
+      Set secure: true and httpOnly: true for production cookies.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A07:2025 - Authentication Failures"
+      cwe: "CWE-614"
+
+  # OWASP A10:2025 - Server-Side Request Forgery (SSRF)
+  - id: ssrf-risk
+    pattern-either:
+      - pattern: |
+          fetch($URL)
+      - pattern: |
+          axios.get($URL)
+      - pattern: |
+          request($URL)
+    metavariable-pattern:
+      metavariable: $URL
+      patterns:
+        - pattern-not: |
+            "..."
+    message: >
+      Potential SSRF vulnerability.
+      Validate and sanitize URL input before making requests.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A10:2025 - SSRF"
+      cwe: "CWE-918"
+
+  # Project-Specific: Age Verification
+  - id: missing-age-verification
+    pattern: |
+      export default function $COMPONENT(...) {
+        ...
+        return (
+          <div>
+            ...
+            <button ... onClick={$HANDLER}>
+              ...
+            </button>
+            ...
+          </div>
+        )
+      }
+    message: >
+      Ensure age verification is enforced on wine purchase flows.
+      Dutch law requires 18+ verification for alcohol sales.
+    languages: [typescript]
+    severity: INFO
+    metadata:
+      category: compliance
+      regulation: "Dutch Alcohol and Catering Act"
