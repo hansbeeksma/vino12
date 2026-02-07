@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
 
 const AGE_COOKIE = "vino12_age_verified";
 
@@ -11,32 +10,6 @@ const SKIP_PATHS = [
   "/auth/callback",
 ];
 const AUTH_REQUIRED_PATHS = ["/account"];
-
-function createSupabaseMiddlewareClient(request: NextRequest) {
-  const response = NextResponse.next({
-    request: { headers: request.headers },
-  });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            request.cookies.set(name, value);
-            response.cookies.set(name, value, options);
-          });
-        },
-      },
-    },
-  );
-
-  return { supabase, response };
-}
 
 function isAdminEmail(email: string | undefined): boolean {
   if (!email) return false;
@@ -60,7 +33,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Guard: skip Supabase auth when env vars are missing
+  // Guard: skip auth when Supabase env vars are missing
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
     !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -68,57 +41,85 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const { supabase, response } = createSupabaseMiddlewareClient(request);
+  try {
+    // Dynamic import to avoid Edge runtime issues if package is incompatible
+    const { createServerClient } = await import("@supabase/ssr");
 
-  // Refresh session (important for Supabase Auth)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const response = NextResponse.next({
+      request: { headers: request.headers },
+    });
 
-  // Protect admin routes
-  if (pathname.startsWith("/admin")) {
-    if (!user) {
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll();
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              request.cookies.set(name, value);
+              response.cookies.set(name, value, options);
+            });
+          },
+        },
+      },
+    );
+
+    // Refresh session
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // Protect admin routes
+    if (pathname.startsWith("/admin")) {
+      if (!user) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/login";
+        url.searchParams.set("redirect", pathname);
+        return NextResponse.redirect(url);
+      }
+
+      const hasAdminRole = user.app_metadata?.role === "admin";
+      if (!hasAdminRole && !isAdminEmail(user.email)) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/admin/geen-toegang";
+        return NextResponse.rewrite(url);
+      }
+
+      return response;
+    }
+
+    // Protect auth-required routes
+    if (AUTH_REQUIRED_PATHS.some((path) => pathname.startsWith(path))) {
+      if (!user) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/login";
+        return NextResponse.redirect(url);
+      }
+    }
+
+    // Redirect logged-in users away from login page
+    if (pathname === "/login" && user) {
+      const redirect = request.nextUrl.searchParams.get("redirect");
       const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      url.searchParams.set("redirect", pathname);
+      url.pathname = redirect ?? "/account";
+      url.searchParams.delete("redirect");
       return NextResponse.redirect(url);
     }
 
-    const hasAdminRole = user.app_metadata?.role === "admin";
-    if (!hasAdminRole && !isAdminEmail(user.email)) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/admin/geen-toegang";
-      return NextResponse.rewrite(url);
+    // Age verification for shop routes
+    const ageVerified = request.cookies.get(AGE_COOKIE);
+    if (!ageVerified) {
+      response.headers.set("x-age-verified", "false");
     }
 
     return response;
+  } catch {
+    // If middleware fails for any reason, don't block the request
+    return NextResponse.next();
   }
-
-  // Protect auth-required routes
-  if (AUTH_REQUIRED_PATHS.some((path) => pathname.startsWith(path))) {
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // Redirect logged-in users away from login page
-  if (pathname === "/login" && user) {
-    const redirect = request.nextUrl.searchParams.get("redirect");
-    const url = request.nextUrl.clone();
-    url.pathname = redirect ?? "/account";
-    url.searchParams.delete("redirect");
-    return NextResponse.redirect(url);
-  }
-
-  // Age verification for shop routes
-  const ageVerified = request.cookies.get(AGE_COOKIE);
-  if (!ageVerified) {
-    response.headers.set("x-age-verified", "false");
-  }
-
-  return response;
 }
 
 export const config = {
