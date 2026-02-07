@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Mono, Space_Mono, Darker_Grotesque } from 'next/font/google'
 import { CartDrawer } from '@/components/shop/CartDrawer'
 import { AgeGate } from '@/components/compliance/AgeGate'
+import { CookieBanner } from '@/components/compliance/CookieBanner'
 import './globals.css'
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -57,6 +58,7 @@ export default function RootLayout({
         <AgeGate />
         {children}
         <CartDrawer />
+        <CookieBanner />
       </body>
     </html>
   )
