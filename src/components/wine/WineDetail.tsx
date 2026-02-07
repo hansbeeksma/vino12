@@ -9,6 +9,7 @@ import {
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
 import { BodyScale } from "./BodyScale";
 import { AddToCartButton } from "@/components/shop/AddToCartButton";
+import { WishlistButton } from "./WishlistButton";
 
 interface WineDetailProps {
   wine: WineRow;
@@ -69,6 +70,7 @@ export function WineDetail({ wine }: WineDetailProps) {
               {wine.vintage && `${wine.vintage} · `}
               {wine.alcohol_percentage && `${wine.alcohol_percentage}%`}
             </span>
+            <WishlistButton wineId={wine.id} />
           </div>
 
           {body && (
