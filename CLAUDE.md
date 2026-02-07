@@ -1,3 +1,9 @@
+<!-- CLEO:START -->
+
+@.cleo/templates/AGENT-INJECTION.md
+
+<!-- CLEO:END -->
+
 # VINO12 - Project Configuration
 
 **See:** `~/.claude/CLAUDE.md` for global configuration
