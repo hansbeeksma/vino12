@@ -1,17 +1,18 @@
-import Image from "next/image";
-import type { Wine } from "@/lib/types";
-import { colorHex, colorLabel, formatPrice } from "@/lib/utils";
-import { BrutalBadge } from "@/components/ui/BrutalBadge";
-import { BodyScale } from "./BodyScale";
-import { TastingProfile } from "./TastingProfile";
-import { PairingTags } from "./PairingTags";
+import Image from 'next/image'
+import type { Wine } from '@/lib/types'
+import { colorHex, colorLabel, formatPrice } from '@/lib/utils'
+import { BrutalBadge } from '@/components/ui/BrutalBadge'
+import { BodyScale } from './BodyScale'
+import { TastingProfile } from './TastingProfile'
+import { PairingTags } from './PairingTags'
+import { WishlistButton } from './WishlistButton'
 
 interface WineDetailProps {
-  wine: Wine;
+  wine: Wine
 }
 
 export function WineDetail({ wine }: WineDetailProps) {
-  const isRed = wine.color === "red";
+  const isRed = wine.color === 'red'
 
   return (
     <div className="container-brutal px-4 py-8 md:px-8">
@@ -31,9 +32,7 @@ export function WineDetail({ wine }: WineDetailProps) {
             priority
           />
           <div className="absolute bottom-4 right-4">
-            <span className="font-display text-6xl font-bold text-ink/5">
-              #{wine.id}
-            </span>
+            <span className="font-display text-6xl font-bold text-ink/5">#{wine.id}</span>
           </div>
         </div>
 
@@ -41,15 +40,13 @@ export function WineDetail({ wine }: WineDetailProps) {
         <div className="space-y-6">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <BrutalBadge variant={isRed ? "wine" : "emerald"}>
+              <BrutalBadge variant={isRed ? 'wine' : 'emerald'}>
                 {colorLabel(wine.color)}
               </BrutalBadge>
               <BrutalBadge variant="champagne">{wine.body}</BrutalBadge>
               <BrutalBadge variant="ink">{wine.countryCode}</BrutalBadge>
             </div>
-            <h1 className="font-display text-display-lg text-ink mb-2">
-              {wine.name}
-            </h1>
+            <h1 className="font-display text-display-lg text-ink mb-2">{wine.name}</h1>
             <p className="font-accent text-sm uppercase tracking-widest text-ink/60">
               {wine.grape} — {wine.region}, {wine.country}
             </p>
@@ -62,14 +59,14 @@ export function WineDetail({ wine }: WineDetailProps) {
             <span className="font-accent text-xs text-ink/50">
               {wine.year} · {wine.alcohol}
             </span>
+            <WishlistButton wineId={wine.id} />
           </div>
 
-          <BodyScale
-            body={wine.body}
-            color={isRed ? "bg-wine" : "bg-emerald"}
-          />
+          <BodyScale body={wine.body} color={isRed ? 'bg-wine' : 'bg-emerald'} />
 
-          <p className="font-body text-base md:text-lg lg:text-xl leading-relaxed">{wine.description}</p>
+          <p className="font-body text-base md:text-lg lg:text-xl leading-relaxed">
+            {wine.description}
+          </p>
 
           <div className="border-t-2 border-ink pt-6">
             <h3 className="font-accent text-xs uppercase tracking-widest text-wine mb-4">
@@ -94,5 +91,5 @@ export function WineDetail({ wine }: WineDetailProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

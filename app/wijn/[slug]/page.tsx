@@ -6,6 +6,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WineDetail } from '@/components/wine/WineDetail'
 import { SimilarWines } from '@/components/wine/SimilarWines'
+import { RecentlyViewed } from '@/components/wine/RecentlyViewed'
+import { TrackView } from '@/components/wine/TrackView'
 import { MarqueeStrip } from '@/components/ui/MarqueeStrip'
 import { getWineProductJsonLd, getBreadcrumbJsonLd } from '@/lib/structured-data'
 
@@ -58,6 +60,7 @@ export default function WinePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbJsonLd(breadcrumbs)) }}
       />
+      <TrackView slug={wine.slug} />
       <Header />
       <main className="pt-20">
         {/* Breadcrumb */}
@@ -78,6 +81,8 @@ export default function WinePage({ params }: PageProps) {
         <WineDetail wine={wine} />
 
         <SimilarWines currentWine={wine} allWines={wines} />
+
+        <RecentlyViewed excludeSlug={wine.slug} />
 
         {/* Navigation */}
         <div className="container-brutal px-4 py-8 md:px-8">
