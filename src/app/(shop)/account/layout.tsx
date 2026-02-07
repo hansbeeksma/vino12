@@ -5,6 +5,7 @@ const ACCOUNT_NAV = [
   { href: "/account/profiel", label: "Profiel" },
   { href: "/account/adressen", label: "Adressen" },
   { href: "/account/bestellingen", label: "Bestellingen" },
+  { href: "/account/wijnclub", label: "Wijnclub" },
   { href: "/account/privacy", label: "Privacy & data" },
 ];
 
