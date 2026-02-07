@@ -60,6 +60,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Guard: skip Supabase auth when env vars are missing
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    return NextResponse.next();
+  }
+
   const { supabase, response } = createSupabaseMiddlewareClient(request);
 
   // Refresh session (important for Supabase Auth)

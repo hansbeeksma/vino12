@@ -20,11 +20,10 @@ const SURCHARGE_POSTAL_RANGES: {
   label: string;
   surchargeCents: number;
 }[] = [
-  { from: 8880, to: 8899, label: "Terschelling", surchargeCents: 750 },
-  { from: 8900, to: 8909, label: "Leeuwarden regio", surchargeCents: 0 },
-  { from: 9160, to: 9169, label: "Schiermonnikoog", surchargeCents: 750 },
-  { from: 9161, to: 9166, label: "Schiermonnikoog", surchargeCents: 750 },
+  { from: 8880, to: 8889, label: "Terschelling", surchargeCents: 750 },
   { from: 8890, to: 8899, label: "Vlieland", surchargeCents: 750 },
+  { from: 8900, to: 8909, label: "Leeuwarden regio", surchargeCents: 0 },
+  { from: 9160, to: 9166, label: "Schiermonnikoog", surchargeCents: 750 },
   { from: 1790, to: 1799, label: "Texel", surchargeCents: 500 },
   { from: 9160, to: 9170, label: "Schiermonnikoog", surchargeCents: 750 },
 ];
