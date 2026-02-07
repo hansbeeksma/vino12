@@ -1,23 +1,24 @@
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import Link from "next/link";
-import { wines, getWineBySlug } from "@/lib/wines";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { WineDetail } from "@/components/wine/WineDetail";
-import { MarqueeStrip } from "@/components/ui/MarqueeStrip";
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { wines, getWineBySlug } from '@/lib/wines'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { WineDetail } from '@/components/wine/WineDetail'
+import { MarqueeStrip } from '@/components/ui/MarqueeStrip'
+import { getWineProductJsonLd, getBreadcrumbJsonLd } from '@/lib/structured-data'
 
 interface PageProps {
-  params: { slug: string };
+  params: { slug: string }
 }
 
 export function generateStaticParams() {
-  return wines.map((wine) => ({ slug: wine.slug }));
+  return wines.map((wine) => ({ slug: wine.slug }))
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
-  const wine = getWineBySlug(params.slug);
-  if (!wine) return { title: "Wijn niet gevonden" };
+  const wine = getWineBySlug(params.slug)
+  if (!wine) return { title: 'Wijn niet gevonden' }
 
   return {
     title: `${wine.name} — Vino12`,
@@ -25,24 +26,37 @@ export function generateMetadata({ params }: PageProps): Metadata {
     openGraph: {
       title: `${wine.name} — Vino12`,
       description: wine.description,
-      type: "website",
-      locale: "nl_NL",
-      siteName: "Vino12",
+      type: 'website',
+      locale: 'nl_NL',
+      siteName: 'Vino12',
     },
-  };
+  }
 }
 
 export default function WinePage({ params }: PageProps) {
-  const wine = getWineBySlug(params.slug);
-  if (!wine) notFound();
+  const wine = getWineBySlug(params.slug)
+  if (!wine) notFound()
 
-  const currentIndex = wines.findIndex((w) => w.slug === params.slug);
-  const prevWine = currentIndex > 0 ? wines[currentIndex - 1] : null;
-  const nextWine =
-    currentIndex < wines.length - 1 ? wines[currentIndex + 1] : null;
+  const currentIndex = wines.findIndex((w) => w.slug === params.slug)
+  const prevWine = currentIndex > 0 ? wines[currentIndex - 1] : null
+  const nextWine = currentIndex < wines.length - 1 ? wines[currentIndex + 1] : null
+
+  const breadcrumbs = [
+    { name: 'Home', url: 'https://vino12.com' },
+    { name: 'Collectie', url: 'https://vino12.com/#collectie' },
+    { name: wine.name, url: `https://vino12.com/wijn/${wine.slug}` },
+  ]
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getWineProductJsonLd(wine)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbJsonLd(breadcrumbs)) }}
+      />
       <Header />
       <main className="pt-20">
         {/* Breadcrumb */}
@@ -98,5 +112,5 @@ export default function WinePage({ params }: PageProps) {
       </main>
       <Footer />
     </>
-  );
+  )
 }
