@@ -36,7 +36,7 @@ export function AgeGate() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-ink/80 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-100 bg-ink/80 flex items-center justify-center p-4">
       <div className="bg-offwhite border-brutal-lg border-ink brutal-shadow-lg p-8 md:p-12 max-w-md w-full text-center">
         <div className="mb-6">
           <span className="font-display text-5xl block mb-2">🍷</span>

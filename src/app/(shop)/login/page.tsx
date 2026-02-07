@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
 
   const inputClass =
-    "w-full font-body text-base border-2 border-ink px-4 py-3 bg-offwhite focus:outline-none focus:border-wine placeholder:text-ink/30";
+    "w-full font-body text-base border-2 border-ink px-4 py-3 bg-offwhite focus:outline-hidden focus:border-wine placeholder:text-ink/30";
 
   if (sent) {
     return (

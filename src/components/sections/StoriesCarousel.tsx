@@ -43,7 +43,7 @@ export function StoriesCarousel({ wines }: StoriesCarouselProps) {
   return (
     <section className="section-padding bg-ink">
       <div className="container-brutal">
-        <SectionLabel className="!text-champagne/60">
+        <SectionLabel className="text-champagne/60!">
           Instagram Stories
         </SectionLabel>
         <h2 className="font-display text-display-md text-champagne mb-8">

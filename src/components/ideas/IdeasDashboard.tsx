@@ -128,7 +128,7 @@ export function IdeasDashboard() {
           placeholder="Zoek ideeën..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border-2 border-ink font-body text-sm flex-1 min-w-[200px] bg-offwhite focus:outline-none focus:ring-2 focus:ring-wine"
+          className="px-4 py-2 border-2 border-ink font-body text-sm flex-1 min-w-[200px] bg-offwhite focus:outline-hidden focus:ring-2 focus:ring-wine"
         />
 
         <select

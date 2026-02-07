@@ -4,6 +4,13 @@ import { createServiceRoleClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
+const SUPPORTED_METHODS = [
+  "ideal",
+  "creditcard",
+  "bancontact",
+  "paypal",
+] as const;
+
 const checkoutRequestSchema = z.object({
   email: z.string().email(),
   firstName: z.string().min(1),
@@ -19,6 +26,8 @@ const checkoutRequestSchema = z.object({
   }),
   ageVerified: z.literal(true),
   notes: z.string().optional(),
+  paymentMethod: z.enum(SUPPORTED_METHODS).optional(),
+  idempotencyKey: z.string().uuid().optional(),
   items: z.array(
     z.object({
       wine_id: z.string().uuid(),
@@ -97,7 +106,7 @@ export async function POST(request: NextRequest) {
         age_verified: true,
         notes: data.notes ?? null,
       })
-      .select("id, order_number")
+      .select("id, order_number, mollie_payment_id")
       .single();
 
     if (orderError) {
@@ -129,10 +138,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 5. Create Mollie payment
+    // 5. Idempotency: check if order already has an open Mollie payment
     const { mollieClient } = await import("@/lib/mollie");
+    const { PaymentMethod } = await import("@mollie/api-client");
     const totalEur = (data.total_cents / 100).toFixed(2);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://vino12.com";
+
+    if (order.mollie_payment_id) {
+      const existingPayment = await mollieClient.payments.get(
+        order.mollie_payment_id,
+      );
+      const openStatuses = ["open", "pending"];
+      if (openStatuses.includes(existingPayment.status)) {
+        return NextResponse.json({
+          success: true,
+          checkoutUrl: existingPayment.getCheckoutUrl(),
+          orderNumber: order.order_number,
+        });
+      }
+    }
+
+    // 6. Create Mollie payment
+    const methodMap: Record<
+      string,
+      (typeof PaymentMethod)[keyof typeof PaymentMethod]
+    > = {
+      ideal: PaymentMethod.ideal,
+      creditcard: PaymentMethod.creditcard,
+      bancontact: PaymentMethod.bancontact,
+      paypal: PaymentMethod.paypal,
+    };
 
     const payment = await mollieClient.payments.create({
       amount: { currency: "EUR", value: totalEur },
@@ -143,15 +178,18 @@ export async function POST(request: NextRequest) {
         order_id: order.id,
         order_number: order.order_number,
       },
+      ...(data.paymentMethod && methodMap[data.paymentMethod]
+        ? { method: methodMap[data.paymentMethod] }
+        : {}),
     });
 
-    // 6. Store Mollie payment ID on order
+    // 7. Store Mollie payment ID on order
     await supabase
       .from("orders")
       .update({ mollie_payment_id: payment.id })
       .eq("id", order.id);
 
-    // 7. Log order event
+    // 8. Log order event
     await supabase.from("order_events").insert({
       order_id: order.id,
       event_type: "created",

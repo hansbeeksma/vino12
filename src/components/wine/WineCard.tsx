@@ -19,7 +19,7 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
 
   return (
     <Link href={`/wijn/${wine.slug}`} className={`block group ${className}`}>
-      <div className="aspect-[3/5] border-brutal border-ink brutal-shadow brutal-hover bg-offwhite overflow-hidden flex flex-col">
+      <div className="aspect-3/5 border-brutal border-ink brutal-shadow brutal-hover bg-offwhite overflow-hidden flex flex-col">
         <div
           className="h-2 w-full shrink-0"
           style={{ backgroundColor: typeColorHex(wine.type) }}
