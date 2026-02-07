@@ -33,31 +33,37 @@ async function fetchWines(filters?: {
   body?: WineBody;
   featured?: boolean;
 }): Promise<WineRow[]> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  let query = supabase
-    .from("wines")
-    .select("*, region:regions(id, name, country)")
-    .eq("is_active", true)
-    .order("name");
+    let query = supabase
+      .from("wines")
+      .select("*, region:regions(id, name, country)")
+      .eq("is_active", true)
+      .order("name");
 
-  if (filters?.type) {
-    query = query.eq("type", filters.type);
+    if (filters?.type) {
+      query = query.eq("type", filters.type);
+    }
+    if (filters?.body) {
+      query = query.eq("body", filters.body);
+    }
+    if (filters?.featured) {
+      query = query.eq("is_featured", true);
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      console.error(`Failed to fetch wines: ${error.message}`);
+      return [];
+    }
+
+    return (data ?? []) as WineRow[];
+  } catch (err) {
+    console.error("Wine fetch error:", err);
+    return [];
   }
-  if (filters?.body) {
-    query = query.eq("body", filters.body);
-  }
-  if (filters?.featured) {
-    query = query.eq("is_featured", true);
-  }
-
-  const { data, error } = await query;
-
-  if (error) {
-    throw new Error(`Failed to fetch wines: ${error.message}`);
-  }
-
-  return (data ?? []) as WineRow[];
 }
 
 export const getWines = unstable_cache(fetchWines, ["wines-list"], {
@@ -66,21 +72,27 @@ export const getWines = unstable_cache(fetchWines, ["wines-list"], {
 });
 
 async function fetchWineBySlug(slug: string): Promise<WineRow | null> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  const { data, error } = await supabase
-    .from("wines")
-    .select("*, region:regions(id, name, country)")
-    .eq("slug", slug)
-    .eq("is_active", true)
-    .single();
+    const { data, error } = await supabase
+      .from("wines")
+      .select("*, region:regions(id, name, country)")
+      .eq("slug", slug)
+      .eq("is_active", true)
+      .single();
 
-  if (error) {
-    if (error.code === "PGRST116") return null;
-    throw new Error(`Failed to fetch wine: ${error.message}`);
+    if (error) {
+      if (error.code === "PGRST116") return null;
+      console.error(`Failed to fetch wine: ${error.message}`);
+      return null;
+    }
+
+    return data as WineRow;
+  } catch (err) {
+    console.error("Wine slug fetch error:", err);
+    return null;
   }
-
-  return data as WineRow;
 }
 
 export const getWineBySlug = unstable_cache(fetchWineBySlug, ["wine-by-slug"], {
@@ -89,42 +101,54 @@ export const getWineBySlug = unstable_cache(fetchWineBySlug, ["wine-by-slug"], {
 });
 
 export async function getWineSlugs(): Promise<{ slug: string }[]> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  const { data, error } = await supabase
-    .from("wines")
-    .select("slug")
-    .eq("is_active", true);
+    const { data, error } = await supabase
+      .from("wines")
+      .select("slug")
+      .eq("is_active", true);
 
-  if (error) {
-    throw new Error(`Failed to fetch wine slugs: ${error.message}`);
+    if (error) {
+      console.error(`Failed to fetch wine slugs: ${error.message}`);
+      return [];
+    }
+
+    return data ?? [];
+  } catch (err) {
+    console.error("Wine slugs fetch error:", err);
+    return [];
   }
-
-  return data ?? [];
 }
 
 async function fetchWineGrapes(
   wineId: string,
 ): Promise<{ id: string; name: string; percentage: number | null }[]> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  const { data, error } = await supabase
-    .from("wine_grapes")
-    .select("percentage, grape:grapes(id, name)")
-    .eq("wine_id", wineId);
+    const { data, error } = await supabase
+      .from("wine_grapes")
+      .select("percentage, grape:grapes(id, name)")
+      .eq("wine_id", wineId);
 
-  if (error) {
-    throw new Error(`Failed to fetch grapes: ${error.message}`);
+    if (error) {
+      console.error(`Failed to fetch grapes: ${error.message}`);
+      return [];
+    }
+
+    return (data ?? []).map((row) => {
+      const grape = row.grape as unknown as { id: string; name: string };
+      return {
+        id: grape.id,
+        name: grape.name,
+        percentage: row.percentage,
+      };
+    });
+  } catch (err) {
+    console.error("Wine grapes fetch error:", err);
+    return [];
   }
-
-  return (data ?? []).map((row) => {
-    const grape = row.grape as unknown as { id: string; name: string };
-    return {
-      id: grape.id,
-      name: grape.name,
-      percentage: row.percentage,
-    };
-  });
 }
 
 export const getWineGrapes = unstable_cache(fetchWineGrapes, ["wine-grapes"], {
@@ -133,21 +157,27 @@ export const getWineGrapes = unstable_cache(fetchWineGrapes, ["wine-grapes"], {
 });
 
 export async function searchWines(query: string): Promise<WineRow[]> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  const { data, error } = await supabase
-    .from("wines")
-    .select("*, region:regions(id, name, country)")
-    .eq("is_active", true)
-    .textSearch("search_vector", query, {
-      config: "dutch",
-      type: "websearch",
-    })
-    .limit(20);
+    const { data, error } = await supabase
+      .from("wines")
+      .select("*, region:regions(id, name, country)")
+      .eq("is_active", true)
+      .textSearch("search_vector", query, {
+        config: "dutch",
+        type: "websearch",
+      })
+      .limit(20);
 
-  if (error) {
-    throw new Error(`Search failed: ${error.message}`);
+    if (error) {
+      console.error(`Search failed: ${error.message}`);
+      return [];
+    }
+
+    return (data ?? []) as WineRow[];
+  } catch (err) {
+    console.error("Wine search error:", err);
+    return [];
   }
-
-  return (data ?? []) as WineRow[];
 }

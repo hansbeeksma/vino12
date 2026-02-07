@@ -14,20 +14,26 @@ export interface ReviewRow {
 }
 
 export async function getApprovedReviews(wineId: string): Promise<ReviewRow[]> {
-  const supabase = await createServerSupabaseClient();
+  try {
+    const supabase = await createServerSupabaseClient();
 
-  const { data, error } = await supabase
-    .from("wine_reviews")
-    .select("*, customer:customers(first_name, last_name)")
-    .eq("wine_id", wineId)
-    .eq("is_approved", true)
-    .order("created_at", { ascending: false });
+    const { data, error } = await supabase
+      .from("wine_reviews")
+      .select("*, customer:customers(first_name, last_name)")
+      .eq("wine_id", wineId)
+      .eq("is_approved", true)
+      .order("created_at", { ascending: false });
 
-  if (error) {
-    throw new Error(`Failed to fetch reviews: ${error.message}`);
+    if (error) {
+      console.error(`Failed to fetch reviews: ${error.message}`);
+      return [];
+    }
+
+    return (data ?? []) as ReviewRow[];
+  } catch (err) {
+    console.error("Reviews fetch error:", err);
+    return [];
   }
-
-  return (data ?? []) as ReviewRow[];
 }
 
 export async function getReviewStats(
