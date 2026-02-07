@@ -21,7 +21,7 @@
     "funFact": "Pinot Noir is een van de oudste druivenrassen ter wereld, al meer dan 2.000 jaar gecultiveerd.",
     "slug": "pinot-noir-bourgogne",
     "bottleShape": "bourgogne",
-    "image": "/images/wines/pinot-noir-bourgogne.jpg"
+    "image": "/images/wines/pinot-noir-bourgogne.svg"
   },
   {
     "id": 2,
@@ -45,7 +45,7 @@
     "funFact": "Gamay werd in 1395 door Filips de Stoute uit Bourgogne verbannen ten faveure van Pinot Noir.",
     "slug": "gamay-beaujolais",
     "bottleShape": "bourgogne",
-    "image": "/images/wines/gamay-beaujolais.jpg"
+    "image": "/images/wines/gamay-beaujolais.svg"
   },
   {
     "id": 3,
@@ -69,7 +69,7 @@
     "funFact": "Grenache is het meest aangeplante rode druivenras van de wereld.",
     "slug": "grenache-cotes-du-rhone",
     "bottleShape": "rhone",
-    "image": "/images/wines/grenache-cotes-du-rhone.jpg"
+    "image": "/images/wines/grenache-cotes-du-rhone.svg"
   },
   {
     "id": 4,
@@ -93,7 +93,7 @@
     "funFact": "Château Pétrus, de duurste wijn van Bordeaux, is bijna 100% Merlot.",
     "slug": "merlot-saint-emilion",
     "bottleShape": "bordeaux",
-    "image": "/images/wines/merlot-saint-emilion.jpg"
+    "image": "/images/wines/merlot-saint-emilion.svg"
   },
   {
     "id": 5,
@@ -117,7 +117,7 @@
     "funFact": "Cabernet Franc is de ouder van zowel Cabernet Sauvignon als Merlot.",
     "slug": "cabernet-franc-loire",
     "bottleShape": "bordeaux",
-    "image": "/images/wines/cabernet-franc-loire.jpg"
+    "image": "/images/wines/cabernet-franc-loire.svg"
   },
   {
     "id": 6,
@@ -141,7 +141,7 @@
     "funFact": "Op 1.500m hoogte in Mendoza krijgen druiven 40% meer UV, wat dikkere schillen en intensere kleur geeft.",
     "slug": "cabernet-sauvignon-mendoza",
     "bottleShape": "bordeaux",
-    "image": "/images/wines/cabernet-sauvignon-mendoza.jpg"
+    "image": "/images/wines/cabernet-sauvignon-mendoza.svg"
   },
   {
     "id": 7,
@@ -165,7 +165,7 @@
     "funFact": "Marlborough Sauvignon Blanc werd pas in 1985 voor het eerst geëxporteerd en veroverde de wereld in slechts 20 jaar.",
     "slug": "sauvignon-blanc-marlborough",
     "bottleShape": "bordeaux",
-    "image": "/images/wines/sauvignon-blanc-marlborough.jpg"
+    "image": "/images/wines/sauvignon-blanc-marlborough.svg"
   },
   {
     "id": 8,
@@ -189,7 +189,7 @@
     "funFact": "Albariño wordt traditioneel op pergola's gegroeid zodat de druiven niet te dicht bij de vochtige grond hangen.",
     "slug": "albarino-rias-baixas",
     "bottleShape": "flute",
-    "image": "/images/wines/albarino-rias-baixas.jpg"
+    "image": "/images/wines/albarino-rias-baixas.svg"
   },
   {
     "id": 9,
@@ -213,7 +213,7 @@
     "funFact": "Vermentino wordt op Sardinië ook Favorita genoemd en is verwant aan het Spaanse druivenras Macabeo.",
     "slug": "vermentino-gallura",
     "bottleShape": "flute",
-    "image": "/images/wines/vermentino-gallura.jpg"
+    "image": "/images/wines/vermentino-gallura.svg"
   },
   {
     "id": 10,
@@ -237,7 +237,7 @@
     "funFact": "Chablis-wijngaarden liggen op 150 miljoen jaar oude Kimmeridgian-klei, vol met fossiele oesters.",
     "slug": "chardonnay-chablis",
     "bottleShape": "bourgogne",
-    "image": "/images/wines/chardonnay-chablis.jpg"
+    "image": "/images/wines/chardonnay-chablis.svg"
   },
   {
     "id": 11,
@@ -261,7 +261,7 @@
     "funFact": "In de jaren 60 waren er nog maar 8 hectare Viognier over. Nu is het een wereldwijd succesverhaal.",
     "slug": "viognier-condrieu",
     "bottleShape": "rhone",
-    "image": "/images/wines/viognier-condrieu.jpg"
+    "image": "/images/wines/viognier-condrieu.svg"
   },
   {
     "id": 12,
@@ -285,6 +285,6 @@
     "funFact": "Riesling uit de Elzas mag niet zoet zijn — het is de enige Franse regio die een minimum droogtegraad eist.",
     "slug": "riesling-alsace",
     "bottleShape": "flute",
-    "image": "/images/wines/riesling-alsace.jpg"
+    "image": "/images/wines/riesling-alsace.svg"
   }
 ]
