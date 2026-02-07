@@ -1,24 +1,10 @@
+import Image from "next/image";
 import type { Wine } from "@/lib/types";
 import { colorHex, colorLabel } from "@/lib/utils";
 
 interface StorySlideProps {
   wine: Wine;
 }
-
-const emojis: Record<string, string> = {
-  "Pinot Noir": "🍒",
-  Gamay: "🫐",
-  Grenache: "🌞",
-  Merlot: "🍫",
-  "Cabernet Franc": "🌿",
-  "Cabernet Sauvignon": "🏔️",
-  "Sauvignon Blanc": "🍋",
-  "Albariño": "🌊",
-  Vermentino: "🌿",
-  Chardonnay: "🪨",
-  Viognier: "🌸",
-  Riesling: "⚡",
-};
 
 export function StorySlide({ wine }: StorySlideProps) {
   return (
@@ -28,9 +14,17 @@ export function StorySlide({ wine }: StorySlideProps) {
         background: `linear-gradient(180deg, ${colorHex(wine.color)}15 0%, ${colorHex(wine.color)}40 100%)`,
       }}
     >
-      {/* Top: emoji + number */}
+      {/* Top: photo + number */}
       <div className="flex items-center justify-between">
-        <span className="text-3xl md:text-5xl">{emojis[wine.name] || "🍷"}</span>
+        <div className="w-12 h-16 md:w-16 md:h-20 relative">
+          <Image
+            src={wine.image}
+            alt={wine.name}
+            fill
+            className="object-contain"
+            sizes="64px"
+          />
+        </div>
         <span className="font-display text-4xl md:text-6xl font-bold text-ink/10">
           {String(wine.id).padStart(2, "0")}
         </span>

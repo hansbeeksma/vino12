@@ -20,7 +20,8 @@
     "pairings": ["Gegrilde zalm", "Brie", "Paddenstoelrisotto"],
     "funFact": "Pinot Noir is een van de oudste druivenrassen ter wereld, al meer dan 2.000 jaar gecultiveerd.",
     "slug": "pinot-noir-bourgogne",
-    "bottleShape": "bourgogne"
+    "bottleShape": "bourgogne",
+    "image": "/images/wines/pinot-noir-bourgogne.jpg"
   },
   {
     "id": 2,
@@ -43,7 +44,8 @@
     "pairings": ["Charcuterie", "Quiche Lorraine", "Lichte pasta"],
     "funFact": "Gamay werd in 1395 door Filips de Stoute uit Bourgogne verbannen ten faveure van Pinot Noir.",
     "slug": "gamay-beaujolais",
-    "bottleShape": "bourgogne"
+    "bottleShape": "bourgogne",
+    "image": "/images/wines/gamay-beaujolais.jpg"
   },
   {
     "id": 3,
@@ -66,7 +68,8 @@
     "pairings": ["Lamskoteletjes", "Ratatouille", "Olijventapenade"],
     "funFact": "Grenache is het meest aangeplante rode druivenras van de wereld.",
     "slug": "grenache-cotes-du-rhone",
-    "bottleShape": "rhone"
+    "bottleShape": "rhone",
+    "image": "/images/wines/grenache-cotes-du-rhone.jpg"
   },
   {
     "id": 4,
@@ -89,7 +92,8 @@
     "pairings": ["Ossenhaas", "Truffelrisotto", "Belegen kaas"],
     "funFact": "Château Pétrus, de duurste wijn van Bordeaux, is bijna 100% Merlot.",
     "slug": "merlot-saint-emilion",
-    "bottleShape": "bordeaux"
+    "bottleShape": "bordeaux",
+    "image": "/images/wines/merlot-saint-emilion.jpg"
   },
   {
     "id": 5,
@@ -112,7 +116,8 @@
     "pairings": ["Eend", "Geitenkaas", "Gegrilde groenten"],
     "funFact": "Cabernet Franc is de ouder van zowel Cabernet Sauvignon als Merlot.",
     "slug": "cabernet-franc-loire",
-    "bottleShape": "bordeaux"
+    "bottleShape": "bordeaux",
+    "image": "/images/wines/cabernet-franc-loire.jpg"
   },
   {
     "id": 6,
@@ -135,7 +140,8 @@
     "pairings": ["Rib-eye steak", "Wild zwijn", "Oude Gouda"],
     "funFact": "Op 1.500m hoogte in Mendoza krijgen druiven 40% meer UV, wat dikkere schillen en intensere kleur geeft.",
     "slug": "cabernet-sauvignon-mendoza",
-    "bottleShape": "bordeaux"
+    "bottleShape": "bordeaux",
+    "image": "/images/wines/cabernet-sauvignon-mendoza.jpg"
   },
   {
     "id": 7,
@@ -158,7 +164,8 @@
     "pairings": ["Oesters", "Geitenkaas salade", "Sushi"],
     "funFact": "Marlborough Sauvignon Blanc werd pas in 1985 voor het eerst geëxporteerd en veroverde de wereld in slechts 20 jaar.",
     "slug": "sauvignon-blanc-marlborough",
-    "bottleShape": "bordeaux"
+    "bottleShape": "bordeaux",
+    "image": "/images/wines/sauvignon-blanc-marlborough.jpg"
   },
   {
     "id": 8,
@@ -181,7 +188,8 @@
     "pairings": ["Pulpo a la gallega", "Zeevruchten", "Manchego"],
     "funFact": "Albariño wordt traditioneel op pergola's gegroeid zodat de druiven niet te dicht bij de vochtige grond hangen.",
     "slug": "albarino-rias-baixas",
-    "bottleShape": "flute"
+    "bottleShape": "flute",
+    "image": "/images/wines/albarino-rias-baixas.jpg"
   },
   {
     "id": 9,
@@ -204,7 +212,8 @@
     "pairings": ["Pesto pasta", "Gegrilde vis", "Bruschetta"],
     "funFact": "Vermentino wordt op Sardinië ook Favorita genoemd en is verwant aan het Spaanse druivenras Macabeo.",
     "slug": "vermentino-gallura",
-    "bottleShape": "flute"
+    "bottleShape": "flute",
+    "image": "/images/wines/vermentino-gallura.jpg"
   },
   {
     "id": 10,
@@ -227,7 +236,8 @@
     "pairings": ["Bourgondische escargots", "Zeebaars", "Jonge Comté"],
     "funFact": "Chablis-wijngaarden liggen op 150 miljoen jaar oude Kimmeridgian-klei, vol met fossiele oesters.",
     "slug": "chardonnay-chablis",
-    "bottleShape": "bourgogne"
+    "bottleShape": "bourgogne",
+    "image": "/images/wines/chardonnay-chablis.jpg"
   },
   {
     "id": 11,
@@ -250,7 +260,8 @@
     "pairings": ["Foie gras", "Kreeft", "Curry"],
     "funFact": "In de jaren 60 waren er nog maar 8 hectare Viognier over. Nu is het een wereldwijd succesverhaal.",
     "slug": "viognier-condrieu",
-    "bottleShape": "rhone"
+    "bottleShape": "rhone",
+    "image": "/images/wines/viognier-condrieu.jpg"
   },
   {
     "id": 12,
@@ -273,6 +284,7 @@
     "pairings": ["Choucroute garnie", "Aziatische keuken", "Raclette"],
     "funFact": "Riesling uit de Elzas mag niet zoet zijn — het is de enige Franse regio die een minimum droogtegraad eist.",
     "slug": "riesling-alsace",
-    "bottleShape": "flute"
+    "bottleShape": "flute",
+    "image": "/images/wines/riesling-alsace.jpg"
   }
 ]

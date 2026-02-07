@@ -1,0 +1,76 @@
+{
+  "mapping": [
+    {
+      "vino12Slug": "pinot-noir-bourgogne",
+      "source": "les-jamelles-pinot-noir",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2025/06/Project-Formaat-afbeelding-wijzigen-7.png",
+      "localPath": "/images/wines/pinot-noir-bourgogne.jpg"
+    },
+    {
+      "vino12Slug": "gamay-beaujolais",
+      "source": "claude-quenard-sansoufrir-blanc",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2025/06/Project-Formaat-afbeelding-wijzigen-15.png",
+      "localPath": "/images/wines/gamay-beaujolais.jpg"
+    },
+    {
+      "vino12Slug": "grenache-cotes-du-rhone",
+      "source": "nicolas-grenache-noir-domaine-lafage",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2020/12/Nicolas-domaine-Lafage.png",
+      "localPath": "/images/wines/grenache-cotes-du-rhone.jpg"
+    },
+    {
+      "vino12Slug": "merlot-saint-emilion",
+      "source": "becasse-cabernet-merlot",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2023/10/Becasse-Merlot.jpg",
+      "localPath": "/images/wines/merlot-saint-emilion.jpg"
+    },
+    {
+      "vino12Slug": "cabernet-franc-loire",
+      "source": "cabernet-il-giardino-antonutti",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2025/06/Project-Formaat-afbeelding-wijzigen-10.png",
+      "localPath": "/images/wines/cabernet-franc-loire.jpg"
+    },
+    {
+      "vino12Slug": "cabernet-sauvignon-mendoza",
+      "source": "cabernet-sauvignon-doc-antonutti",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2021/02/Antonutti-Cabernet-Sauvignon-600x600-1.jpg",
+      "localPath": "/images/wines/cabernet-sauvignon-mendoza.jpg"
+    },
+    {
+      "vino12Slug": "sauvignon-blanc-marlborough",
+      "source": "sauvignon-blanc-the-outlier-jordan-wines",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2021/02/the-outlier-sauvignon-blanc-jordan-wines.png",
+      "localPath": "/images/wines/sauvignon-blanc-marlborough.jpg"
+    },
+    {
+      "vino12Slug": "albarino-rias-baixas",
+      "source": "albarino-pedras-loiras-marcos-lojo",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2021/11/Pedras-Louras-Marcos-Lojo-500x500-1.jpg",
+      "localPath": "/images/wines/albarino-rias-baixas.jpg"
+    },
+    {
+      "vino12Slug": "vermentino-gallura",
+      "source": "vermentino-magnum-morisfarms",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2020/08/Morisfarms-Vermentino-vierkant.jpg",
+      "localPath": "/images/wines/vermentino-gallura.jpg"
+    },
+    {
+      "vino12Slug": "chardonnay-chablis",
+      "source": "svp-chardonnay",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2025/01/Project-Formaat-afbeelding-wijzigen-2-13.png",
+      "localPath": "/images/wines/chardonnay-chablis.jpg"
+    },
+    {
+      "vino12Slug": "viognier-condrieu",
+      "source": "les-bertholets-reserve-viognier-paul-albert",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2024/11/paul-albert-les-bertholets-reserve-viognier.jpg.png",
+      "localPath": "/images/wines/viognier-condrieu.jpg"
+    },
+    {
+      "vino12Slug": "riesling-alsace",
+      "source": "riesling-fusser",
+      "sourceUrl": "https://timetowine.nl/wp-content/uploads/2021/01/riesling-martin-en-georg-fusser.png",
+      "localPath": "/images/wines/riesling-alsace.jpg"
+    }
+  ]
+}

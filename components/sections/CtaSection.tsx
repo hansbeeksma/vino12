@@ -1,6 +1,10 @@
-import { BrutalButton } from "@/components/ui/BrutalButton";
+"use client";
+
+import { useCart } from "@/lib/cart-context";
 
 export function CtaSection() {
+  const { addBox } = useCart();
+
   return (
     <section
       id="bestel"
@@ -35,9 +39,12 @@ export function CtaSection() {
         </div>
 
         <div className="flex flex-col items-center gap-4">
-          <BrutalButton variant="primary" size="lg">
+          <button
+            onClick={addBox}
+            className="font-accent font-bold uppercase tracking-wider border-brutal border-ink brutal-shadow brutal-hover inline-block text-center cursor-pointer bg-wine text-champagne hover:bg-burgundy px-8 py-4 text-base"
+          >
             Bestel Nu →
-          </BrutalButton>
+          </button>
           <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest">
             Levering binnen 3-5 werkdagen · 21+ verificatie bij levering
           </p>

@@ -33,6 +33,7 @@ export interface Wine {
   funFact: string;
   slug: string;
   bottleShape: BottleShape;
+  image: string;
 }
 
 export interface WineCollection {

@@ -1,8 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Wine } from "@/lib/types";
 import { colorHex, colorLabel } from "@/lib/utils";
 import { BodyScale } from "./BodyScale";
-import { BottleSilhouette } from "./BottleSilhouette";
 
 interface WineCardProps {
   wine: Wine;
@@ -14,19 +14,21 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
 
   return (
     <Link href={`/wijn/${wine.slug}`} className={`block group ${className}`}>
-      <div className="aspect-square border-brutal border-ink brutal-shadow brutal-hover bg-offwhite relative overflow-hidden flex flex-col">
+      <div className="aspect-[3/4] border-brutal border-ink brutal-shadow brutal-hover bg-offwhite relative overflow-hidden flex flex-col">
         {/* Color indicator top bar */}
         <div
           className="h-2 w-full"
           style={{ backgroundColor: colorHex(wine.color) }}
         />
 
-        {/* SVG bottle silhouette */}
-        <div className="flex-1 flex items-center justify-center px-6 py-4">
-          <BottleSilhouette
-            shape={wine.bottleShape}
-            color={colorHex(wine.color)}
-            className="h-full max-h-[55%] opacity-15"
+        {/* Product photo */}
+        <div className="flex-1 flex items-center justify-center p-4 relative">
+          <Image
+            src={wine.image}
+            alt={`${wine.name} - ${wine.region}`}
+            width={300}
+            height={400}
+            className="object-contain max-h-full w-auto group-hover:scale-105 transition-transform duration-300"
           />
         </div>
 

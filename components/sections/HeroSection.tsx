@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { BottleSilhouette } from "@/components/wine/BottleSilhouette";
+import { useCart } from "@/lib/cart-context";
 
 export function HeroSection() {
+  const { addBox } = useCart();
+
   return (
     <section className="min-h-screen flex flex-col justify-center relative bg-offwhite border-b-brutal-lg border-ink overflow-hidden">
       {/* Background decoration */}
@@ -48,7 +51,7 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mb-12">
-            <BrutalButton variant="primary" size="lg" href="#bestel">
+            <BrutalButton variant="primary" size="lg" onClick={addBox}>
               Bestel — €175
             </BrutalButton>
             <BrutalButton variant="outline" size="lg" href="#collectie">

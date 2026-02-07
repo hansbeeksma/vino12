@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Space_Mono, Darker_Grotesque } from "next/font/google";
+import { CartProvider } from "@/lib/cart-context";
+import { CartDrawer } from "@/components/shop/CartDrawer";
 import "./globals.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -49,7 +51,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="nl" className={`${ibmPlexMono.variable} ${spaceMono.variable} ${darkerGrotesque.variable}`}>
-      <body className="bg-offwhite text-ink antialiased">{children}</body>
+      <body className="bg-offwhite text-ink antialiased">
+        <CartProvider>
+          {children}
+          <CartDrawer />
+        </CartProvider>
+      </body>
     </html>
   );
 }

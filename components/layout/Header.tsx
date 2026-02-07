@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CartButton } from "@/components/shop/CartButton";
 
 export function Header() {
   return (
@@ -22,12 +23,7 @@ export function Header() {
           >
             Filosofie
           </a>
-          <a
-            href="#bestel"
-            className="font-accent text-xs font-bold uppercase tracking-widest bg-wine text-champagne px-4 py-2 border-2 border-ink brutal-shadow brutal-hover"
-          >
-            Bestel
-          </a>
+          <CartButton />
         </nav>
       </div>
     </header>

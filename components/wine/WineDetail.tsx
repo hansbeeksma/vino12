@@ -1,10 +1,10 @@
+import Image from "next/image";
 import type { Wine } from "@/lib/types";
 import { colorHex, colorLabel, formatPrice } from "@/lib/utils";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
 import { BodyScale } from "./BodyScale";
 import { TastingProfile } from "./TastingProfile";
 import { PairingTags } from "./PairingTags";
-import { BottleSilhouette } from "./BottleSilhouette";
 
 interface WineDetailProps {
   wine: Wine;
@@ -16,16 +16,19 @@ export function WineDetail({ wine }: WineDetailProps) {
   return (
     <div className="container-brutal px-4 py-8 md:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-        {/* Left: Bottle visual */}
-        <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-square flex items-center justify-center relative">
+        {/* Left: Product photo */}
+        <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-square flex items-center justify-center relative p-8">
           <div
             className="absolute top-0 left-0 right-0 h-3"
             style={{ backgroundColor: colorHex(wine.color) }}
           />
-          <BottleSilhouette
-            shape={wine.bottleShape}
-            color={colorHex(wine.color)}
-            className="h-[60%] opacity-20"
+          <Image
+            src={wine.image}
+            alt={`${wine.name} - ${wine.region}`}
+            width={500}
+            height={667}
+            className="object-contain max-h-full w-auto"
+            priority
           />
           <div className="absolute bottom-4 right-4">
             <span className="font-display text-6xl font-bold text-ink/5">
