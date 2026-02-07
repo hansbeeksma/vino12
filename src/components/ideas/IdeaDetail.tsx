@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { BrutalCard } from "@/components/ui/BrutalCard";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
@@ -166,12 +167,12 @@ export function IdeaDetail() {
 
   return (
     <div className="max-w-4xl space-y-8">
-      <a
+      <Link
         href="/admin/ideas"
         className="font-accent text-xs uppercase tracking-widest text-gray-500 hover:text-ink"
       >
         &larr; Terug naar ideeën
-      </a>
+      </Link>
 
       {/* Header */}
       <div>
