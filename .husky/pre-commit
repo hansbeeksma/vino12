@@ -1,0 +1,5 @@
+# Secret scanning with emergency bypass support
+bash ~/Development/shared/pre-commit-gitleaks.sh
+
+# Code quality checks
+npx lint-staged

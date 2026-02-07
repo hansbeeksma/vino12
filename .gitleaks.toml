@@ -1,0 +1,54 @@
+# Vino12 - Gitleaks Configuration
+# Extends default gitleaks rules with custom patterns
+
+title = "Vino12 Gitleaks Config"
+
+[extend]
+# Use default gitleaks rules as base
+useDefault = true
+
+# Custom rules for our stack
+[[rules]]
+id = "stripe-live-key"
+description = "Stripe Live Secret Key"
+regex = '''sk_live_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret", "critical"]
+
+[[rules]]
+id = "stripe-test-key"
+description = "Stripe Test Secret Key"
+regex = '''sk_test_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret"]
+
+[[rules]]
+id = "stripe-restricted-key"
+description = "Stripe Restricted Key"
+regex = '''rk_(live|test)_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret"]
+
+[[rules]]
+id = "stripe-webhook-secret"
+description = "Stripe Webhook Secret"
+regex = '''whsec_[a-zA-Z0-9]{20,}'''
+tags = ["stripe", "secret"]
+
+[[rules]]
+id = "mollie-api-key"
+description = "Mollie API Key"
+regex = '''(live|test)_[a-zA-Z0-9]{20,}'''
+tags = ["mollie", "secret"]
+
+# Global allowlist
+[allowlist]
+paths = [
+  '''node_modules/''',
+  '''\.next/''',
+  '''dist/''',
+  '''build/''',
+  '''package-lock\.json''',
+  '''pnpm-lock\.yaml''',
+  '''yarn\.lock''',
+  '''\.gitleaks\.toml''',
+  '''\.github/workflows/''',
+  '''\.env\.example''',
+]

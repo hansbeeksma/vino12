@@ -37,3 +37,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security
+.semgrep/
+.gitleaks-report.json
+
+# Environment
+.env
+.env.local
+.env.production
+.env*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Planning
+.planning/

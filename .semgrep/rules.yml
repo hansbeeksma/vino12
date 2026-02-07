@@ -1,0 +1,149 @@
+rules:
+  # OWASP A03:2025 - Injection
+  - id: sql-injection-risk
+    pattern-either:
+      - pattern: |
+          $DB.query($SQL + $USER_INPUT)
+      - pattern: |
+          $DB.query(`...${$VAR}...`)
+      - pattern: |
+          $DB.raw($SQL + $VAR)
+    message: >
+      Potential SQL injection vulnerability.
+      Use parameterized queries or ORM methods.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A03:2025 - Injection"
+      cwe: "CWE-89"
+
+  - id: command-injection-risk
+    pattern-either:
+      - pattern: |
+          exec($CMD + $USER_INPUT)
+      - pattern: |
+          execSync($CMD + $USER_INPUT)
+      - pattern: |
+          spawn($CMD, [$USER_INPUT])
+    message: >
+      Potential command injection vulnerability.
+      Sanitize user input before executing shell commands.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A03:2025 - Injection"
+      cwe: "CWE-78"
+
+  # OWASP A02:2025 - Cryptographic Failures
+  - id: weak-crypto
+    pattern-either:
+      - pattern: crypto.createHash('md5')
+      - pattern: crypto.createHash('sha1')
+    message: >
+      Weak cryptographic algorithm detected.
+      Use SHA-256 or stronger.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A02:2025 - Cryptographic Failures"
+      cwe: "CWE-327"
+
+  # OWASP A04:2025 - Insecure Design
+  - id: hardcoded-secrets
+    pattern-either:
+      - pattern: |
+          const $VAR = "$SECRET"
+      - pattern: |
+          let $VAR = "$SECRET"
+    metavariable-regex:
+      metavariable: $VAR
+      regex: .*(SECRET|KEY|TOKEN|PASSWORD|API_KEY).*
+    message: >
+      Hardcoded secret detected.
+      Use environment variables instead.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A04:2025 - Insecure Design"
+      cwe: "CWE-798"
+
+  # OWASP A06:2025 - Vulnerable Components
+  - id: eval-usage
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+    message: >
+      eval() or Function() constructor detected.
+      Avoid dynamic code execution.
+    languages: [javascript, typescript]
+    severity: ERROR
+    metadata:
+      owasp: "A06:2025 - Vulnerable Components"
+      cwe: "CWE-95"
+
+  # OWASP A10:2025 - Server-Side Request Forgery (SSRF)
+  - id: ssrf-risk
+    pattern-either:
+      - pattern: |
+          fetch($URL)
+      - pattern: |
+          axios.get($URL)
+    metavariable-pattern:
+      metavariable: $URL
+      patterns:
+        - pattern-not: |
+            "..."
+    message: >
+      Potential SSRF vulnerability.
+      Validate and sanitize URL input before making requests.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A10:2025 - SSRF"
+      cwe: "CWE-918"
+
+  # Next.js Specific: dangerouslySetInnerHTML
+  - id: nextjs-dangerous-html
+    pattern: dangerouslySetInnerHTML={{__html: $VAR}}
+    message: >
+      dangerouslySetInnerHTML detected.
+      Ensure input is properly sanitized to prevent XSS.
+    languages: [javascript, typescript]
+    severity: WARNING
+    metadata:
+      owasp: "A03:2025 - Injection (XSS)"
+      cwe: "CWE-79"
+
+  # Next.js Specific: Exposed API route without validation
+  - id: nextjs-api-no-method-check
+    patterns:
+      - pattern: |
+          export async function $HANDLER($REQ, ...) {
+            ...
+          }
+      - pattern-not: |
+          export async function $HANDLER($REQ, ...) {
+            ...
+            $REQ.method
+            ...
+          }
+      - metavariable-regex:
+          metavariable: $HANDLER
+          regex: (GET|POST|PUT|DELETE|PATCH)
+    message: >
+      Next.js API route handler detected. Ensure proper input validation.
+    languages: [javascript, typescript]
+    severity: INFO
+    metadata:
+      category: security
+
+  # Console.log detection
+  - id: console-log-in-production
+    pattern: console.log(...)
+    message: >
+      console.log detected.
+      Remove debug statements before production deployment.
+    languages: [javascript, typescript]
+    severity: INFO
+    metadata:
+      category: code-quality

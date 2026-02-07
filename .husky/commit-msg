@@ -1,0 +1,2 @@
+# Conventional commit message validation
+bash ~/Development/shared/commit-tools/commit-msg-hook.sh "$1"
