@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="bg-ink text-champagne border-t-brutal border-wine">
@@ -17,19 +19,24 @@ export function Footer() {
             </h4>
             <ul className="space-y-2 font-body text-lg">
               <li>
-                <a href="/wijnen" className="hover:text-wine">
+                <Link href="/wijnen" className="hover:text-wine">
                   De Collectie
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/privacy" className="hover:text-wine">
+                <Link href="/blog" className="hover:text-wine">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="hover:text-wine">
                   Privacybeleid
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/voorwaarden" className="hover:text-wine">
+                <Link href="/voorwaarden" className="hover:text-wine">
                   Algemene Voorwaarden
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
