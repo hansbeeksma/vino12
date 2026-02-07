@@ -27,7 +27,7 @@ Dit project gebruikt de globale configuratie van `~/.claude/CLAUDE.md`.
 
 | Component  | Keuze                               |
 | ---------- | ----------------------------------- |
-| Framework  | Next.js 14 (App Router)             |
+| Framework  | Next.js 16 (App Router, Turbopack)  |
 | Database   | Supabase (PostgreSQL 17)            |
 | Payment    | Mollie (iDEAL native)               |
 | Email      | Resend + react-email                |
