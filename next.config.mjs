@@ -1,5 +1,3 @@
-import { withSentryConfig } from "@sentry/nextjs";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Security headers
@@ -57,9 +55,19 @@ const nextConfig = {
   },
 }
 
-export default withSentryConfig(nextConfig, {
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-  silent: !process.env.CI,
-  widenClientFileUpload: true,
-});
+// Only wrap with Sentry when DSN and org are configured
+const hasSentry = process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.SENTRY_ORG;
+
+let config = nextConfig;
+
+if (hasSentry) {
+  const { withSentryConfig } = await import("@sentry/nextjs");
+  config = withSentryConfig(nextConfig, {
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    silent: !process.env.CI,
+    widenClientFileUpload: true,
+  });
+}
+
+export default config;
