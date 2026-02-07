@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import { BrutalButton } from "@/components/ui/BrutalButton";
-import { BottleSilhouette } from "@/components/wine/BottleSilhouette";
-import { useCart } from "@/lib/cart-context";
+import { motion } from 'framer-motion'
+import { BrutalButton } from '@/components/ui/BrutalButton'
+import { BottleSilhouette } from '@/components/wine/BottleSilhouette'
+import { useCart } from '@/lib/cart-store'
 
 export function HeroSection() {
-  const { addBox } = useCart();
+  const { addBox } = useCart()
 
   return (
     <section className="min-h-screen flex flex-col justify-center relative bg-offwhite border-b-brutal-lg border-ink overflow-hidden">
@@ -28,7 +28,7 @@ export function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <p className="font-accent text-xs uppercase tracking-[0.3em] text-wine mb-4 md:mb-6">
             Premium Wijnbox
@@ -45,8 +45,8 @@ export function HeroSection() {
               6 ROOD. 6 WIT. PERFECTE BALANS.
             </p>
             <p className="font-body text-xl md:text-2xl text-ink/70 mb-8">
-              12 premium wijnen, zorgvuldig gecureerd. Van licht en fris tot vol
-              en complex. Eén box, alle smaken.
+              12 premium wijnen, zorgvuldig gecureerd. Van licht en fris tot vol en complex. Eén
+              box, alle smaken.
             </p>
           </div>
 
@@ -70,9 +70,7 @@ export function HeroSection() {
             </div>
             <div className="w-px h-10 bg-ink/20" />
             <div className="text-center">
-              <span className="font-display text-3xl md:text-4xl font-bold text-wine block">
-                6
-              </span>
+              <span className="font-display text-3xl md:text-4xl font-bold text-wine block">6</span>
               <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
                 Landen
               </span>
@@ -101,5 +99,5 @@ export function HeroSection() {
         </div>
       </motion.div>
     </section>
-  );
+  )
 }

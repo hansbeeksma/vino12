@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { useCart } from "@/lib/cart-context";
+import { useCart } from '@/lib/cart-store'
 
 export function CartButton() {
-  const { quantity, toggleCart } = useCart();
+  const { quantity, toggleCart } = useCart()
 
   return (
     <button
@@ -18,5 +18,5 @@ export function CartButton() {
         </span>
       )}
     </button>
-  );
+  )
 }
