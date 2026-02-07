@@ -25,7 +25,7 @@ export async function POST(req: Request) {
               description:
                 "12 premium wijnen — 6 rood, 6 wit. Van licht en fris tot vol en complex.",
               images: [
-                `${process.env.NEXT_PUBLIC_SITE_URL || "https://vino12.com"}/images/wines/pinot-noir-bourgogne.jpg`,
+                `${process.env.NEXT_PUBLIC_SITE_URL || "https://vino12.com"}/images/wines/pinot-noir-bourgogne.svg`,
               ],
             },
             unit_amount: 17500,
