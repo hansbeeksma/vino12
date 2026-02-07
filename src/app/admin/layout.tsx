@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { href: "/admin/klanten", label: "Klanten" },
   { href: "/admin/voorraad", label: "Voorraad" },
   { href: "/admin/ideas", label: "Ideeën" },
+  { href: "/admin/instellingen", label: "Instellingen" },
 ];
 
 export default async function AdminLayout({
