@@ -62,32 +62,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. Save shipping address
+    // 2. Save shipping address to addresses table
     const addr = data.shippingAddress;
-    const { data: address, error: addressError } = await supabase
-      .from("addresses")
-      .insert({
-        customer_id: customer.id,
-        type: "shipping",
-        street: addr.street,
-        house_number: addr.houseNumber,
-        house_number_addition: addr.houseNumberAddition ?? null,
-        postal_code: addr.postalCode,
-        city: addr.city,
-        country: addr.country,
-        is_default: true,
-      })
-      .select("id")
-      .single();
+    await supabase.from("addresses").insert({
+      customer_id: customer.id,
+      street: addr.street,
+      house_number: addr.houseNumber,
+      house_number_addition: addr.houseNumberAddition ?? null,
+      postal_code: addr.postalCode,
+      city: addr.city,
+      country: addr.country,
+      is_default: true,
+    });
 
-    if (addressError) {
-      return NextResponse.json(
-        { error: "Adres kon niet worden opgeslagen" },
-        { status: 500 },
-      );
-    }
-
-    // 3. Create order
+    // 3. Create order with inline address fields
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({
@@ -99,8 +87,13 @@ export async function POST(request: NextRequest) {
         shipping_cents: data.shipping_cents,
         discount_cents: 0,
         total_cents: data.total_cents,
-        shipping_address_id: address.id,
-        billing_address_id: address.id,
+        shipping_address_street: addr.street,
+        shipping_address_house_number: addr.houseNumber,
+        shipping_address_house_number_addition:
+          addr.houseNumberAddition ?? null,
+        shipping_address_postal_code: addr.postalCode,
+        shipping_address_city: addr.city,
+        shipping_address_country: addr.country,
         age_verified: true,
         notes: data.notes ?? null,
       })

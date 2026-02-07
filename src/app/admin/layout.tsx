@@ -1,40 +1,57 @@
+import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Admin | VINO12",
+  robots: { index: false, follow: false },
+};
+
+const NAV_ITEMS = [
+  { href: "/admin", label: "Dashboard" },
+  { href: "/admin/bestellingen", label: "Bestellingen" },
+  { href: "/admin/wijnen", label: "Wijnen" },
+  { href: "/admin/klanten", label: "Klanten" },
+  { href: "/admin/ideas", label: "Ideeën" },
+];
+
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex">
-      <aside className="w-64 border-r bg-gray-50 p-4">
-        <h2 className="text-lg font-bold mb-4">VINO12 Admin</h2>
-        <nav className="space-y-2">
-          <a
-            href="/admin"
-            className="block px-3 py-2 rounded hover:bg-gray-200"
-          >
-            Dashboard
-          </a>
-          <a
-            href="/admin/producten"
-            className="block px-3 py-2 rounded hover:bg-gray-200"
-          >
-            Producten
-          </a>
-          <a
-            href="/admin/bestellingen"
-            className="block px-3 py-2 rounded hover:bg-gray-200"
-          >
-            Bestellingen
-          </a>
-          <a
-            href="/admin/klanten"
-            className="block px-3 py-2 rounded hover:bg-gray-200"
-          >
-            Klanten
-          </a>
+    <div className="min-h-screen flex bg-offwhite">
+      <aside className="w-56 border-r-2 border-ink bg-champagne p-4 shrink-0">
+        <Link
+          href="/admin"
+          className="font-display text-xl font-bold text-ink block mb-6"
+        >
+          VINO<span className="text-wine">12</span>
+          <span className="font-accent text-[10px] uppercase tracking-widest text-ink/40 block">
+            Admin
+          </span>
+        </Link>
+        <nav className="space-y-1">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block font-accent text-xs uppercase tracking-widest text-ink px-3 py-2.5 border-2 border-transparent hover:border-ink hover:bg-offwhite"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+        <div className="mt-8 pt-4 border-t border-ink/20">
+          <Link
+            href="/"
+            className="font-accent text-[10px] uppercase tracking-widest text-ink/40 hover:text-wine"
+          >
+            ← Terug naar shop
+          </Link>
+        </div>
       </aside>
-      <main className="flex-1 p-8">{children}</main>
+      <main className="flex-1 p-6 md:p-8 overflow-x-auto">{children}</main>
     </div>
   );
 }

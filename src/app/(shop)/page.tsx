@@ -8,6 +8,7 @@ import { StatsBar } from "@/components/sections/StatsBar";
 import { StoriesCarousel } from "@/components/sections/StoriesCarousel";
 import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { CtaSection } from "@/components/sections/CtaSection";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,8 @@ export default async function HomePage() {
 
   return (
     <>
+      <OrganizationJsonLd />
+      <WebSiteJsonLd />
       <HeroSection />
       <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · €175 PER BOX · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />

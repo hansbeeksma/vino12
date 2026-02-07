@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getWineBySlug } from "@/lib/api/wines";
 import { WineDetail } from "@/components/wine/WineDetail";
+import { ProductJsonLd } from "@/components/seo/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -35,6 +36,7 @@ export default async function WineDetailPage({ params }: Props) {
 
   return (
     <div className="bg-offwhite min-h-screen section-padding">
+      <ProductJsonLd wine={wine} />
       <WineDetail wine={wine} />
     </div>
   );

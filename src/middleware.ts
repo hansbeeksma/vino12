@@ -1,15 +1,22 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
 const AGE_COOKIE = "vino12_age_verified";
 
-const PUBLIC_PATHS = ["/api/webhooks", "/_next", "/favicon.ico"];
+const SKIP_PATHS = [
+  "/api/webhooks",
+  "/_next",
+  "/favicon.ico",
+  "/auth/callback",
+];
+const AUTH_REQUIRED_PATHS = ["/account"];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip public paths
-  if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
+  // Skip static/webhook/callback paths
+  if (SKIP_PATHS.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
@@ -18,22 +25,62 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Skip API routes (handled separately)
+  // Skip API routes
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 
-  // Check age verification cookie for shop routes
-  const ageVerified = request.cookies.get(AGE_COOKIE);
+  // Create Supabase client for auth check
+  const response = NextResponse.next({
+    request: { headers: request.headers },
+  });
 
-  if (!ageVerified) {
-    // Allow the page to render - age gate modal will show client-side
-    const response = NextResponse.next();
-    response.headers.set("x-age-verified", "false");
-    return response;
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            request.cookies.set(name, value);
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    },
+  );
+
+  // Refresh session (important for Supabase Auth)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Protect auth-required routes
+  if (AUTH_REQUIRED_PATHS.some((path) => pathname.startsWith(path))) {
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
   }
 
-  return NextResponse.next();
+  // Redirect logged-in users away from login page
+  if (pathname === "/login" && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/account";
+    return NextResponse.redirect(url);
+  }
+
+  // Age verification for shop routes
+  const ageVerified = request.cookies.get(AGE_COOKIE);
+  if (!ageVerified) {
+    response.headers.set("x-age-verified", "false");
+  }
+
+  return response;
 }
 
 export const config = {
