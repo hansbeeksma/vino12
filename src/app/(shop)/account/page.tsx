@@ -3,7 +3,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/utils";
-import { BrutalButton } from "@/components/ui/BrutalButton";
 import { LogoutButton } from "@/components/auth/LogoutButton";
 
 export const dynamic = "force-dynamic";
