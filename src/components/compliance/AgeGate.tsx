@@ -21,12 +21,22 @@ export function AgeGate() {
     return !getCookie(AGE_COOKIE);
   });
 
+  function logVerification(verified: boolean) {
+    fetch("/api/age-verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ verified }),
+    }).catch(() => {});
+  }
+
   function handleConfirm() {
     setCookie(AGE_COOKIE, "true", COOKIE_MAX_AGE);
+    logVerification(true);
     setShow(false);
   }
 
   function handleDeny() {
+    logVerification(false);
     window.location.href = "https://www.google.com";
   }
 
