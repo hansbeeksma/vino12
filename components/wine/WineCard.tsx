@@ -14,27 +14,31 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
 
   return (
     <Link href={`/wijn/${wine.slug}`} className={`block group ${className}`}>
-      <div className="aspect-[3/4] border-brutal border-ink brutal-shadow brutal-hover bg-offwhite relative overflow-hidden flex flex-col">
+      <div className="aspect-[3/5] border-brutal border-ink brutal-shadow brutal-hover bg-offwhite overflow-hidden flex flex-col">
         {/* Color indicator top bar */}
         <div
-          className="h-2 w-full"
+          className="h-2 w-full shrink-0"
           style={{ backgroundColor: colorHex(wine.color) }}
         />
 
-        {/* Product photo */}
-        <div className="flex-1 flex items-center justify-center p-4 relative">
-          <Image
-            src={wine.image}
-            alt={`${wine.name} - ${wine.region}`}
-            width={300}
-            height={400}
-            className="object-contain max-h-full w-auto group-hover:scale-105 transition-transform duration-300"
-          />
+        {/* Product photo — strictly contained in white area */}
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <div className="relative w-full h-full p-4 md:p-6">
+            <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-300">
+              <Image
+                src={wine.image}
+                alt={`${wine.name} - ${wine.region}`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 50vw, 33vw"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Info overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-offwhite/95 border-t-2 border-ink">
-          <div className="flex items-start justify-between gap-2 mb-2">
+        {/* Info section */}
+        <div className="shrink-0 p-3 md:p-4 bg-offwhite border-t-2 border-ink">
+          <div className="flex items-start justify-between gap-2 mb-1">
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <span
@@ -45,7 +49,7 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
                   {colorLabel(wine.color)}
                 </span>
               </div>
-              <h3 className="font-display text-lg font-bold leading-tight">
+              <h3 className="font-display text-base md:text-lg font-bold leading-tight">
                 {wine.name}
               </h3>
             </div>
@@ -53,7 +57,7 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
               €{wine.price}
             </span>
           </div>
-          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/60 mb-2">
+          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/60 mb-1">
             {wine.region}, {wine.countryCode}
           </p>
           <BodyScale
