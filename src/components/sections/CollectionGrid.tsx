@@ -175,7 +175,7 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
               setBodyFilter(val);
               updateUrl({ body: val });
             }}
-            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-none focus:border-wine cursor-pointer"
+            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-hidden focus:border-wine cursor-pointer"
           >
             {BODY_FILTERS.map((f) => (
               <option key={f.value} value={f.value}>
@@ -191,7 +191,7 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
               setRegionFilter(e.target.value);
               updateUrl({ region: e.target.value });
             }}
-            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-none focus:border-wine cursor-pointer"
+            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-hidden focus:border-wine cursor-pointer"
           >
             <option value="all">Alle regio&apos;s</option>
             {regions.map((r) => (
@@ -209,7 +209,7 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
               setSort(val);
               updateUrl({ sort: val });
             }}
-            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-none focus:border-wine cursor-pointer ml-auto"
+            className="font-accent text-xs uppercase tracking-widest border-2 border-ink px-3 py-2 bg-offwhite focus:outline-hidden focus:border-wine cursor-pointer ml-auto"
           >
             {SORT_OPTIONS.map((s) => (
               <option key={s.value} value={s.value}>

@@ -33,7 +33,7 @@ async function fetchWines(filters?: {
   body?: WineBody;
   featured?: boolean;
 }): Promise<WineRow[]> {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   let query = supabase
     .from("wines")
@@ -66,7 +66,7 @@ export const getWines = unstable_cache(fetchWines, ["wines-list"], {
 });
 
 async function fetchWineBySlug(slug: string): Promise<WineRow | null> {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("wines")
@@ -89,7 +89,7 @@ export const getWineBySlug = unstable_cache(fetchWineBySlug, ["wine-by-slug"], {
 });
 
 export async function getWineSlugs(): Promise<{ slug: string }[]> {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("wines")
@@ -106,7 +106,7 @@ export async function getWineSlugs(): Promise<{ slug: string }[]> {
 async function fetchWineGrapes(
   wineId: string,
 ): Promise<{ id: string; name: string; percentage: number | null }[]> {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("wine_grapes")
@@ -133,7 +133,7 @@ export const getWineGrapes = unstable_cache(fetchWineGrapes, ["wine-grapes"], {
 });
 
 export async function searchWines(query: string): Promise<WineRow[]> {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("wines")

@@ -5,7 +5,7 @@ import {
   blogPosts,
   getBlogPostBySlug,
   blogCategories,
-} from "@/../../data/blog-posts";
+} from "@/data/blog-posts";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -107,18 +107,26 @@ export default async function BlogPostPage({ params }: Props) {
                 );
               }
               if (block.startsWith("|")) {
-                const rows = block.split("\n").filter((r) => !r.match(/^\|[-|]+\|$/));
+                const rows = block
+                  .split("\n")
+                  .filter((r) => !r.match(/^\|[-|]+\|$/));
                 return (
                   <div key={i} className="overflow-x-auto mb-4">
                     <table className="w-full border-2 border-ink font-body text-sm">
                       <tbody>
                         {rows.map((row, j) => (
-                          <tr key={j} className={j === 0 ? "bg-champagne font-bold" : ""}>
+                          <tr
+                            key={j}
+                            className={j === 0 ? "bg-champagne font-bold" : ""}
+                          >
                             {row
                               .split("|")
                               .filter(Boolean)
                               .map((cell, k) => (
-                                <td key={k} className="border border-ink/20 px-3 py-2">
+                                <td
+                                  key={k}
+                                  className="border border-ink/20 px-3 py-2"
+                                >
                                   {cell.trim()}
                                 </td>
                               ))}

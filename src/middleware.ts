@@ -12,25 +12,7 @@ const SKIP_PATHS = [
 ];
 const AUTH_REQUIRED_PATHS = ["/account"];
 
-export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Skip static/webhook/callback paths
-  if (SKIP_PATHS.some((path) => pathname.startsWith(path))) {
-    return NextResponse.next();
-  }
-
-  // Skip admin routes (separate auth)
-  if (pathname.startsWith("/admin")) {
-    return NextResponse.next();
-  }
-
-  // Skip API routes
-  if (pathname.startsWith("/api")) {
-    return NextResponse.next();
-  }
-
-  // Create Supabase client for auth check
+function createSupabaseMiddlewareClient(request: NextRequest) {
   const response = NextResponse.next({
     request: { headers: request.headers },
   });
@@ -53,10 +35,56 @@ export async function middleware(request: NextRequest) {
     },
   );
 
+  return { supabase, response };
+}
+
+function isAdminEmail(email: string | undefined): boolean {
+  if (!email) return false;
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return adminEmails.length > 0 && adminEmails.includes(email.toLowerCase());
+}
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Skip static/webhook/callback paths
+  if (SKIP_PATHS.some((path) => pathname.startsWith(path))) {
+    return NextResponse.next();
+  }
+
+  // Skip API routes
+  if (pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
+  const { supabase, response } = createSupabaseMiddlewareClient(request);
+
   // Refresh session (important for Supabase Auth)
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Protect admin routes
+  if (pathname.startsWith("/admin")) {
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      url.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    const hasAdminRole = user.app_metadata?.role === "admin";
+    if (!hasAdminRole && !isAdminEmail(user.email)) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/admin/geen-toegang";
+      return NextResponse.rewrite(url);
+    }
+
+    return response;
+  }
 
   // Protect auth-required routes
   if (AUTH_REQUIRED_PATHS.some((path) => pathname.startsWith(path))) {
@@ -69,8 +97,10 @@ export async function middleware(request: NextRequest) {
 
   // Redirect logged-in users away from login page
   if (pathname === "/login" && user) {
+    const redirect = request.nextUrl.searchParams.get("redirect");
     const url = request.nextUrl.clone();
-    url.pathname = "/account";
+    url.pathname = redirect ?? "/account";
+    url.searchParams.delete("redirect");
     return NextResponse.redirect(url);
   }
 

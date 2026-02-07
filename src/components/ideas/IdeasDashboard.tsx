@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { IdeaCard } from "@/components/ideas/IdeaCard";
 
@@ -46,8 +46,22 @@ export function IdeasDashboard() {
 
   const supabase = useMemo(() => createClient(), []);
 
+  const loadIdeas = useCallback(async () => {
+    const { data } = await supabase
+      .from("ideas")
+      .select(
+        "id, raw_message, sender_name, message_type, status, created_at, idea_analyses(title, category, urgency, feasibility_score, estimated_effort)",
+      )
+      .order("created_at", { ascending: false });
+
+    if (data) {
+      setIdeas(data as IdeaWithAnalysis[]);
+    }
+    setLoading(false);
+  }, [supabase]);
+
   useEffect(() => {
-    loadIdeas();
+    const initialLoad = setTimeout(loadIdeas, 0);
 
     const channel = supabase
       .channel("ideas-realtime")
@@ -68,23 +82,10 @@ export function IdeasDashboard() {
       .subscribe();
 
     return () => {
+      clearTimeout(initialLoad);
       supabase.removeChannel(channel);
     };
-  }, [supabase]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  async function loadIdeas() {
-    const { data } = await supabase
-      .from("ideas")
-      .select(
-        "id, raw_message, sender_name, message_type, status, created_at, idea_analyses(title, category, urgency, feasibility_score, estimated_effort)",
-      )
-      .order("created_at", { ascending: false });
-
-    if (data) {
-      setIdeas(data as IdeaWithAnalysis[]);
-    }
-    setLoading(false);
-  }
+  }, [supabase, loadIdeas]);
 
   const filtered = ideas.filter((idea) => {
     if (statusFilter !== "all" && idea.status !== statusFilter) return false;
@@ -128,7 +129,7 @@ export function IdeasDashboard() {
           placeholder="Zoek ideeën..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border-2 border-ink font-body text-sm flex-1 min-w-[200px] bg-offwhite focus:outline-none focus:ring-2 focus:ring-wine"
+          className="px-4 py-2 border-2 border-ink font-body text-sm flex-1 min-w-[200px] bg-offwhite focus:outline-hidden focus:ring-2 focus:ring-wine"
         />
 
         <select

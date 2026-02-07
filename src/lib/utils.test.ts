@@ -132,9 +132,7 @@ describe("slugify", () => {
   });
 
   it("handles multiple spaces and special chars", () => {
-    expect(slugify("Wijn & Kaas  Combinatie!")).toBe(
-      "wijn-kaas-combinatie",
-    );
+    expect(slugify("Wijn & Kaas  Combinatie!")).toBe("wijn-kaas-combinatie");
   });
 
   it("strips leading and trailing dashes", () => {

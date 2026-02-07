@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 
 const AGE_COOKIE = "vino12_age_verified";
@@ -16,27 +16,34 @@ function setCookie(name: string, value: string, maxAge: number) {
 }
 
 export function AgeGate() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(() => {
+    if (typeof document === "undefined") return false;
+    return !getCookie(AGE_COOKIE);
+  });
 
-  useEffect(() => {
-    if (!getCookie(AGE_COOKIE)) {
-      setShow(true);
-    }
-  }, []);
+  function logVerification(verified: boolean) {
+    fetch("/api/age-verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ verified }),
+    }).catch(() => {});
+  }
 
   function handleConfirm() {
     setCookie(AGE_COOKIE, "true", COOKIE_MAX_AGE);
+    logVerification(true);
     setShow(false);
   }
 
   function handleDeny() {
+    logVerification(false);
     window.location.href = "https://www.google.com";
   }
 
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-ink/80 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-100 bg-ink/80 flex items-center justify-center p-4">
       <div className="bg-offwhite border-brutal-lg border-ink brutal-shadow-lg p-8 md:p-12 max-w-md w-full text-center">
         <div className="mb-6">
           <span className="font-display text-5xl block mb-2">🍷</span>

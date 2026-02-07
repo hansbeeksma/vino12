@@ -45,7 +45,7 @@ export function HeroSection() {
             <BrutalButton variant="primary" size="lg" href="/wijnen">
               Bekijk wijnen — €175
             </BrutalButton>
-            <BrutalButton variant="outline" size="lg" href="#collectie">
+            <BrutalButton variant="outline-solid" size="lg" href="#collectie">
               Bekijk collectie ↓
             </BrutalButton>
           </div>

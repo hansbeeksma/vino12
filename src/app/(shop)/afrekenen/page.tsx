@@ -17,6 +17,7 @@ export default function AfrekenenPage() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState("ideal");
   const [form, setForm] = useState({
     email: "",
     firstName: "",
@@ -69,6 +70,7 @@ export default function AfrekenenPage() {
           subtotal_cents,
           shipping_cents,
           total_cents,
+          paymentMethod,
         }),
       });
 
@@ -112,7 +114,7 @@ export default function AfrekenenPage() {
   }
 
   const inputClass =
-    "w-full font-body text-base border-2 border-ink px-4 py-3 bg-offwhite focus:outline-none focus:border-wine placeholder:text-ink/30";
+    "w-full font-body text-base border-2 border-ink px-4 py-3 bg-offwhite focus:outline-hidden focus:border-wine placeholder:text-ink/30";
 
   return (
     <div className="bg-offwhite min-h-screen section-padding">
@@ -253,6 +255,34 @@ export default function AfrekenenPage() {
               </div>
             </div>
           </div>
+
+          {/* Payment method */}
+          <fieldset className="border-brutal border-ink bg-offwhite brutal-shadow p-6 space-y-3">
+            <legend className="font-display text-lg font-bold px-2">
+              Betaalmethode
+            </legend>
+            {[
+              { value: "ideal", label: "iDEAL" },
+              { value: "creditcard", label: "Creditcard" },
+              { value: "bancontact", label: "Bancontact" },
+              { value: "paypal", label: "PayPal" },
+            ].map((m) => (
+              <label
+                key={m.value}
+                className="flex items-center gap-3 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value={m.value}
+                  checked={paymentMethod === m.value}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="w-5 h-5 border-2 border-ink accent-wine"
+                />
+                <span className="font-body text-base">{m.label}</span>
+              </label>
+            ))}
+          </fieldset>
 
           {/* Age verification */}
           <label className="flex items-start gap-3 cursor-pointer">

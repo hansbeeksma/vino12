@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get("q");
   const sortBy = searchParams.get("sort") ?? "name_asc";
 
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   let query = supabase
     .from("wines")

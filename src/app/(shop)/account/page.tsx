@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/utils";
-import { BrutalButton } from "@/components/ui/BrutalButton";
 import { LogoutButton } from "@/components/auth/LogoutButton";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AccountPage() {
-  const supabase = createServerSupabaseClient();
+  const supabase = await createServerSupabaseClient();
 
   const {
     data: { user },
@@ -22,109 +22,144 @@ export default async function AccountPage() {
     redirect("/login");
   }
 
-  // Get customer record
-  const { data: customer } = await supabase
-    .from("customers")
-    .select("*")
-    .eq("auth_user_id", user.id)
-    .single();
-
-  // Get recent orders
-  const { data: orders } = await supabase
-    .from("orders")
-    .select("*, order_items:order_items(*)")
-    .eq("email", user.email!)
-    .order("created_at", { ascending: false })
-    .limit(10);
+  const [{ data: customer }, { data: orders }, { data: addresses }] =
+    await Promise.all([
+      supabase
+        .from("customers")
+        .select("*")
+        .eq("auth_user_id", user.id)
+        .single(),
+      supabase
+        .from("orders")
+        .select("id, order_number, status, total_cents, created_at")
+        .eq("email", user.email!)
+        .order("created_at", { ascending: false })
+        .limit(3),
+      supabase
+        .from("addresses")
+        .select("id")
+        .eq(
+          "customer_id",
+          (
+            await supabase
+              .from("customers")
+              .select("id")
+              .eq("auth_user_id", user.id)
+              .single()
+          ).data?.id ?? "",
+        ),
+    ]);
 
   return (
-    <div className="bg-offwhite min-h-screen section-padding">
-      <div className="container-brutal max-w-2xl">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="font-display text-display-md text-ink">
-            MIJN ACCOUNT
-          </h1>
-          <LogoutButton />
-        </div>
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="font-display text-display-md text-ink">MIJN ACCOUNT</h1>
+        <LogoutButton />
+      </div>
 
-        {/* Profile */}
-        <div className="border-brutal border-ink bg-offwhite brutal-shadow p-6 mb-8">
-          <h2 className="font-display text-lg font-bold text-ink mb-4">
-            Profiel
-          </h2>
-          <div className="space-y-2 font-body text-base">
-            <p>
-              <span className="text-ink/50">E-mail:</span>{" "}
-              <span className="font-bold">{user.email}</span>
-            </p>
-            {customer && (
-              <>
-                <p>
-                  <span className="text-ink/50">Naam:</span>{" "}
-                  <span className="font-bold">
-                    {customer.first_name} {customer.last_name}
-                  </span>
-                </p>
-                {customer.phone && (
-                  <p>
-                    <span className="text-ink/50">Telefoon:</span>{" "}
-                    <span className="font-bold">{customer.phone}</span>
-                  </p>
-                )}
-              </>
-            )}
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div className="border-2 border-ink bg-offwhite p-4">
+          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/50 mb-1">
+            Naam
+          </p>
+          <p className="font-display text-lg font-bold text-ink">
+            {customer?.first_name && customer?.last_name
+              ? `${customer.first_name} ${customer.last_name}`
+              : "Niet ingesteld"}
+          </p>
         </div>
-
-        {/* Orders */}
-        <div className="border-brutal border-ink bg-offwhite brutal-shadow p-6">
-          <h2 className="font-display text-lg font-bold text-ink mb-4">
+        <div className="border-2 border-ink bg-offwhite p-4">
+          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/50 mb-1">
+            E-mail
+          </p>
+          <p className="font-display text-lg font-bold text-ink truncate">
+            {user.email}
+          </p>
+        </div>
+        <div className="border-2 border-ink bg-offwhite p-4">
+          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/50 mb-1">
             Bestellingen
-          </h2>
-
-          {!orders || orders.length === 0 ? (
-            <div className="text-center py-8">
-              <p className="font-body text-base text-ink/50 mb-4">
-                Je hebt nog geen bestellingen geplaatst.
-              </p>
-              <BrutalButton variant="primary" size="md" href="/wijnen">
-                Bekijk wijnen →
-              </BrutalButton>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {orders.map((order) => (
-                <div
-                  key={order.id}
-                  className="border-2 border-ink p-4 space-y-2"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-base font-bold">
-                      {order.order_number}
-                    </span>
-                    <OrderStatusBadge status={order.status} />
-                  </div>
-                  <div className="flex items-center justify-between font-body text-sm text-ink/60">
-                    <span>
-                      {new Date(order.created_at).toLocaleDateString("nl-NL", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </span>
-                    <span className="font-bold text-ink">
-                      {formatPrice(order.total_cents)}
-                    </span>
-                  </div>
-                  <div className="font-body text-sm text-ink/50">
-                    {order.order_items?.length ?? 0} item(s)
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          </p>
+          <p className="font-display text-lg font-bold text-ink">
+            {orders?.length ?? 0}
+          </p>
+        </div>
+        <div className="border-2 border-ink bg-offwhite p-4">
+          <p className="font-accent text-[10px] uppercase tracking-widest text-ink/50 mb-1">
+            Adressen
+          </p>
+          <p className="font-display text-lg font-bold text-ink">
+            {addresses?.length ?? 0}
+          </p>
         </div>
       </div>
+
+      {/* Quick links */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <Link
+          href="/account/profiel"
+          className="border-2 border-ink bg-offwhite p-4 hover:bg-champagne transition-colors group"
+        >
+          <p className="font-display text-base font-bold text-ink group-hover:text-wine">
+            Profiel bewerken →
+          </p>
+          <p className="font-body text-sm text-ink/50">
+            Naam, telefoon, voorkeuren
+          </p>
+        </Link>
+        <Link
+          href="/account/adressen"
+          className="border-2 border-ink bg-offwhite p-4 hover:bg-champagne transition-colors group"
+        >
+          <p className="font-display text-base font-bold text-ink group-hover:text-wine">
+            Adresboek →
+          </p>
+          <p className="font-body text-sm text-ink/50">
+            Bezorgadressen beheren
+          </p>
+        </Link>
+        <Link
+          href="/account/bestellingen"
+          className="border-2 border-ink bg-offwhite p-4 hover:bg-champagne transition-colors group"
+        >
+          <p className="font-display text-base font-bold text-ink group-hover:text-wine">
+            Bestellingen →
+          </p>
+          <p className="font-body text-sm text-ink/50">Ordergeschiedenis</p>
+        </Link>
+      </div>
+
+      {/* Recent orders preview */}
+      {orders && orders.length > 0 && (
+        <div className="border-2 border-ink bg-offwhite p-6">
+          <h2 className="font-display text-lg font-bold text-ink mb-4">
+            Recente bestellingen
+          </h2>
+          <div className="space-y-3">
+            {orders.map((order) => (
+              <div
+                key={order.id}
+                className="flex items-center justify-between border-b border-ink/10 pb-3 last:border-0"
+              >
+                <div>
+                  <span className="font-display text-sm font-bold">
+                    {order.order_number}
+                  </span>
+                  <span className="font-body text-sm text-ink/50 ml-3">
+                    {new Date(order.created_at).toLocaleDateString("nl-NL")}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <OrderStatusBadge status={order.status} />
+                  <span className="font-body text-sm font-bold">
+                    {formatPrice(order.total_cents)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

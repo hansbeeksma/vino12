@@ -37,7 +37,7 @@ export function CookieConsent() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[90] p-4">
+    <div className="fixed bottom-0 left-0 right-0 z-90 p-4">
       <div className="container-brutal max-w-2xl mx-auto bg-offwhite border-brutal border-ink brutal-shadow p-4 md:p-6">
         <p className="font-body text-sm text-ink/80 mb-4">
           VINO12 gebruikt cookies voor een betere winkelervaring. Essentiële

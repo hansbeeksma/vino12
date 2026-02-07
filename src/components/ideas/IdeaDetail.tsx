@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { BrutalCard } from "@/components/ui/BrutalCard";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
@@ -77,8 +78,25 @@ export function IdeaDetail() {
 
   const supabase = useMemo(() => createClient(), []);
 
+  const loadIdea = useCallback(async () => {
+    const [ideaResult, analysisResult] = await Promise.all([
+      supabase.from("ideas").select("*").eq("id", ideaId).single(),
+      supabase
+        .from("idea_analyses")
+        .select("*")
+        .eq("idea_id", ideaId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]);
+
+    if (ideaResult.data) setIdea(ideaResult.data as Idea);
+    if (analysisResult.data) setAnalysis(analysisResult.data as Analysis);
+    setLoading(false);
+  }, [supabase, ideaId]);
+
   useEffect(() => {
-    loadIdea();
+    const initialLoad = setTimeout(loadIdea, 0);
 
     const channel = supabase
       .channel(`idea-${ideaId}`)
@@ -109,26 +127,10 @@ export function IdeaDetail() {
       .subscribe();
 
     return () => {
+      clearTimeout(initialLoad);
       supabase.removeChannel(channel);
     };
-  }, [ideaId, supabase]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  async function loadIdea() {
-    const [ideaResult, analysisResult] = await Promise.all([
-      supabase.from("ideas").select("*").eq("id", ideaId).single(),
-      supabase
-        .from("idea_analyses")
-        .select("*")
-        .eq("idea_id", ideaId)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ]);
-
-    if (ideaResult.data) setIdea(ideaResult.data as Idea);
-    if (analysisResult.data) setAnalysis(analysisResult.data as Analysis);
-    setLoading(false);
-  }
+  }, [ideaId, supabase, loadIdea]);
 
   async function updateStatus(newStatus: string) {
     await supabase.from("ideas").update({ status: newStatus }).eq("id", ideaId);
@@ -149,7 +151,11 @@ export function IdeaDetail() {
     return (
       <div className="text-center py-12">
         <p className="font-display text-xl font-bold">Idee niet gevonden</p>
-        <BrutalButton href="/admin/ideas" variant="outline" className="mt-4">
+        <BrutalButton
+          href="/admin/ideas"
+          variant="outline-solid"
+          className="mt-4"
+        >
           Terug naar overzicht
         </BrutalButton>
       </div>
@@ -166,12 +172,12 @@ export function IdeaDetail() {
 
   return (
     <div className="max-w-4xl space-y-8">
-      <a
+      <Link
         href="/admin/ideas"
         className="font-accent text-xs uppercase tracking-widest text-gray-500 hover:text-ink"
       >
         &larr; Terug naar ideeën
-      </a>
+      </Link>
 
       {/* Header */}
       <div>
@@ -242,7 +248,7 @@ export function IdeaDetail() {
         {idea.status !== "archived" && (
           <BrutalButton
             onClick={() => updateStatus("archived")}
-            variant="outline"
+            variant="outline-solid"
           >
             Archiveren
           </BrutalButton>
@@ -250,7 +256,7 @@ export function IdeaDetail() {
         {idea.status === "archived" && (
           <BrutalButton
             onClick={() => updateStatus("analyzed")}
-            variant="outline"
+            variant="outline-solid"
           >
             Uit archief halen
           </BrutalButton>

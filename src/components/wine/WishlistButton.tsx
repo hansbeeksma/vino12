@@ -18,9 +18,7 @@ export function WishlistButton({
     <button
       onClick={() => toggle(wineId)}
       className={`font-accent text-xs uppercase tracking-widest border-2 border-ink px-4 py-2 transition-colors ${
-        saved
-          ? "bg-wine text-champagne"
-          : "bg-offwhite text-ink hover:bg-ink/5"
+        saved ? "bg-wine text-champagne" : "bg-offwhite text-ink hover:bg-ink/5"
       } ${className}`}
       aria-label={
         saved ? "Verwijder uit favorieten" : "Voeg toe aan favorieten"

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getWineSlugs } from "@/lib/api/wines";
-import { blogPosts } from "@/../../data/blog-posts";
+import { blogPosts } from "@/data/blog-posts";
 
 export const dynamic = "force-dynamic";
 

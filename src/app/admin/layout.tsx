@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
+import { getAdminUser } from "@/lib/supabase/admin";
 
 export const metadata: Metadata = {
   title: "Admin | VINO12",
@@ -11,14 +13,23 @@ const NAV_ITEMS = [
   { href: "/admin/bestellingen", label: "Bestellingen" },
   { href: "/admin/wijnen", label: "Wijnen" },
   { href: "/admin/klanten", label: "Klanten" },
+  { href: "/admin/voorraad", label: "Voorraad" },
+  { href: "/admin/reviews", label: "Reviews" },
   { href: "/admin/ideas", label: "Ideeën" },
+  { href: "/admin/instellingen", label: "Instellingen" },
 ];
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const admin = await getAdminUser();
+
+  if (!admin) {
+    redirect("/login?redirect=/admin");
+  }
+
   return (
     <div className="min-h-screen flex bg-offwhite">
       <aside className="w-56 border-r-2 border-ink bg-champagne p-4 shrink-0">
@@ -43,6 +54,9 @@ export default function AdminLayout({
           ))}
         </nav>
         <div className="mt-8 pt-4 border-t border-ink/20">
+          <p className="font-accent text-[9px] uppercase tracking-widest text-ink/30 mb-3">
+            {admin.email}
+          </p>
           <Link
             href="/"
             className="font-accent text-[10px] uppercase tracking-widest text-ink/40 hover:text-wine"

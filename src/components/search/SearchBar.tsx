@@ -64,7 +64,7 @@ export function SearchBar() {
           setOpen(true);
         }}
         onFocus={() => setOpen(true)}
-        className="w-full font-body text-base border-2 border-ink px-4 py-2.5 bg-offwhite focus:outline-none focus:border-wine placeholder:text-ink/30"
+        className="w-full font-body text-base border-2 border-ink px-4 py-2.5 bg-offwhite focus:outline-hidden focus:border-wine placeholder:text-ink/30"
       />
 
       {open && query.length >= 2 && (

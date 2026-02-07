@@ -23,7 +23,7 @@ export function WineDetail({ wine }: WineDetailProps) {
     <div className="container-brutal px-4 py-8 md:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         {/* Left: Product photo */}
-        <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-[3/4] flex items-center justify-center relative p-8">
+        <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-3/4 flex items-center justify-center relative p-8">
           <div
             className="absolute top-0 left-0 right-0 h-3"
             style={{ backgroundColor: typeColorHex(wine.type) }}

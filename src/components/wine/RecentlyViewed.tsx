@@ -21,10 +21,7 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
 
   useEffect(() => {
     const targetSlugs = slugKey.split(",").filter(Boolean);
-    if (targetSlugs.length === 0) {
-      setWines([]);
-      return;
-    }
+    if (targetSlugs.length === 0) return;
 
     const supabase = createClient();
     supabase

@@ -1,6 +1,162 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-wine-50: #faf0f1;
+  --color-wine-100: #f0d4d7;
+  --color-wine-200: #d9a0a7;
+  --color-wine-300: #c16d77;
+  --color-wine-400: #a94a56;
+  --color-wine-500: #722f37;
+  --color-wine-600: #5e262e;
+  --color-wine-700: #4a1e24;
+  --color-wine-800: #36151b;
+  --color-wine-900: #220d11;
+  --color-wine: #722f37;
+
+  --color-burgundy: #660033;
+  --color-burgundy-light: #8c1a57;
+  --color-burgundy-dark: #400020;
+
+  --color-emerald: #00674f;
+
+  --color-champagne: #f7e6ca;
+  --color-champagne-light: #fbf2e3;
+  --color-champagne-dark: #e8cfa3;
+
+  --color-offwhite: #fafaf5;
+  --color-ink: #000000;
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --font-family-display: var(--font-display), 'IBM Plex Mono', monospace;
+  --font-family-body: var(--font-body), 'Darker Grotesque', sans-serif;
+  --font-family-accent: var(--font-accent), 'Space Mono', monospace;
+
+  --text-display-hero: clamp(3.5rem, 10vw, 14rem);
+  --text-display-hero--line-height: 0.9;
+  --text-display-hero--letter-spacing: -0.04em;
+  --text-display-hero--font-weight: 700;
+  --text-display-lg: clamp(2rem, 5vw, 6rem);
+  --text-display-lg--line-height: 0.95;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-lg--font-weight: 700;
+  --text-display-md: clamp(1.5rem, 3vw, 3.5rem);
+  --text-display-md--line-height: 1;
+  --text-display-md--letter-spacing: -0.02em;
+  --text-display-md--font-weight: 700;
+
+  --shadow-brutal: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  --shadow-brutal-lg: 6px 6px 0px rgba(0, 0, 0, 0.8);
+  --shadow-brutal-wine: 4px 4px 0px #722f37;
+
+  --border-width-brutal: 4px;
+  --border-width-brutal-lg: 6px;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility brutal-border {
+  border: 4px solid #000000;
+}
+
+@utility brutal-border-lg {
+  border: 6px solid #000000;
+}
+
+@utility brutal-shadow {
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+}
+
+@utility brutal-shadow-lg {
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
+}
+
+@utility brutal-hover {
+  transition: none;
+
+  &:hover {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+}
+
+@utility section-padding {
+  @apply px-4 py-16 md:px-8 md:py-24 lg:px-16 lg:py-32;
+}
+
+@utility container-brutal {
+  @apply max-w-7xl mx-auto;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility font-display {
+  font-family: var(--font-family-display);
+}
+
+@utility font-body {
+  font-family: var(--font-family-body);
+}
+
+@utility font-accent {
+  font-family: var(--font-family-accent);
+}
 
 @layer base {
   * {
@@ -135,59 +291,6 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-  }
-}
-
-@layer components {
-  .brutal-border {
-    border: 4px solid #000000;
-  }
-
-  .brutal-border-lg {
-    border: 6px solid #000000;
-  }
-
-  .brutal-shadow {
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
-  }
-
-  .brutal-shadow-lg {
-    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.8);
-  }
-
-  .brutal-hover {
-    transition: none;
-  }
-
-  .brutal-hover:hover {
-    transform: translate(4px, 4px);
-    box-shadow: none;
-  }
-
-  .section-padding {
-    @apply px-4 py-16 md:px-8 md:py-24 lg:px-16 lg:py-32;
-  }
-
-  .container-brutal {
-    @apply max-w-7xl mx-auto;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .font-display {
-    font-family: var(--font-display), "IBM Plex Mono", monospace;
-  }
-
-  .font-body {
-    font-family: var(--font-body), "Darker Grotesque", sans-serif;
-  }
-
-  .font-accent {
-    font-family: var(--font-accent), "Space Mono", monospace;
   }
 }
 
