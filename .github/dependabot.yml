@@ -15,13 +15,16 @@ updates:
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
+    # Major version bumps ignored - require manual migration
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     groups:
       security-patches:
         applies-to: security-updates
         update-types:
           - "patch"
           - "minor"
-          - "major"
       production-dependencies:
         dependency-type: "production"
         update-types:
