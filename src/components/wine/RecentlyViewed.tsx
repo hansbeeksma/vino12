@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useRecentlyViewedStore } from "@/features/recently-viewed/store";
 import { createClient } from "@/lib/supabase/client";
 import { WineCard } from "./WineCard";
@@ -14,36 +14,29 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
   const { slugs } = useRecentlyViewedStore();
   const [wines, setWines] = useState<WineRow[]>([]);
 
-  const filteredSlugs = useMemo(
-    () => slugs.filter((s) => s !== excludeSlug).slice(0, 4),
-    [slugs, excludeSlug],
-  );
+  const slugKey = slugs
+    .filter((s) => s !== excludeSlug)
+    .slice(0, 4)
+    .join(",");
 
-  const fetchWines = useCallback(() => {
-    if (filteredSlugs.length === 0) {
-      setWines([]);
-      return;
-    }
+  useEffect(() => {
+    const targetSlugs = slugKey.split(",").filter(Boolean);
+    if (targetSlugs.length === 0) return;
 
     const supabase = createClient();
     supabase
       .from("wines")
       .select("*, region:regions(id, name, country)")
-      .in("slug", filteredSlugs)
+      .in("slug", targetSlugs)
       .eq("is_active", true)
       .then(({ data }) => {
         if (!data) return;
-        const sorted = filteredSlugs
+        const sorted = targetSlugs
           .map((slug) => (data as WineRow[]).find((w) => w.slug === slug))
           .filter(Boolean) as WineRow[];
         setWines(sorted);
       });
-  }, [filteredSlugs]);
-
-  useEffect(() => {
-    const timeout = setTimeout(fetchWines, 0);
-    return () => clearTimeout(timeout);
-  }, [fetchWines]);
+  }, [slugKey]);
 
   if (wines.length === 0) return null;
 
