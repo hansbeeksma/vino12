@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
@@ -78,8 +78,25 @@ export function IdeaDetail() {
 
   const supabase = useMemo(() => createClient(), []);
 
+  const loadIdea = useCallback(async () => {
+    const [ideaResult, analysisResult] = await Promise.all([
+      supabase.from("ideas").select("*").eq("id", ideaId).single(),
+      supabase
+        .from("idea_analyses")
+        .select("*")
+        .eq("idea_id", ideaId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+    ]);
+
+    if (ideaResult.data) setIdea(ideaResult.data as Idea);
+    if (analysisResult.data) setAnalysis(analysisResult.data as Analysis);
+    setLoading(false);
+  }, [supabase, ideaId]);
+
   useEffect(() => {
-    loadIdea();
+    const initialLoad = setTimeout(loadIdea, 0);
 
     const channel = supabase
       .channel(`idea-${ideaId}`)
@@ -110,26 +127,10 @@ export function IdeaDetail() {
       .subscribe();
 
     return () => {
+      clearTimeout(initialLoad);
       supabase.removeChannel(channel);
     };
-  }, [ideaId, supabase]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  async function loadIdea() {
-    const [ideaResult, analysisResult] = await Promise.all([
-      supabase.from("ideas").select("*").eq("id", ideaId).single(),
-      supabase
-        .from("idea_analyses")
-        .select("*")
-        .eq("idea_id", ideaId)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ]);
-
-    if (ideaResult.data) setIdea(ideaResult.data as Idea);
-    if (analysisResult.data) setAnalysis(analysisResult.data as Analysis);
-    setLoading(false);
-  }
+  }, [ideaId, supabase, loadIdea]);
 
   async function updateStatus(newStatus: string) {
     await supabase.from("ideas").update({ status: newStatus }).eq("id", ideaId);

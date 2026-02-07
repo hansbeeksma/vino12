@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 
 const AGE_COOKIE = "vino12_age_verified";
@@ -16,13 +16,10 @@ function setCookie(name: string, value: string, maxAge: number) {
 }
 
 export function AgeGate() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    if (!getCookie(AGE_COOKIE)) {
-      setShow(true);
-    }
-  }, []);
+  const [show, setShow] = useState(() => {
+    if (typeof document === "undefined") return false;
+    return !getCookie(AGE_COOKIE);
+  });
 
   function handleConfirm() {
     setCookie(AGE_COOKIE, "true", COOKIE_MAX_AGE);
