@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { href: "/admin/wijnen", label: "Wijnen" },
   { href: "/admin/klanten", label: "Klanten" },
   { href: "/admin/voorraad", label: "Voorraad" },
+  { href: "/admin/reviews", label: "Reviews" },
   { href: "/admin/ideas", label: "Ideeën" },
   { href: "/admin/instellingen", label: "Instellingen" },
 ];
