@@ -5,6 +5,7 @@ import { wines, getWineBySlug } from '@/lib/wines'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { WineDetail } from '@/components/wine/WineDetail'
+import { SimilarWines } from '@/components/wine/SimilarWines'
 import { MarqueeStrip } from '@/components/ui/MarqueeStrip'
 import { getWineProductJsonLd, getBreadcrumbJsonLd } from '@/lib/structured-data'
 
@@ -75,6 +76,8 @@ export default function WinePage({ params }: PageProps) {
         </div>
 
         <WineDetail wine={wine} />
+
+        <SimilarWines currentWine={wine} allWines={wines} />
 
         {/* Navigation */}
         <div className="container-brutal px-4 py-8 md:px-8">
