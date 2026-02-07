@@ -5,7 +5,7 @@ import {
   blogPosts,
   getBlogPostBySlug,
   blogCategories,
-} from "@/../../data/blog-posts";
+} from "@/data/blog-posts";
 
 interface Props {
   params: Promise<{ slug: string }>;

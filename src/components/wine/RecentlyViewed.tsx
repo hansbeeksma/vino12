@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRecentlyViewedStore } from "@/features/recently-viewed/store";
 import { createClient } from "@/lib/supabase/client";
 import { WineCard } from "./WineCard";
@@ -19,8 +19,11 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
     [slugs, excludeSlug],
   );
 
-  useEffect(() => {
-    if (filteredSlugs.length === 0) return;
+  const fetchWines = useCallback(() => {
+    if (filteredSlugs.length === 0) {
+      setWines([]);
+      return;
+    }
 
     const supabase = createClient();
     supabase
@@ -36,6 +39,11 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
         setWines(sorted);
       });
   }, [filteredSlugs]);
+
+  useEffect(() => {
+    const timeout = setTimeout(fetchWines, 0);
+    return () => clearTimeout(timeout);
+  }, [fetchWines]);
 
   if (wines.length === 0) return null;
 
