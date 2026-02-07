@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getWines } from "@/lib/api/wines";
 import { CollectionGrid } from "@/components/sections/CollectionGrid";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { SearchBar } from "@/components/search/SearchBar";
 
 export const dynamic = "force-dynamic";
 
@@ -28,9 +30,12 @@ export default async function WijnenPage() {
             12 premium wijnen. Elke fles vertelt een verhaal van regio, druif en
             vakmanschap.
           </p>
+          <SearchBar />
         </div>
       </section>
-      <CollectionGrid wines={wines} />
+      <Suspense>
+        <CollectionGrid wines={wines} />
+      </Suspense>
     </div>
   );
 }

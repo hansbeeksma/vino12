@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { WineType, WineBody } from "@/lib/schemas/wine";
 
@@ -25,7 +26,9 @@ export interface WineRow {
   region: { id: string; name: string; country: string } | null;
 }
 
-export async function getWines(filters?: {
+const CACHE_REVALIDATE = 60; // 60 seconds
+
+async function fetchWines(filters?: {
   type?: WineType;
   body?: WineBody;
   featured?: boolean;
@@ -57,7 +60,12 @@ export async function getWines(filters?: {
   return (data ?? []) as WineRow[];
 }
 
-export async function getWineBySlug(slug: string): Promise<WineRow | null> {
+export const getWines = unstable_cache(fetchWines, ["wines-list"], {
+  revalidate: CACHE_REVALIDATE,
+  tags: ["wines"],
+});
+
+async function fetchWineBySlug(slug: string): Promise<WineRow | null> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
@@ -75,6 +83,11 @@ export async function getWineBySlug(slug: string): Promise<WineRow | null> {
   return data as WineRow;
 }
 
+export const getWineBySlug = unstable_cache(fetchWineBySlug, ["wine-by-slug"], {
+  revalidate: CACHE_REVALIDATE,
+  tags: ["wines"],
+});
+
 export async function getWineSlugs(): Promise<{ slug: string }[]> {
   const supabase = createServerSupabaseClient();
 
@@ -90,7 +103,7 @@ export async function getWineSlugs(): Promise<{ slug: string }[]> {
   return data ?? [];
 }
 
-export async function getWineGrapes(
+async function fetchWineGrapes(
   wineId: string,
 ): Promise<{ id: string; name: string; percentage: number | null }[]> {
   const supabase = createServerSupabaseClient();
@@ -113,6 +126,11 @@ export async function getWineGrapes(
     };
   });
 }
+
+export const getWineGrapes = unstable_cache(fetchWineGrapes, ["wine-grapes"], {
+  revalidate: CACHE_REVALIDATE,
+  tags: ["wines"],
+});
 
 export async function searchWines(query: string): Promise<WineRow[]> {
   const supabase = createServerSupabaseClient();
