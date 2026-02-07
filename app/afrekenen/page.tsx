@@ -2,15 +2,28 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useCart } from '@/lib/cart-store'
+import { useAgeVerification } from '@/lib/age-store'
 import { checkoutSchema } from '@/lib/checkout-schema'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { OrderSummary } from '@/components/shop/OrderSummary'
 
 export default function CheckoutPage() {
   const { quantity, total } = useCart()
+  const { verified } = useAgeVerification()
+  const router = useRouter()
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
+
+  // Age re-verification: redirect if not verified
+  if (!verified) {
+    if (typeof window !== 'undefined') {
+      router.replace('/?age-required=1')
+    }
+    return null
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -235,42 +248,12 @@ export default function CheckoutPage() {
 
               {/* Order Summary Sidebar */}
               <div className="lg:col-span-1">
-                <div className="border-brutal border-ink bg-champagne/20 p-6 sticky top-24">
-                  <h3 className="font-display text-xl font-bold mb-6">Bestelling</h3>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex justify-between font-body text-base">
-                      <span className="text-ink/60">{quantity}x Vino12 Box</span>
-                      <span>€{total}</span>
-                    </div>
-                    <div className="flex justify-between font-body text-base">
-                      <span className="text-ink/60">Verzendkosten</span>
-                      <span className="text-emerald font-bold">Gratis</span>
-                    </div>
-                  </div>
-
-                  <div className="border-t-2 border-ink pt-4 mb-6">
-                    <div className="flex justify-between items-baseline">
-                      <span className="font-accent text-xs uppercase tracking-widest">Totaal</span>
-                      <span className="font-display text-3xl font-bold text-wine">€{total}</span>
-                    </div>
-                    <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest mt-1">
-                      Inclusief BTW
-                    </p>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full font-accent text-base font-bold uppercase tracking-wider bg-wine text-champagne px-8 py-4 border-brutal border-ink brutal-shadow brutal-hover disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {loading ? 'Laden...' : 'Bestelling plaatsen →'}
-                  </button>
-
-                  <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest text-center mt-4">
-                    Je wordt doorgestuurd naar de betaalpagina
-                  </p>
-                </div>
+                <OrderSummary
+                  quantity={quantity}
+                  total={total}
+                  variant="checkout"
+                  loading={loading}
+                />
               </div>
             </div>
           </form>
