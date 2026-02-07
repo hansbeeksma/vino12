@@ -14,12 +14,14 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
   const { slugs } = useRecentlyViewedStore();
   const [wines, setWines] = useState<WineRow[]>([]);
 
-  const filteredSlugs = slugs
+  const slugKey = slugs
     .filter((s) => s !== excludeSlug)
-    .slice(0, 4);
+    .slice(0, 4)
+    .join(",");
 
   useEffect(() => {
-    if (filteredSlugs.length === 0) {
+    const targetSlugs = slugKey.split(",").filter(Boolean);
+    if (targetSlugs.length === 0) {
       setWines([]);
       return;
     }
@@ -28,16 +30,16 @@ export function RecentlyViewed({ excludeSlug }: RecentlyViewedProps) {
     supabase
       .from("wines")
       .select("*, region:regions(id, name, country)")
-      .in("slug", filteredSlugs)
+      .in("slug", targetSlugs)
       .eq("is_active", true)
       .then(({ data }) => {
         if (!data) return;
-        const sorted = filteredSlugs
+        const sorted = targetSlugs
           .map((slug) => (data as WineRow[]).find((w) => w.slug === slug))
           .filter(Boolean) as WineRow[];
         setWines(sorted);
       });
-  }, [filteredSlugs.join(",")]);
+  }, [slugKey]);
 
   if (wines.length === 0) return null;
 
