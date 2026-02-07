@@ -8,6 +8,7 @@ import { StatsBar } from '@/components/sections/StatsBar'
 import { StoriesCarousel } from '@/components/sections/StoriesCarousel'
 import { PhilosophySection } from '@/components/sections/PhilosophySection'
 import { CtaSection } from '@/components/sections/CtaSection'
+import { NewsletterSignup } from '@/components/marketing/NewsletterSignup'
 import { getOrganizationJsonLd, getWebsiteJsonLd, getProductJsonLd } from '@/lib/structured-data'
 
 export default function Home() {
@@ -35,6 +36,9 @@ export default function Home() {
         <StoriesCarousel />
         <PhilosophySection />
         <CtaSection />
+        <section className="container-brutal px-4 py-12 md:px-8 md:py-16">
+          <NewsletterSignup />
+        </section>
       </main>
       <Footer />
     </>

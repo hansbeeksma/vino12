@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { wines } from '@/lib/wines'
 import type { WineColor, BodyLevel } from '@/lib/types'
 import { Header } from '@/components/layout/Header'
@@ -19,32 +19,62 @@ const bodyOrder: Record<BodyLevel, number> = {
   Full: 5,
 }
 
+const allRegions = Array.from(new Set(wines.map((w) => w.region))).sort()
+const allGrapes = Array.from(new Set(wines.map((w) => w.grape))).sort()
+const allBodies: BodyLevel[] = ['Light', 'Light-Medium', 'Medium', 'Medium-Full', 'Full']
+
 export default function WinesPage() {
   const [colorFilter, setColorFilter] = useState<FilterColor>('all')
+  const [regionFilter, setRegionFilter] = useState<string>('all')
+  const [grapeFilter, setGrapeFilter] = useState<string>('all')
+  const [bodyFilter, setBodyFilter] = useState<string>('all')
   const [sort, setSort] = useState<SortOption>('default')
 
-  const filtered = wines.filter((w) => {
-    if (colorFilter !== 'all' && w.color !== colorFilter) return false
-    return true
-  })
+  const activeFilterCount = [colorFilter, regionFilter, grapeFilter, bodyFilter].filter(
+    (f) => f !== 'all',
+  ).length
 
-  const sorted = [...filtered].sort((a, b) => {
-    switch (sort) {
-      case 'price-asc':
-        return a.price - b.price
-      case 'price-desc':
-        return b.price - a.price
-      case 'body-asc':
-        return bodyOrder[a.body] - bodyOrder[b.body]
-      case 'body-desc':
-        return bodyOrder[b.body] - bodyOrder[a.body]
-      default:
-        return 0
-    }
-  })
+  const filtered = useMemo(
+    () =>
+      wines.filter((w) => {
+        if (colorFilter !== 'all' && w.color !== colorFilter) return false
+        if (regionFilter !== 'all' && w.region !== regionFilter) return false
+        if (grapeFilter !== 'all' && w.grape !== grapeFilter) return false
+        if (bodyFilter !== 'all' && w.body !== bodyFilter) return false
+        return true
+      }),
+    [colorFilter, regionFilter, grapeFilter, bodyFilter],
+  )
+
+  const sorted = useMemo(
+    () =>
+      [...filtered].sort((a, b) => {
+        switch (sort) {
+          case 'price-asc':
+            return a.price - b.price
+          case 'price-desc':
+            return b.price - a.price
+          case 'body-asc':
+            return bodyOrder[a.body] - bodyOrder[b.body]
+          case 'body-desc':
+            return bodyOrder[b.body] - bodyOrder[a.body]
+          default:
+            return 0
+        }
+      }),
+    [filtered, sort],
+  )
 
   const redCount = wines.filter((w) => w.color === 'red').length
   const whiteCount = wines.filter((w) => w.color === 'white').length
+
+  function clearFilters() {
+    setColorFilter('all')
+    setRegionFilter('all')
+    setGrapeFilter('all')
+    setBodyFilter('all')
+    setSort('default')
+  }
 
   return (
     <>
@@ -65,8 +95,8 @@ export default function WinesPage() {
             </p>
           </div>
 
-          {/* Filters */}
-          <div className="flex flex-wrap items-center gap-4 mb-8 border-b-2 border-ink/10 pb-6">
+          {/* Color Filters */}
+          <div className="flex flex-wrap items-center gap-4 mb-4">
             <div className="flex gap-2">
               <FilterButton active={colorFilter === 'all'} onClick={() => setColorFilter('all')}>
                 Alle ({wines.length})
@@ -81,8 +111,38 @@ export default function WinesPage() {
                 Wit ({whiteCount})
               </FilterButton>
             </div>
+          </div>
 
-            <div className="ml-auto">
+          {/* Faceted Filters */}
+          <div className="flex flex-wrap items-center gap-3 mb-8 border-b-2 border-ink/10 pb-6">
+            <FilterSelect
+              value={regionFilter}
+              onChange={setRegionFilter}
+              label="Regio"
+              options={allRegions}
+            />
+            <FilterSelect
+              value={grapeFilter}
+              onChange={setGrapeFilter}
+              label="Druif"
+              options={allGrapes}
+            />
+            <FilterSelect
+              value={bodyFilter}
+              onChange={setBodyFilter}
+              label="Body"
+              options={allBodies}
+            />
+
+            <div className="ml-auto flex items-center gap-3">
+              {activeFilterCount > 0 && (
+                <button
+                  onClick={clearFilters}
+                  className="font-accent text-xs uppercase tracking-widest text-ink/40 hover:text-wine"
+                >
+                  Wis filters ({activeFilterCount})
+                </button>
+              )}
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value as SortOption)}
@@ -97,6 +157,11 @@ export default function WinesPage() {
             </div>
           </div>
 
+          {/* Results count */}
+          <p className="font-accent text-xs uppercase tracking-widest text-ink/40 mb-4">
+            {sorted.length} {sorted.length === 1 ? 'wijn' : 'wijnen'}
+          </p>
+
           {/* Wine Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {sorted.map((wine) => (
@@ -106,7 +171,13 @@ export default function WinesPage() {
 
           {sorted.length === 0 && (
             <div className="text-center py-12">
-              <p className="font-display text-2xl text-ink/50">Geen wijnen gevonden</p>
+              <p className="font-display text-2xl text-ink/50 mb-4">Geen wijnen gevonden</p>
+              <button
+                onClick={clearFilters}
+                className="font-accent text-xs uppercase tracking-widest text-wine hover:text-ink"
+              >
+                Wis alle filters
+              </button>
             </div>
           )}
         </div>
@@ -136,5 +207,34 @@ function FilterButton({
     >
       {children}
     </button>
+  )
+}
+
+function FilterSelect({
+  value,
+  onChange,
+  label,
+  options,
+}: {
+  value: string
+  onChange: (value: string) => void
+  label: string
+  options: string[]
+}) {
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={`font-accent text-xs uppercase tracking-widest border-2 px-3 py-2 cursor-pointer ${
+        value !== 'all' ? 'border-wine bg-wine/5 text-wine' : 'border-ink bg-offwhite text-ink'
+      }`}
+    >
+      <option value="all">{label}</option>
+      {options.map((opt) => (
+        <option key={opt} value={opt}>
+          {opt}
+        </option>
+      ))}
+    </select>
   )
 }
