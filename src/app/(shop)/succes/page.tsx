@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
+import { OrderStatus } from "./OrderStatus";
 
 export const metadata: Metadata = {
   title: "Bestelling bevestigd | VINO12",
@@ -16,6 +18,9 @@ export default async function SuccesPage({ searchParams }: Props) {
     <div className="bg-offwhite min-h-screen section-padding">
       <div className="container-brutal text-center py-20">
         <div className="inline-block border-brutal-lg border-ink bg-offwhite brutal-shadow-lg p-8 md:p-12 mb-8">
+          <Suspense>
+            <OrderStatus />
+          </Suspense>
           <span className="font-display text-6xl md:text-7xl block mb-4">
             🍷
           </span>
@@ -37,7 +42,7 @@ export default async function SuccesPage({ searchParams }: Props) {
           <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest">
             Levering binnen 3-5 werkdagen · Bevestigingsmail onderweg
           </p>
-          <BrutalButton variant="outline" size="lg" href="/">
+          <BrutalButton variant="outline-solid" size="lg" href="/">
             ← Terug naar home
           </BrutalButton>
         </div>

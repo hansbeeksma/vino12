@@ -150,7 +150,11 @@ export function IdeaDetail() {
     return (
       <div className="text-center py-12">
         <p className="font-display text-xl font-bold">Idee niet gevonden</p>
-        <BrutalButton href="/admin/ideas" variant="outline" className="mt-4">
+        <BrutalButton
+          href="/admin/ideas"
+          variant="outline-solid"
+          className="mt-4"
+        >
           Terug naar overzicht
         </BrutalButton>
       </div>
@@ -243,7 +247,7 @@ export function IdeaDetail() {
         {idea.status !== "archived" && (
           <BrutalButton
             onClick={() => updateStatus("archived")}
-            variant="outline"
+            variant="outline-solid"
           >
             Archiveren
           </BrutalButton>
@@ -251,7 +255,7 @@ export function IdeaDetail() {
         {idea.status === "archived" && (
           <BrutalButton
             onClick={() => updateStatus("analyzed")}
-            variant="outline"
+            variant="outline-solid"
           >
             Uit archief halen
           </BrutalButton>
