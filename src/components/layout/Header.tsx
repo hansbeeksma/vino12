@@ -40,6 +40,12 @@ export function Header() {
             Collectie
           </Link>
           <Link
+            href="/blog"
+            className="font-accent text-xs uppercase tracking-widest text-ink hover:text-wine hidden md:block"
+          >
+            Blog
+          </Link>
+          <Link
             href={isLoggedIn ? "/account" : "/login"}
             className="font-accent text-xs uppercase tracking-widest text-ink hover:text-wine hidden md:block"
           >
