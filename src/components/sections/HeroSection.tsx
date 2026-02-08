@@ -49,35 +49,6 @@ export function HeroSection() {
               Bekijk collectie ↓
             </BrutalButton>
           </div>
-
-          <div className="flex items-center gap-6 md:gap-8">
-            <div className="text-center">
-              <span className="font-display text-3xl md:text-4xl font-bold text-wine block">
-                12
-              </span>
-              <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
-                Flessen
-              </span>
-            </div>
-            <div className="w-px h-10 bg-ink/20" />
-            <div className="text-center">
-              <span className="font-display text-3xl md:text-4xl font-bold text-wine block">
-                6
-              </span>
-              <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
-                Landen
-              </span>
-            </div>
-            <div className="w-px h-10 bg-ink/20" />
-            <div className="text-center">
-              <span className="font-display text-3xl md:text-4xl font-bold text-ink block">
-                €14,58
-              </span>
-              <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
-                Per fles
-              </span>
-            </div>
-          </div>
         </div>
       </div>
 

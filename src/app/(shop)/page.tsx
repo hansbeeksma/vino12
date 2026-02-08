@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { MarqueeStrip } from "@/components/ui/MarqueeStrip";
 import { CollectionGrid } from "@/components/sections/CollectionGrid";
 import { WineJourney } from "@/components/sections/WineJourney";
-import { StatsBar } from "@/components/sections/StatsBar";
 import { StoriesCarousel } from "@/components/sections/StoriesCarousel";
 import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { CtaSection } from "@/components/sections/CtaSection";
@@ -35,7 +34,6 @@ export default async function HomePage() {
       <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · €175 PER BOX · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />
       {wines.length > 0 && <WineJourney wines={wines} />}
-      <StatsBar />
       {wines.length > 0 && <StoriesCarousel wines={wines} />}
       <PhilosophySection />
       <CtaSection />
