@@ -4,7 +4,13 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { AgeGate } from "@/components/compliance/AgeGate";
 import { CookieConsent } from "@/components/compliance/CookieConsent";
-import { VoiceCommandWrapper } from "@/components/voice/VoiceCommandWrapper";
+import { FeatureFlag } from "@/components/ui/FeatureFlag";
+
+const VoiceCommandWrapper = lazy(() =>
+  import("@/components/voice/VoiceCommandWrapper").then((m) => ({
+    default: m.VoiceCommandWrapper,
+  })),
+);
 
 const CursorTrail = lazy(() =>
   import("@/components/effects/CursorTrail").then((m) => ({
@@ -19,16 +25,22 @@ export default function ShopLayout({
 }) {
   return (
     <>
-      <Suspense fallback={null}>
-        <CursorTrail />
-      </Suspense>
+      <FeatureFlag flag="effects.cursor_trail">
+        <Suspense fallback={null}>
+          <CursorTrail />
+        </Suspense>
+      </FeatureFlag>
       <AgeGate />
       <Header />
       <CartDrawer />
       <main className="pt-14">{children}</main>
       <Footer />
       <CookieConsent />
-      <VoiceCommandWrapper />
+      <FeatureFlag flag="voice.enabled">
+        <Suspense fallback={null}>
+          <VoiceCommandWrapper />
+        </Suspense>
+      </FeatureFlag>
     </>
   );
 }

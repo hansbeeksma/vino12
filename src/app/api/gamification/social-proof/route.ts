@@ -1,10 +1,17 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { getSocialProof, trackActivity } from "@/lib/gamification/social-proof";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
+const FEATURE_DISABLED = NextResponse.json(
+  { error: "Social proof is niet beschikbaar" },
+  { status: 404 },
+);
+
 export async function GET(request: NextRequest) {
+  if (!isFeatureEnabled("social.proof")) return FEATURE_DISABLED;
   const wineId = request.nextUrl.searchParams.get("wine_id");
 
   if (!wineId) {
@@ -21,6 +28,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isFeatureEnabled("social.proof")) return FEATURE_DISABLED;
   const body = await request.json();
   const { wine_id, activity_type, session_id } = body;
 

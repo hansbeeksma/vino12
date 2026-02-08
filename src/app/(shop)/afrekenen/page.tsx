@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/features/cart/store";
 import { formatPrice } from "@/lib/utils";
 import { BrutalButton } from "@/components/ui/BrutalButton";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { trackBeginCheckout } from "@/lib/analytics/plausible";
 
 export default function AfrekenenPage() {
   const router = useRouter();
@@ -18,6 +20,19 @@ export default function AfrekenenPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState("ideal");
+  const { track } = useAnalytics();
+  const trackedRef = useRef(false);
+
+  useEffect(() => {
+    if (items.length > 0 && !trackedRef.current) {
+      trackedRef.current = true;
+      track("checkout_started", {
+        itemCount: item_count,
+        totalCents: total_cents,
+      });
+      trackBeginCheckout(item_count, total_cents / 100);
+    }
+  }, [items.length, item_count, total_cents, track]);
   const [form, setForm] = useState({
     email: "",
     firstName: "",

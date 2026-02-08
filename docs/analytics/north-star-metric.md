@@ -114,16 +114,25 @@ CREATE INDEX idx_daily_metrics_date ON analytics.daily_metrics(date DESC);
 
 ---
 
-## Implementation Plan
+## Implementation Status
 
-### Phase 1: Foundation (Week 1)
+### Phase 1: Foundation ✅ COMPLETE
 
-- [ ] Create `analytics` schema in Supabase
-- [ ] Implement `calculate_mawcm()` SQL function
-- [ ] Create `analytics.daily_metrics` table
-- [ ] Setup daily Vercel Cron job for metric rollup
+- [x] Create `analytics` schema in Supabase (existing: `012_analytics.sql`)
+- [x] Implement `calculate_mawcm()` SQL function (migration: `014_north_star_metric.sql`)
+- [x] Create `analytics.daily_metrics` table (existing: `012_analytics.sql`)
+- [x] Setup daily Vercel Cron job for metric rollup (existing: `/api/cron/daily-metrics`)
+- [x] Create `north_star_trend` view for easy querying
 
-### Phase 2: Dashboard (Week 2)
+**Files:**
+
+- Migration: `supabase/migrations/014_north_star_metric.sql`
+- Cron Job: `/src/app/api/cron/daily-metrics/route.ts` (runs daily at 06:00 UTC)
+- Query: `SELECT * FROM north_star_trend ORDER BY date DESC LIMIT 12;`
+
+### Phase 2: Dashboard ⏳ TODO
+
+**Related Issues:** VINO-168 (AARRR Dashboard), VINO-169 (Conversion Funnel)
 
 - [ ] Metabase connection to Supabase
 - [ ] Create "North Star Dashboard" with:
@@ -132,7 +141,9 @@ CREATE INDEX idx_daily_metrics_date ON analytics.daily_metrics(date DESC);
   - Cohort retention heatmap
   - New vs Retained breakdown
 
-### Phase 3: Instrumentation (Week 3)
+### Phase 3: Instrumentation ⏳ TODO
+
+**Related Issues:** VINO-167 (GrowthBook Setup)
 
 - [ ] Add NSM tracking to app insights
 - [ ] Setup alerts (Sentry) for:
@@ -164,6 +175,7 @@ CREATE INDEX idx_daily_metrics_date ON analytics.daily_metrics(date DESC);
 
 ## Changelog
 
-| Datum      | Wijziging                     | Auteur            |
-| ---------- | ----------------------------- | ----------------- |
-| 2026-02-08 | Initial draft - NSM definitie | Claude Sonnet 4.5 |
+| Datum      | Wijziging                                      | Auteur            |
+| ---------- | ---------------------------------------------- | ----------------- |
+| 2026-02-08 | SQL implementation complete + Cron integration | Claude Sonnet 4.5 |
+| 2026-02-08 | Initial draft - NSM definitie + rationale      | Claude Sonnet 4.5 |

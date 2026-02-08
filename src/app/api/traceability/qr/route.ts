@@ -3,8 +3,15 @@ import {
   generatePassportQR,
   generatePassportQRSvg,
 } from "@/lib/traceability/qr";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export async function GET(request: NextRequest) {
+  if (!isFeatureEnabled("blockchain.enabled")) {
+    return NextResponse.json(
+      { error: "Traceability is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
   const wineId = request.nextUrl.searchParams.get("wine_id");
   const format = request.nextUrl.searchParams.get("format") ?? "png";
 

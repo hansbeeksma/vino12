@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Space_Mono, Darker_Grotesque } from "next/font/google";
+import { GrowthBookProvider } from "@/lib/growthbook/GrowthBookProvider";
 import "./globals.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -77,8 +78,17 @@ export default function RootLayout({
         />
         <meta name="apple-mobile-web-app-title" content="Vino12" />
         <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
+        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
+          <script
+            defer
+            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+            src="https://plausible.io/js/script.js"
+          />
+        )}
       </head>
-      <body className="bg-offwhite text-ink antialiased">{children}</body>
+      <body className="bg-offwhite text-ink antialiased">
+        <GrowthBookProvider>{children}</GrowthBookProvider>
+      </body>
     </html>
   );
 }

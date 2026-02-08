@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 import { VerificationClient } from "./client";
 
 interface VerificatiePageProps {
@@ -18,6 +20,10 @@ export async function generateMetadata({
 export default async function VerificatiePage({
   params,
 }: VerificatiePageProps) {
+  if (!isFeatureEnabled("blockchain.enabled")) {
+    redirect("/wijnen");
+  }
+
   const { id } = await params;
 
   return (

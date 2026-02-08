@@ -76,5 +76,8 @@ public/workbox-*.js.map
 # Docker volumes (local data)
 docker-data/
 
+# Storybook
+storybook-static/
+
 # OS
 Thumbs.db

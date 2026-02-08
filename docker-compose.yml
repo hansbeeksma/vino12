@@ -142,10 +142,54 @@ services:
     networks:
       - vino12-network
 
+  # ===================
+  # GrowthBook (A/B testing + feature flags)
+  # ===================
+  growthbook:
+    image: growthbook/growthbook:latest
+    container_name: vino12-growthbook
+    ports:
+      - "3100:3100" # App UI
+      - "3101:3101" # API
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/growthbook
+      APP_ORIGIN: http://localhost:3100
+      API_HOST: http://localhost:3101
+    depends_on:
+      - mongo
+    networks:
+      - vino12-network
+
+  mongo:
+    image: mongo:7
+    container_name: vino12-mongo
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - vino12-network
+
+  # ===================
+  # Metabase (analytics dashboards)
+  # ===================
+  metabase:
+    image: metabase/metabase:latest
+    container_name: vino12-metabase
+    ports:
+      - "3200:3000"
+    environment:
+      MB_DB_TYPE: h2
+      JAVA_TIMEZONE: Europe/Amsterdam
+    volumes:
+      - metabase-data:/metabase-data
+    networks:
+      - vino12-network
+
 volumes:
   redis-data:
   postgres-gorse-data:
   typesense-data:
+  mongo-data:
+  metabase-data:
 
 networks:
   vino12-network:

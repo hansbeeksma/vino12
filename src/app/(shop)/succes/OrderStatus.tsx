@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { trackPurchase } from "@/lib/analytics/plausible";
 
 type PaymentStatus =
   | "pending"
@@ -18,6 +19,7 @@ export function OrderStatus() {
 
   const [status, setStatus] = useState<PaymentStatus>("pending");
   const [polling, setPolling] = useState(true);
+  const purchaseTrackedRef = useRef(false);
 
   const pollStatus = useCallback(async () => {
     if (!orderNumber) return;
@@ -41,6 +43,17 @@ export function OrderStatus() {
         );
       } else if (paymentStatus === "paid" || paymentStatus === "refunded") {
         setPolling(false);
+        if (
+          paymentStatus === "paid" &&
+          orderNumber &&
+          !purchaseTrackedRef.current
+        ) {
+          purchaseTrackedRef.current = true;
+          trackPurchase(
+            orderNumber,
+            data.totalCents ? data.totalCents / 100 : 0,
+          );
+        }
       }
     } catch {
       // Silently ignore polling errors

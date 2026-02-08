@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useEffect, useRef } from "react";
 import { submitReview } from "@/app/(shop)/wijn/[slug]/actions";
 import { StarRating } from "./StarRating";
+import { trackReviewSubmit } from "@/lib/analytics/plausible";
 
 interface ReviewFormProps {
   wineId: string;
@@ -19,6 +20,14 @@ export function ReviewForm({ wineId, slug, existingReview }: ReviewFormProps) {
   const [state, formAction, pending] = useActionState(submitReview, {
     success: false,
   });
+  const trackedRef = useRef(false);
+
+  useEffect(() => {
+    if (state.success && !trackedRef.current) {
+      trackedRef.current = true;
+      trackReviewSubmit(slug, rating);
+    }
+  }, [state.success, slug, rating]);
 
   if (state.success) {
     return (

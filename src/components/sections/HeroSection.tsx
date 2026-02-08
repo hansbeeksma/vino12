@@ -3,6 +3,7 @@
 import { lazy, Suspense } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { WineCarousel } from "@/components/sections/WineCarousel";
+import { FeatureFlag } from "@/components/ui/FeatureFlag";
 import type { WineRow } from "@/lib/api/wines";
 
 const WineParticles = lazy(() =>
@@ -24,15 +25,19 @@ interface HeroSectionProps {
 export function HeroSection({ wines }: HeroSectionProps) {
   return (
     <section className="min-h-screen flex flex-col justify-center relative bg-offwhite overflow-hidden">
-      <Suspense fallback={null}>
-        <HeroGradient className="absolute inset-0 z-0 opacity-30 pointer-events-none" />
-      </Suspense>
-      <Suspense fallback={null}>
-        <WineParticles
-          variant="hero"
-          className="absolute inset-0 z-[1] pointer-events-none"
-        />
-      </Suspense>
+      <FeatureFlag flag="effects.hero_gradient">
+        <Suspense fallback={null}>
+          <HeroGradient className="absolute inset-0 z-0 opacity-30 pointer-events-none" />
+        </Suspense>
+      </FeatureFlag>
+      <FeatureFlag flag="effects.particles">
+        <Suspense fallback={null}>
+          <WineParticles
+            variant="hero"
+            className="absolute inset-0 z-[1] pointer-events-none"
+          />
+        </Suspense>
+      </FeatureFlag>
       {wines.length > 0 ? (
         <WineCarousel wines={wines} />
       ) : (

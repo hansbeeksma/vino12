@@ -1,6 +1,7 @@
 "use client";
 
 import { lazy, Suspense } from "react";
+import { FeatureFlag } from "@/components/ui/FeatureFlag";
 
 const CelebrationBurst = lazy(() =>
   import("@/components/effects/CelebrationBurst").then((m) => ({
@@ -10,8 +11,10 @@ const CelebrationBurst = lazy(() =>
 
 export function SuccessCelebration() {
   return (
-    <Suspense fallback={null}>
-      <CelebrationBurst className="z-20" />
-    </Suspense>
+    <FeatureFlag flag="effects.celebration">
+      <Suspense fallback={null}>
+        <CelebrationBurst className="z-20" />
+      </Suspense>
+    </FeatureFlag>
   );
 }

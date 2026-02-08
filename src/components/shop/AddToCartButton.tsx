@@ -2,6 +2,8 @@
 
 import type { WineRow } from "@/lib/api/wines";
 import { useCartStore } from "@/features/cart/store";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { trackAddToCart } from "@/lib/analytics/plausible";
 
 interface AddToCartButtonProps {
   wine: WineRow;
@@ -9,6 +11,7 @@ interface AddToCartButtonProps {
 
 export function AddToCartButton({ wine }: AddToCartButtonProps) {
   const addItem = useCartStore((s) => s.addItem);
+  const { track } = useAnalytics();
 
   function handleAdd() {
     addItem({
@@ -21,6 +24,13 @@ export function AddToCartButton({ wine }: AddToCartButtonProps) {
       volume_ml: wine.volume_ml,
       max_quantity: Math.min(wine.stock_quantity, 12),
     });
+    track("added_to_cart", {
+      productId: wine.id,
+      productName: wine.name,
+      price: wine.price_cents,
+      quantity: 1,
+    });
+    trackAddToCart(wine.name, wine.price_cents / 100);
   }
 
   const inStock = wine.stock_quantity > 0;

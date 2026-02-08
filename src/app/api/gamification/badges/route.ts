@@ -4,10 +4,17 @@ import {
   createServiceRoleClient,
 } from "@/lib/supabase/server";
 import { checkBadgeEligibility, awardBadge } from "@/lib/gamification/badges";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
+const FEATURE_DISABLED = NextResponse.json(
+  { error: "Gamification is niet beschikbaar" },
+  { status: 404 },
+);
+
 export async function GET() {
+  if (!isFeatureEnabled("gamification.enabled")) return FEATURE_DISABLED;
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },
@@ -63,6 +70,7 @@ export async function GET() {
 }
 
 export async function POST() {
+  if (!isFeatureEnabled("gamification.enabled")) return FEATURE_DISABLED;
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },

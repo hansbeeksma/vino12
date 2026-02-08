@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  if (!isFeatureEnabled("voice.enabled")) {
+    return NextResponse.json(
+      { error: "Voice feature is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
+
   const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {

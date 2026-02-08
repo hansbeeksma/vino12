@@ -1,8 +1,5 @@
 # Secret scanning with emergency bypass support
 bash ~/Development/shared/pre-commit-gitleaks.sh
 
-# Code quality checks
+# Code quality checks + related tests (via lint-staged)
 npx lint-staged
-
-# Run tests
-npx vitest run --reporter=dot

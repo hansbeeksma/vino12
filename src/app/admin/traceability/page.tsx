@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 import { TraceabilityClient } from "./client";
 
 export const metadata: Metadata = {
@@ -13,6 +15,9 @@ interface WineRow {
 }
 
 export default async function TraceabilityPage() {
+  if (!isFeatureEnabled("blockchain.enabled")) {
+    redirect("/admin");
+  }
   const supabase = createServiceRoleClient();
 
   const { data: wines } = await supabase

@@ -1,12 +1,14 @@
 "use client";
 
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import Image from "next/image";
 import type { WineRow } from "@/lib/api/wines";
 import { typeColorHex, typeLabel, bodyLabel } from "@/lib/utils";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 import { BodyScale } from "./BodyScale";
 import { WishlistButton } from "./WishlistButton";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 const WineBottleShowcase = lazy(() =>
   import("@/components/three/WineBottleShowcase").then((m) => ({
@@ -21,7 +23,18 @@ interface WineDetailProps {
 export function WineDetail({ wine }: WineDetailProps) {
   const isRed = wine.type === "red";
   const body = bodyLabel(wine.body);
+  const show3D = isFeatureEnabled("three.bottles");
   const [view, setView] = useState<"photo" | "3d">("photo");
+  const { track } = useAnalytics();
+
+  useEffect(() => {
+    track("product_viewed", {
+      productId: wine.id,
+      productName: wine.name,
+      price: wine.price_cents,
+      category: wine.type,
+    });
+  }, [wine.id, wine.name, wine.price_cents, wine.type, track]);
 
   return (
     <div className="container-brutal px-4 py-8 md:px-8">
@@ -68,29 +81,31 @@ export function WineDetail({ wine }: WineDetailProps) {
             </div>
           )}
 
-          {/* View toggle */}
-          <div className="flex gap-2 mt-3">
-            <button
-              onClick={() => setView("photo")}
-              className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
-                view === "photo"
-                  ? "bg-ink text-offwhite"
-                  : "bg-offwhite text-ink hover:bg-ink/5"
-              }`}
-            >
-              Foto
-            </button>
-            <button
-              onClick={() => setView("3d")}
-              className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
-                view === "3d"
-                  ? "bg-ink text-offwhite"
-                  : "bg-offwhite text-ink hover:bg-ink/5"
-              }`}
-            >
-              3D Bekijken
-            </button>
-          </div>
+          {/* View toggle — only shown when 3D feature is enabled */}
+          {show3D && (
+            <div className="flex gap-2 mt-3">
+              <button
+                onClick={() => setView("photo")}
+                className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
+                  view === "photo"
+                    ? "bg-ink text-offwhite"
+                    : "bg-offwhite text-ink hover:bg-ink/5"
+                }`}
+              >
+                Foto
+              </button>
+              <button
+                onClick={() => setView("3d")}
+                className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
+                  view === "3d"
+                    ? "bg-ink text-offwhite"
+                    : "bg-offwhite text-ink hover:bg-ink/5"
+                }`}
+              >
+                3D Bekijken
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Right: Details */}

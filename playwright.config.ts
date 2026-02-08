@@ -20,6 +20,15 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "visual",
+      testDir: "./e2e/visual",
+      use: {
+        ...devices["Desktop Chrome"],
+        // Consistent viewport for visual regression
+        viewport: { width: 1280, height: 720 },
+      },
+    },
   ],
   webServer: {
     command: "npm run dev",

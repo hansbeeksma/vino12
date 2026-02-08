@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 import { ScanPageClient } from "./client";
 
 export const metadata: Metadata = {
@@ -8,6 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function ScanPage() {
+  if (!isFeatureEnabled("cv.scanner")) {
+    redirect("/wijnen");
+  }
+
   return (
     <section className="min-h-screen">
       <ScanPageClient />

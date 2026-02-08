@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { verifyChain } from "@/lib/traceability/crypto";
 import type { WinePassport, SupplyChainEvent } from "@/lib/traceability/types";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,12 @@ export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ wineId: string }> },
 ) {
+  if (!isFeatureEnabled("blockchain.enabled")) {
+    return NextResponse.json(
+      { error: "Traceability is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
   const { wineId } = await params;
 
   if (!wineId) {

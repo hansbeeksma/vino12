@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (!isFeatureEnabled("leaderboard.enabled")) {
+    return NextResponse.json(
+      { error: "Leaderboard is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
   const supabase = createServiceRoleClient();
 
   const { data: leaderboard, error } = await supabase

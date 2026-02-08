@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { SocialProofData } from "@/lib/gamification/types";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 interface SocialProofIndicatorProps {
   wineId: string;
@@ -9,8 +10,11 @@ interface SocialProofIndicatorProps {
 
 export function SocialProofIndicator({ wineId }: SocialProofIndicatorProps) {
   const [data, setData] = useState<SocialProofData | null>(null);
+  const enabled = isFeatureEnabled("social.proof");
 
   useEffect(() => {
+    if (!enabled) return;
+
     async function load() {
       try {
         // Track view
@@ -37,7 +41,7 @@ export function SocialProofIndicator({ wineId }: SocialProofIndicatorProps) {
     }
 
     load();
-  }, [wineId]);
+  }, [wineId, enabled]);
 
   if (!data) return null;
 

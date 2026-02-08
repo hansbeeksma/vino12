@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { resend } from "@/lib/resend";
+import { trackServerEvent } from "@/lib/analytics";
 
 export const dynamic = "force-dynamic";
 
@@ -99,6 +100,15 @@ export async function POST(request: NextRequest) {
         to: order.email,
         subject: `Bevestiging bestelling ${metadata.order_number}`,
         html: buildConfirmationEmail(order, metadata.order_number),
+      });
+
+      // Track checkout completion for analytics
+      await trackServerEvent("checkout_completed", {
+        orderId: metadata.order_id,
+        orderNumber: metadata.order_number,
+        totalCents: order.total_cents,
+        itemCount: order.order_items.length,
+        paymentMethod: payment.method ?? "unknown",
       });
     }
 

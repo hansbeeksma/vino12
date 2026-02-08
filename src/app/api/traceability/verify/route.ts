@@ -5,10 +5,17 @@ import type {
   SupplyChainEvent,
   VerificationResult,
 } from "@/lib/traceability/types";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
+  if (!isFeatureEnabled("blockchain.enabled")) {
+    return NextResponse.json(
+      { error: "Traceability is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
   const wineId = request.nextUrl.searchParams.get("wine_id");
 
   if (!wineId) {

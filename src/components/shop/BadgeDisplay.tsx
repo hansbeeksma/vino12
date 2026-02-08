@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 interface Badge {
   slug: string;
@@ -26,8 +27,14 @@ const ICON_MAP: Record<string, string> = {
 export function BadgeDisplay() {
   const [badges, setBadges] = useState<Badge[]>([]);
   const [loading, setLoading] = useState(true);
+  const enabled = isFeatureEnabled("gamification.enabled");
 
   useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+      return;
+    }
+
     async function load() {
       try {
         const res = await fetch("/api/gamification/badges");

@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { typeColorHex, formatPriceShort } from "@/lib/utils";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { trackSearch } from "@/lib/analytics/plausible";
 
 interface SearchResult {
   id: string;
@@ -20,6 +22,7 @@ export function SearchBar() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { track } = useAnalytics();
 
   useEffect(() => {
     if (query.trim().length < 2) {
@@ -32,7 +35,13 @@ export function SearchBar() {
       try {
         const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         const data = await res.json();
-        setResults(data.results ?? []);
+        const searchResults = data.results ?? [];
+        setResults(searchResults);
+        track("product_searched", {
+          query: query.trim(),
+          resultCount: searchResults.length,
+        });
+        trackSearch(query.trim());
       } catch {
         setResults([]);
       } finally {
@@ -41,7 +50,7 @@ export function SearchBar() {
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [query]);
+  }, [query, track]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CartButton } from "@/components/shop/CartButton";
 import { createClient } from "@/lib/supabase/client";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,46 +43,50 @@ export function Header() {
           >
             Collectie
           </Link>
-          <Link
-            href="/ar"
-            className="font-accent text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors duration-200 hidden md:block"
-            title="AR Wijnlabels"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="inline-block"
+          {isFeatureEnabled("ar.enabled") && (
+            <Link
+              href="/ar"
+              className="font-accent text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors duration-200 hidden md:block"
+              title="AR Wijnlabels"
             >
-              <path d="M2 7l10-5 10 5-10 5z" />
-              <path d="M2 17l10 5 10-5" />
-              <path d="M2 12l10 5 10-5" />
-            </svg>
-          </Link>
-          <Link
-            href="/scan"
-            className="font-accent text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors duration-200 hidden md:block"
-            title="Wijn Scanner"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="inline-block"
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="inline-block"
+              >
+                <path d="M2 7l10-5 10 5-10 5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </Link>
+          )}
+          {isFeatureEnabled("cv.scanner") && (
+            <Link
+              href="/scan"
+              className="font-accent text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors duration-200 hidden md:block"
+              title="Wijn Scanner"
             >
-              <path d="M3 7V5a2 2 0 0 1 2-2h2" />
-              <path d="M17 3h2a2 2 0 0 1 2 2v2" />
-              <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
-              <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-          </Link>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="inline-block"
+              >
+                <path d="M3 7V5a2 2 0 0 1 2-2h2" />
+                <path d="M17 3h2a2 2 0 0 1 2 2v2" />
+                <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
+                <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </Link>
+          )}
           <Link
             href={isLoggedIn ? "/account" : "/login"}
             className="font-accent text-xs uppercase tracking-widest text-ink hover:text-gold transition-colors duration-200 hidden md:block"

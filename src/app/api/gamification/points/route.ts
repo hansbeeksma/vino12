@@ -3,10 +3,17 @@ import {
   createServerSupabaseClient,
   createServiceRoleClient,
 } from "@/lib/supabase/server";
+import { isFeatureEnabled } from "@/lib/feature-flags";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (!isFeatureEnabled("gamification.enabled")) {
+    return NextResponse.json(
+      { error: "Gamification is niet beschikbaar" },
+      { status: 404 },
+    );
+  }
   const supabase = await createServerSupabaseClient();
   const {
     data: { user },
