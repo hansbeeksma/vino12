@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getAdminUser } from "@/lib/supabase/admin";
+import { getUserRole } from "@/lib/supabase/roles";
 
 export const metadata: Metadata = {
   title: "Admin | VINO12",
   robots: { index: false, follow: false },
 };
 
-const NAV_ITEMS = [
+const ADMIN_NAV_ITEMS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/bestellingen", label: "Bestellingen" },
   { href: "/admin/wijnen", label: "Wijnen" },
@@ -16,7 +16,14 @@ const NAV_ITEMS = [
   { href: "/admin/voorraad", label: "Voorraad" },
   { href: "/admin/reviews", label: "Reviews" },
   { href: "/admin/ideas", label: "Ideeën" },
+  { href: "/admin/creative", label: "Creatief" },
   { href: "/admin/instellingen", label: "Instellingen" },
+];
+
+const CONTRIBUTOR_NAV_ITEMS = [
+  { href: "/admin", label: "Dashboard" },
+  { href: "/admin/ideas", label: "Ideeën" },
+  { href: "/admin/creative", label: "Creatief" },
 ];
 
 export default async function AdminLayout({
@@ -24,11 +31,15 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const admin = await getAdminUser();
+  const result = await getUserRole();
 
-  if (!admin) {
+  if (!result || result.role === "customer") {
     redirect("/login?redirect=/admin");
   }
+
+  const navItems =
+    result.role === "admin" ? ADMIN_NAV_ITEMS : CONTRIBUTOR_NAV_ITEMS;
+  const roleLabel = result.role === "admin" ? "Admin" : "Creatief";
 
   return (
     <div className="min-h-screen flex bg-offwhite">
@@ -39,11 +50,11 @@ export default async function AdminLayout({
         >
           VINO<span className="text-wine">12</span>
           <span className="font-accent text-[10px] uppercase tracking-widest text-ink/40 block">
-            Admin
+            {roleLabel}
           </span>
         </Link>
         <nav className="space-y-1">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -55,7 +66,7 @@ export default async function AdminLayout({
         </nav>
         <div className="mt-8 pt-4 border-t border-ink/20">
           <p className="font-accent text-[9px] uppercase tracking-widest text-ink/30 mb-3">
-            {admin.email}
+            {result.user.email}
           </p>
           <Link
             href="/"

@@ -20,6 +20,28 @@ function isAdminEmail(email: string | undefined): boolean {
   return adminEmails.length > 0 && adminEmails.includes(email.toLowerCase());
 }
 
+function isContributorEmail(email: string | undefined): boolean {
+  if (!email) return false;
+  const contributorEmails = (process.env.CONTRIBUTOR_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return (
+    contributorEmails.length > 0 &&
+    contributorEmails.includes(email.toLowerCase())
+  );
+}
+
+const CONTRIBUTOR_BLOCKED_PATHS = [
+  "/admin/bestellingen",
+  "/admin/wijnen",
+  "/admin/klanten",
+  "/admin/voorraad",
+  "/admin/reviews",
+  "/admin/instellingen",
+  "/admin/leveranciers",
+];
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -82,7 +104,21 @@ export async function middleware(request: NextRequest) {
       }
 
       const hasAdminRole = user.app_metadata?.role === "admin";
-      if (!hasAdminRole && !isAdminEmail(user.email)) {
+      const isAdmin = hasAdminRole || isAdminEmail(user.email);
+      const isContributor = isContributorEmail(user.email);
+
+      if (!isAdmin && !isContributor) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/admin/geen-toegang";
+        return NextResponse.rewrite(url);
+      }
+
+      // Contributors are blocked from admin-only sections
+      if (
+        isContributor &&
+        !isAdmin &&
+        CONTRIBUTOR_BLOCKED_PATHS.some((path) => pathname.startsWith(path))
+      ) {
         const url = request.nextUrl.clone();
         url.pathname = "/admin/geen-toegang";
         return NextResponse.rewrite(url);

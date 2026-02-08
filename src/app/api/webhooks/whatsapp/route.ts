@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceRoleClient } from "@/lib/supabase/server";
-import { analyzeIdea } from "@/lib/ai/analyze-idea";
+import { processIdeaAnalysis } from "@/lib/ai/process-idea";
 import { sendWhatsAppMessage, formatIdeaReply } from "@/lib/whatsapp";
 
 export const dynamic = "force-dynamic";
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Run analysis in background (don't block webhook response)
-    processIdeaAnalysis(idea.id, rawMessage, sender).catch(() => {
+    processAndReply(idea.id, rawMessage, sender).catch(() => {
       // Logged in the function itself
     });
 
@@ -137,67 +137,36 @@ export async function POST(request: NextRequest) {
 }
 
 /**
- * Background: Run AI analysis and store results
+ * Background: Run AI analysis, store results, then send WhatsApp reply
  */
-async function processIdeaAnalysis(
+async function processAndReply(
   ideaId: string,
   rawMessage: string,
   sender: string,
 ): Promise<void> {
+  // Run shared analysis pipeline
+  await processIdeaAnalysis(ideaId, rawMessage);
+
+  // Fetch the stored analysis for the WhatsApp reply
   const supabase = createServiceRoleClient();
+  const { data: analysis } = await supabase
+    .from("idea_analyses")
+    .select("title, category, urgency, summary")
+    .eq("idea_id", ideaId)
+    .single();
 
-  try {
-    // Update status to analyzing
-    await supabase
-      .from("ideas")
-      .update({ status: "analyzing" })
-      .eq("id", ideaId);
-
-    // Run full AI pipeline
-    const result = await analyzeIdea(rawMessage);
-
-    // Store analysis
-    await supabase.from("idea_analyses").insert({
-      idea_id: ideaId,
-      title: result.classifier.title,
-      summary: result.classifier.summary,
-      category: result.classifier.category,
-      urgency: result.classifier.urgency,
-      complexity: result.classifier.complexity,
-      feasibility_score: result.planner.feasibility_score,
-      swot: result.planner.swot,
-      research_findings: result.research,
-      action_plan: result.planner.action_plan,
-      estimated_effort: result.planner.estimated_effort,
-      ai_model: "claude-haiku+sonnet+perplexity",
-    });
-
-    // Update idea status
-    await supabase
-      .from("ideas")
-      .update({ status: "analyzed" })
-      .eq("id", ideaId);
-
-    // Send WhatsApp reply with summary
+  if (analysis) {
     await sendWhatsAppMessage(
       sender,
       formatIdeaReply({
-        title: result.classifier.title,
-        category: result.classifier.category,
-        urgency: result.classifier.urgency,
-        summary: result.classifier.summary,
+        title: analysis.title,
+        category: analysis.category,
+        urgency: analysis.urgency,
+        summary: analysis.summary ?? "",
         ideaId,
       }),
     ).catch(() => {
       // Non-critical: analysis is stored even if reply fails
     });
-  } catch (error) {
-    // Mark as failed but don't lose the original idea
-    await supabase
-      .from("ideas")
-      .update({ status: "received" })
-      .eq("id", ideaId);
-
-    throw error;
   }
 }

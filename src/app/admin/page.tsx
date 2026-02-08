@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { formatPrice } from "@/lib/utils";
+import { getUserRole } from "@/lib/supabase/roles";
+import { ContributorDashboard } from "@/components/creative/ContributorDashboard";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +31,12 @@ function getThirtyDaysAgo(): string {
 }
 
 export default async function AdminDashboard() {
+  const result = await getUserRole();
+
+  if (result?.role === "contributor") {
+    return <ContributorDashboard userId={result.user.id} />;
+  }
+
   const supabase = createServiceRoleClient();
 
   const thirtyDaysAgo = getThirtyDaysAgo();
