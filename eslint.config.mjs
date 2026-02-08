@@ -6,6 +6,12 @@ const eslintConfig = [
   ...nextConfig,
   ...nextCoreWebVitals,
   ...nextTypescript,
+  {
+    files: ["e2e/**/*.ts"],
+    rules: {
+      "react-hooks/rules-of-hooks": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
