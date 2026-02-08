@@ -4,18 +4,17 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
       time: "03:00"
       timezone: "Europe/Amsterdam"
-    open-pull-requests-limit: 15
+    open-pull-requests-limit: 5
     labels:
       - "dependencies"
-      - "security"
       - "automerge"
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
-    # Major version bumps ignored - require manual migration
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
@@ -25,12 +24,11 @@ updates:
         update-types:
           - "patch"
           - "minor"
-      production-dependencies:
+      production-patches:
         dependency-type: "production"
         update-types:
           - "patch"
-          - "minor"
-      development-dependencies:
+      dev-dependencies:
         dependency-type: "development"
         update-types:
           - "minor"
