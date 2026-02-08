@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/shop/CartDrawer";
 import { AgeGate } from "@/components/compliance/AgeGate";
 import { CookieConsent } from "@/components/compliance/CookieConsent";
+import { VoiceCommandWrapper } from "@/components/voice/VoiceCommandWrapper";
 
 const CursorTrail = lazy(() =>
   import("@/components/effects/CursorTrail").then((m) => ({
@@ -27,6 +28,7 @@ export default function ShopLayout({
       <main className="pt-14">{children}</main>
       <Footer />
       <CookieConsent />
+      <VoiceCommandWrapper />
     </>
   );
 }
