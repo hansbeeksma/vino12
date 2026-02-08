@@ -1,5 +1,19 @@
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+  fallbacks: {
+    document: "/fallback.html",
+  },
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Allow Turbopack to coexist with webpack-based plugins (next-pwa)
+  turbopack: {},
   // Security headers
   async headers() {
     return [
@@ -55,14 +69,17 @@ const nextConfig = {
   },
 }
 
+// Apply PWA wrapper first
+const pwaConfig = withPWA(nextConfig);
+
 // Only wrap with Sentry when DSN and org are configured
 const hasSentry = process.env.NEXT_PUBLIC_SENTRY_DSN && process.env.SENTRY_ORG;
 
-let config = nextConfig;
+let config = pwaConfig;
 
 if (hasSentry) {
   const { withSentryConfig } = await import("@sentry/nextjs");
-  config = withSentryConfig(nextConfig, {
+  config = withSentryConfig(pwaConfig, {
     org: process.env.SENTRY_ORG,
     project: process.env.SENTRY_PROJECT,
     silent: !process.env.CI,

@@ -67,6 +67,17 @@ export default function RootLayout({
       lang="nl"
       className={`${ibmPlexMono.variable} ${spaceMono.variable} ${darkerGrotesque.variable}`}
     >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#722F37" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="Vino12" />
+        <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
+      </head>
       <body className="bg-offwhite text-ink antialiased">{children}</body>
     </html>
   );

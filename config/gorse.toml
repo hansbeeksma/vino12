@@ -1,0 +1,83 @@
+# Gorse Configuration for VINO12
+# Wine recommendation engine — collaborative + content-based filtering
+
+[database]
+# Data store (PostgreSQL)
+data_store = "postgres://gorse:gorse_secret@postgres-gorse:5432/gorse?sslmode=disable"
+# Cache store (Redis)
+cache_store = "redis://redis:6379/0"
+# Number of cached items per user
+cache_size = 100
+
+[master]
+# Master port for HTTP API
+port = 8086
+# Master host
+host = "0.0.0.0"
+# Number of jobs for model fitting
+jobs = 2
+# Meta timeout in seconds
+meta_timeout = 10
+
+[server]
+# Default number of returned items
+default_n = 12
+# API key for authentication
+api_key = ""
+
+[recommend]
+# Enable offline recommendation
+enable_latest_recommend = true
+enable_popular_recommend = true
+enable_user_based_recommend = true
+enable_item_based_recommend = true
+
+# Content-based filtering: use item labels (grape, region, color, body)
+enable_click_through_prediction = true
+
+# Collaborative filtering settings
+collaborative_filtering_model_fit_period = "60m"
+collaborative_filtering_model_search_period = "360m"
+
+# Recommendation exploration: mix popular items with personalized
+explore_recommend = { popular = 0.1, latest = 0.1 }
+
+# Item-to-item similarity: crucial for wine recommendations
+# Users who liked Pinot Noir may also like Gamay
+item_neighbors_type = "auto"
+user_neighbors_type = "auto"
+
+# Recommendation data sources
+data_source = { positive_feedback_types = ["purchase", "rating"], read_feedback_types = ["view"], positive_feedback_weight = { "purchase" = 5.0, "rating" = 3.0 }, read_feedback_weight = { "view" = 1.0 } }
+
+# Number of neighbors for item-to-item and user-to-user
+neighbors_count = 20
+
+# Replacement: if personalized recommendations < default_n, fill with popular
+replacement_enable = true
+replacement_decay = { positive = 0.8, read = 0.6 }
+
+[recommend.offline]
+# Interval between offline recommendation refresh
+check_recommend_period = "10m"
+# Interval between model fit
+refresh_recommend_period = "24h"
+
+[recommend.online]
+# Fallback to latest/popular when no personalized recommendations exist
+fallback_recommend = ["item_based", "popular", "latest"]
+# Number of feedback to consider for online recommendations
+num_feedback_fallback_item_based = 50
+
+[recommend.data_source]
+# Positive feedback types — purchase > rating > view
+positive_feedback_types = ["purchase", "rating"]
+# Read feedback types — lower weight, used for filtering "already seen"
+read_feedback_types = ["view"]
+# Feedback time-to-live: discard old feedback after 365 days
+positive_feedback_ttl = 8760  # hours (365 days)
+read_feedback_ttl = 2160     # hours (90 days)
+
+[recommend.popular]
+# Popular items window
+popular_window = 720  # hours (30 days)

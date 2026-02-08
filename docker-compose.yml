@@ -1,0 +1,152 @@
+version: "3.8"
+
+services:
+  # ===================
+  # Redis (Gorse cache store)
+  # ===================
+  redis:
+    image: redis:7-alpine
+    container_name: vino12-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vino12-network
+
+  # ===================
+  # PostgreSQL (Gorse data store — port 5433 to avoid Supabase conflict)
+  # ===================
+  postgres-gorse:
+    image: postgres:16-alpine
+    container_name: vino12-postgres-gorse
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${GORSE_POSTGRES_DB:-gorse}
+      POSTGRES_USER: ${GORSE_POSTGRES_USER:-gorse}
+      POSTGRES_PASSWORD: ${GORSE_POSTGRES_PASSWORD:-gorse_secret}
+    volumes:
+      - postgres-gorse-data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${GORSE_POSTGRES_USER:-gorse} -d ${GORSE_POSTGRES_DB:-gorse}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - vino12-network
+
+  # ===================
+  # Gorse Master (coordination + dashboard)
+  # ===================
+  gorse-master:
+    image: zhenghaoz/gorse-master:latest
+    container_name: vino12-gorse-master
+    ports:
+      - "8086:8086" # Dashboard UI
+      - "8088:8088" # Master API (item/feedback ingestion)
+    environment:
+      GORSE_CACHE_STORE: redis://redis:6379/0
+      GORSE_DATA_STORE: postgres://gorse:gorse_secret@postgres-gorse:5432/gorse?sslmode=disable
+      GORSE_DASHBOARD_USER_NAME: ${GORSE_DASHBOARD_USER:-admin}
+      GORSE_DASHBOARD_PASSWORD: ${GORSE_DASHBOARD_PASSWORD:-admin}
+    volumes:
+      - ./config/gorse.toml:/etc/gorse/config.toml
+    command: >
+      --config /etc/gorse/config.toml
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres-gorse:
+        condition: service_healthy
+    healthcheck:
+      test:
+        ["CMD-SHELL", "wget -qO- http://localhost:8086/api/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    networks:
+      - vino12-network
+
+  # ===================
+  # Gorse Worker (model training)
+  # ===================
+  gorse-worker:
+    image: zhenghaoz/gorse-worker:latest
+    container_name: vino12-gorse-worker
+    environment:
+      GORSE_MASTER_HOST: gorse-master
+      GORSE_MASTER_PORT: 8086
+      GORSE_WORKER_JOBS: ${GORSE_WORKER_JOBS:-2}
+    depends_on:
+      gorse-master:
+        condition: service_healthy
+    networks:
+      - vino12-network
+
+  # ===================
+  # Gorse Server (recommendation API)
+  # ===================
+  gorse-server:
+    image: zhenghaoz/gorse-server:latest
+    container_name: vino12-gorse-server
+    ports:
+      - "8087:8087" # Recommendation API
+    environment:
+      GORSE_MASTER_HOST: gorse-master
+      GORSE_MASTER_PORT: 8086
+      GORSE_SERVER_API_KEY: ${GORSE_API_KEY:-vino12_gorse_key}
+    depends_on:
+      gorse-master:
+        condition: service_healthy
+    healthcheck:
+      test:
+        ["CMD-SHELL", "wget -qO- http://localhost:8087/api/health || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    networks:
+      - vino12-network
+
+  # ===================
+  # Typesense (search engine)
+  # ===================
+  typesense:
+    image: typesense/typesense:27.1
+    container_name: vino12-typesense
+    ports:
+      - "8108:8108"
+    environment:
+      TYPESENSE_API_KEY: ${TYPESENSE_API_KEY:-vino12_typesense_key}
+      TYPESENSE_DATA_DIR: /data
+      TYPESENSE_ENABLE_CORS: "true"
+    volumes:
+      - typesense-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8108/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - vino12-network
+
+volumes:
+  redis-data:
+  postgres-gorse-data:
+  typesense-data:
+
+networks:
+  vino12-network:
+    driver: bridge
