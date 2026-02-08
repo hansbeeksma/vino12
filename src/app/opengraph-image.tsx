@@ -83,7 +83,7 @@ export default async function Image() {
           letterSpacing: "0.1em",
         }}
       >
-        12 PREMIUM WIJNEN · €175 PER BOX · GRATIS VERZENDING
+        12 PREMIUM WIJNEN · GRATIS VERZENDING
       </div>
 
       {/* Bottom border */}

@@ -31,7 +31,7 @@ export default async function HomePage() {
       <OrganizationJsonLd />
       <WebSiteJsonLd />
       <HeroSection />
-      <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · €175 PER BOX · GRATIS VERZENDING · PREMIUM WIJNEN" />
+      <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />
       {wines.length > 0 && <WineJourney wines={wines} />}
       {wines.length > 0 && <StoriesCarousel wines={wines} />}

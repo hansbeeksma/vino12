@@ -1,14 +1,8 @@
 import Image from "next/image";
 import type { WineRow } from "@/lib/api/wines";
-import {
-  typeColorHex,
-  typeLabel,
-  bodyLabel,
-  formatPriceShort,
-} from "@/lib/utils";
+import { typeColorHex, typeLabel, bodyLabel } from "@/lib/utils";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
 import { BodyScale } from "./BodyScale";
-import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { WishlistButton } from "./WishlistButton";
 
 interface WineDetailProps {
@@ -63,9 +57,6 @@ export function WineDetail({ wine }: WineDetailProps) {
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="font-display text-4xl font-bold text-wine">
-              {formatPriceShort(wine.price_cents)}
-            </span>
             <span className="font-accent text-xs text-ink/50">
               {wine.vintage && `${wine.vintage} · `}
               {wine.alcohol_percentage && `${wine.alcohol_percentage}%`}
@@ -111,8 +102,6 @@ export function WineDetail({ wine }: WineDetailProps) {
               </div>
             </div>
           )}
-
-          <AddToCartButton wine={wine} />
         </div>
       </div>
     </div>

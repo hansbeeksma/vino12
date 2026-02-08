@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s — Vino12",
   },
   description:
-    "12 premium wijnen, zorgvuldig gecureerd. Van licht en fris tot vol en complex. Ontdek jouw perfecte box voor €175.",
+    "12 premium wijnen, zorgvuldig gecureerd. Van licht en fris tot vol en complex. Ontdek jouw perfecte box.",
   keywords: [
     "wijn",
     "wijnbox",

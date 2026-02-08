@@ -1,25 +1,10 @@
-"use client";
-
+import Image from "next/image";
 import { BrutalButton } from "@/components/ui/BrutalButton";
-import { BottleSilhouette } from "@/components/wine/BottleSilhouette";
 
 export function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col justify-center relative bg-offwhite border-b-brutal-lg border-ink overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <BottleSilhouette
-          shape="bordeaux"
-          color="#722F37"
-          className="absolute right-[5%] top-[10%] h-[70vh] opacity-[0.04]"
-        />
-        <BottleSilhouette
-          shape="bourgogne"
-          color="#00674F"
-          className="absolute left-[8%] top-[15%] h-[60vh] opacity-[0.03]"
-        />
-      </div>
-
-      <div className="container-brutal px-4 md:px-8 pt-24 pb-16 relative z-10">
+      <div className="container-brutal px-4 md:px-8 pt-24 pb-8 relative z-10">
         <div>
           <p className="font-accent text-xs uppercase tracking-[0.3em] text-wine mb-4 md:mb-6">
             Premium Wijnbox
@@ -43,7 +28,7 @@ export function HeroSection() {
 
           <div className="flex flex-wrap items-center gap-4 mb-12">
             <BrutalButton variant="primary" size="lg" href="/wijnen">
-              Bekijk wijnen — €175
+              Ontdek de box →
             </BrutalButton>
             <BrutalButton variant="outline-solid" size="lg" href="#collectie">
               Bekijk collectie ↓
@@ -52,10 +37,15 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="w-8 h-12 border-2 border-ink flex items-end justify-center pb-2">
-          <div className="w-1.5 h-3 bg-wine" />
-        </div>
+      <div className="w-full">
+        <Image
+          src="/images/wines/collection-feb.svg"
+          alt="VINO12 collectie — 12 premium wijnen naast elkaar"
+          width={1920}
+          height={400}
+          className="w-full h-auto"
+          priority
+        />
       </div>
     </section>
   );

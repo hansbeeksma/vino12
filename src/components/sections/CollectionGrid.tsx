@@ -9,7 +9,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 
 type TypeFilter = "all" | WineType;
 type BodyFilter = "all" | WineBody;
-type SortOption = "name_asc" | "price_asc" | "price_desc" | "body_asc";
+type SortOption = "name_asc" | "body_asc";
 
 interface CollectionGridProps {
   wines: WineRow[];
@@ -32,8 +32,6 @@ const BODY_FILTERS: { label: string; value: BodyFilter }[] = [
 
 const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: "Naam A-Z", value: "name_asc" },
-  { label: "Prijs laag-hoog", value: "price_asc" },
-  { label: "Prijs hoog-laag", value: "price_desc" },
   { label: "Body licht-vol", value: "body_asc" },
 ];
 
@@ -103,12 +101,6 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
 
     const sorted = [...result];
     switch (sort) {
-      case "price_asc":
-        sorted.sort((a, b) => a.price_cents - b.price_cents);
-        break;
-      case "price_desc":
-        sorted.sort((a, b) => b.price_cents - a.price_cents);
-        break;
       case "body_asc":
         sorted.sort(
           (a, b) =>

@@ -20,20 +20,6 @@ export function CtaSection() {
           complex. Gratis verzending binnen Nederland.
         </p>
 
-        <div className="inline-block border-brutal-lg border-ink bg-offwhite brutal-shadow-lg p-4 md:p-8 mb-8">
-          <div className="flex items-baseline justify-center gap-2 mb-2">
-            <span className="font-display text-6xl md:text-7xl font-bold text-wine">
-              €175
-            </span>
-            <span className="font-accent text-xs text-ink/50 uppercase tracking-widest">
-              / box
-            </span>
-          </div>
-          <p className="font-accent text-xs text-ink/50 uppercase tracking-widest">
-            12 flessen · €14,58 per fles · Gratis verzending
-          </p>
-        </div>
-
         <div className="flex flex-col items-center gap-4">
           <BrutalButton variant="primary" size="lg" href="/wijnen">
             Bekijk wijnen →

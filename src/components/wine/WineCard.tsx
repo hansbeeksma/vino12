@@ -1,12 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { WineRow } from "@/lib/api/wines";
-import {
-  typeColorHex,
-  typeLabel,
-  bodyLabel,
-  formatPriceShort,
-} from "@/lib/utils";
+import { typeColorHex, typeLabel, bodyLabel } from "@/lib/utils";
 import { BodyScale } from "./BodyScale";
 
 interface WineCardProps {
@@ -42,24 +37,19 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
         </div>
 
         <div className="shrink-0 p-3 md:p-4 bg-offwhite border-t-2 border-ink">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span
-                  className="w-3 h-3 border border-ink inline-block"
-                  style={{ backgroundColor: typeColorHex(wine.type) }}
-                />
-                <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
-                  {typeLabel(wine.type)}
-                </span>
-              </div>
-              <h3 className="font-display text-base md:text-lg font-bold leading-tight">
-                {wine.name}
-              </h3>
+          <div className="mb-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span
+                className="w-3 h-3 border border-ink inline-block"
+                style={{ backgroundColor: typeColorHex(wine.type) }}
+              />
+              <span className="font-accent text-[10px] uppercase tracking-widest text-ink/50">
+                {typeLabel(wine.type)}
+              </span>
             </div>
-            <span className="font-accent text-xs font-bold text-wine whitespace-nowrap">
-              {formatPriceShort(wine.price_cents)}
-            </span>
+            <h3 className="font-display text-base md:text-lg font-bold leading-tight">
+              {wine.name}
+            </h3>
           </div>
           {wine.region && (
             <p className="font-accent text-[10px] uppercase tracking-widest text-ink/60 mb-1">
