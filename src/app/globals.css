@@ -306,20 +306,22 @@
   }
 }
 
-@utility carousel-dot {
-  width: 12px;
-  height: 12px;
-  border: 2px solid #000000;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+@utility ticker-scroll {
+  animation: ticker-scroll 40s linear infinite;
+  will-change: transform;
+}
 
-  &:hover {
-    background-color: #d9a0a7;
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-@utility carousel-dot-active {
-  background-color: #722f37;
-  border-color: #722f37;
+@media (prefers-reduced-motion: reduce) {
+  .ticker-scroll {
+    animation: none;
+  }
 }

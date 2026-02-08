@@ -1,8 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import { useState } from "react";
 import { WineSpotlightSlide } from "@/components/wine/WineSpotlightSlide";
 
 interface CarouselWine {
@@ -18,82 +16,38 @@ interface WineCarouselProps {
 }
 
 export function WineCarousel({ wines }: WineCarouselProps) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      loop: true,
-      align: "center",
-      skipSnaps: false,
-      containScroll: false,
-    },
-    [
-      Autoplay({
-        delay: 5000,
-        stopOnInteraction: false,
-        stopOnMouseEnter: true,
-      }),
-    ],
-  );
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi, onSelect]);
-
-  const scrollTo = useCallback(
-    (index: number) => {
-      emblaApi?.scrollTo(index);
-    },
-    [emblaApi],
-  );
+  const tickerWines = [...wines, ...wines];
 
   return (
-    <div className="w-full">
+    <div
+      className="w-full overflow-hidden"
+      aria-label="Wijnflessen collectie"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div
-        className="overflow-hidden cursor-grab active:cursor-grabbing"
-        ref={emblaRef}
+        className="flex w-max ticker-scroll"
+        style={{
+          animationPlayState: isPaused ? "paused" : "running",
+        }}
       >
-        <div className="flex">
-          {wines.map((wine, index) => (
-            <div
-              key={wine.id}
-              className="flex-[0_0_100%] min-w-0 md:flex-[0_0_60%]"
-            >
-              <WineSpotlightSlide
-                name={wine.name}
-                slug={wine.slug}
-                region={wine.region?.name ?? null}
-                vintage={wine.vintage}
-                isActive={index === selectedIndex}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {wines.length > 1 && (
-        <div className="flex justify-center gap-2 mt-6">
-          {wines.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              aria-label={`Ga naar wijn ${index + 1}`}
-              onClick={() => scrollTo(index)}
-              className={`carousel-dot ${index === selectedIndex ? "carousel-dot-active" : ""}`}
+        {tickerWines.map((wine, index) => (
+          <div
+            key={`${wine.id}-${index}`}
+            className="flex-shrink-0 w-[200px] md:w-[280px]"
+          >
+            <WineSpotlightSlide
+              name={wine.name}
+              slug={wine.slug}
+              region={wine.region?.name ?? null}
+              vintage={wine.vintage}
+              index={index}
             />
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
