@@ -1,0 +1,1748 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generated": "2026-02-08",
+    "source": "Perplexity AI Research",
+    "total_terms": 245,
+    "purpose": "Wispr Flow personal dictionary for Dutch wine webshop",
+    "description": "Comprehensive wine terminology dictionary for voice-to-text accuracy in Dutch wine e-commerce context"
+  },
+  "categories": {
+    "druivenrassen": {
+      "label": "Druivenrassen",
+      "terms": [
+        {
+          "term": "Cabernet Sauvignon",
+          "alternatives": [
+            "Kabarnet Sauvignon",
+            "Cabinet Sovereign",
+            "Cabernet Sauvignion",
+            "Kabirnet Sovinjon"
+          ],
+          "pronunciation": "kab-er-NAY so-vin-YOHN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Merlot",
+          "alternatives": ["Merloh", "Merlo", "Merloot"],
+          "pronunciation": "mer-LOH",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Pinot Noir",
+          "alternatives": ["Pino Nwar", "Pinot Noire", "Pino Noir"],
+          "pronunciation": "PEE-noh NWAHR",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Syrah",
+          "alternatives": ["Sirah", "Syra", "Shiraz"],
+          "pronunciation": "see-RAH",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Shiraz",
+          "alternatives": ["Shiraz", "Syrah", "Siraz"],
+          "pronunciation": "shi-RAZZ",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Grenache",
+          "alternatives": ["Grenash", "Grenahce", "Garnacha"],
+          "pronunciation": "greh-NASH",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Garnacha",
+          "alternatives": ["Garnatja", "Garnasja", "Grenache"],
+          "pronunciation": "gar-NAH-cha",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Mourvèdre",
+          "alternatives": ["Mourvedre", "Morvèdre", "Monastrell"],
+          "pronunciation": "moor-VED-ruh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Tempranillo",
+          "alternatives": ["Tempraniljo", "Tempranilo", "Tempraniyo"],
+          "pronunciation": "tem-prah-NEE-yoh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Sangiovese",
+          "alternatives": ["Sangioveze", "Sandjovese", "Sangioveze"],
+          "pronunciation": "san-jo-VAY-zeh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Nebbiolo",
+          "alternatives": ["Nebiolo", "Nebbiolla", "Nebbiollo"],
+          "pronunciation": "neb-bee-OH-loh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Barbera",
+          "alternatives": ["Barbara", "Barberra", "Barbira"],
+          "pronunciation": "bar-BEHR-ah",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Dolcetto",
+          "alternatives": ["Dolchetto", "Dolsetto", "Dolceto"],
+          "pronunciation": "dohl-CHET-toh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Malbec",
+          "alternatives": ["Malbek", "Malbeck", "Malbac"],
+          "pronunciation": "mal-BEK",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Carménère",
+          "alternatives": ["Carmenere", "Carmenère", "Karmenjere"],
+          "pronunciation": "kar-men-YEHR",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Petit Verdot",
+          "alternatives": ["Petie Verdot", "Petit Verdo", "Peti Verdot"],
+          "pronunciation": "puh-TEE ver-DOH",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Gamay",
+          "alternatives": ["Gamee", "Gamay", "Gamé"],
+          "pronunciation": "ga-MAY",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Zinfandel",
+          "alternatives": ["Zinfandell", "Zinphendel", "Primitivo"],
+          "pronunciation": "ZIN-fan-del",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Primitivo",
+          "alternatives": ["Primitievo", "Primitivo", "Zinfandel"],
+          "pronunciation": "pree-mee-TEE-voh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Pinotage",
+          "alternatives": ["Pinnotage", "Pinotagge", "Pinotaag"],
+          "pronunciation": "PEE-noh-tahzh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Tannat",
+          "alternatives": ["Tanat", "Tannet", "Tannah"],
+          "pronunciation": "tah-NAH",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Touriga Nacional",
+          "alternatives": [
+            "Touriga Nasional",
+            "Touriga Nasjonal",
+            "Toerriga Nacional"
+          ],
+          "pronunciation": "toh-REE-gah nah-see-oh-NAHL",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Corvina",
+          "alternatives": ["Korvina", "Corvinna", "Corvine"],
+          "pronunciation": "kor-VEE-nah",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Montepulciano",
+          "alternatives": ["Montepulsiano", "Montepulsjano", "Montepulciono"],
+          "pronunciation": "mon-teh-pool-CHAH-noh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Nero d'Avola",
+          "alternatives": ["Nero d'Avola", "Nero Davola", "Naro d'Avola"],
+          "pronunciation": "NEH-roh dah-VOH-lah",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Aglianico",
+          "alternatives": ["Aglianco", "Aglianieko", "Aglianiko"],
+          "pronunciation": "ahl-YAH-nee-koh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Chardonnay",
+          "alternatives": ["Shardonay", "Chardoney", "Shardonney"],
+          "pronunciation": "shar-doh-NAY",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Sauvignon Blanc",
+          "alternatives": [
+            "Sauvignon Blan",
+            "Sovinjon Blanc",
+            "Sauvignon Blang"
+          ],
+          "pronunciation": "SO-vin-yohn BLAHN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Riesling",
+          "alternatives": ["Rizling", "Reesling", "Rieseling"],
+          "pronunciation": "REEZ-ling",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Gewürztraminer",
+          "alternatives": [
+            "Gewurztraminer",
+            "Geworztraminer",
+            "Gewurstraminer"
+          ],
+          "pronunciation": "geh-VURTS-trah-mee-ner",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Pinot Grigio",
+          "alternatives": ["Pino Grigio", "Pinot Grisio", "Pinot Gris"],
+          "pronunciation": "PEE-noh GREE-joh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Pinot Gris",
+          "alternatives": ["Pino Gri", "Pinot Griss", "Pinot Grigio"],
+          "pronunciation": "PEE-noh GREE",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Viognier",
+          "alternatives": ["Vionnier", "Vionier", "Viojnier"],
+          "pronunciation": "vee-oh-NYAY",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Sémillon",
+          "alternatives": ["Semillon", "Semilion", "Semijon"],
+          "pronunciation": "seh-mee-YOHN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Chenin Blanc",
+          "alternatives": ["Shenin Blanc", "Chenin Blan", "Sjenin Blanc"],
+          "pronunciation": "shen-AN BLAHN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Muscadet",
+          "alternatives": ["Muscadet", "Muskadet", "Muscadeh"],
+          "pronunciation": "moos-kah-DAY",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Melon de Bourgogne",
+          "alternatives": [
+            "Melon de Boergogne",
+            "Melon de Bourgonje",
+            "Muscadet"
+          ],
+          "pronunciation": "meh-LOHN duh boor-GON-yuh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Grüner Veltliner",
+          "alternatives": [
+            "Gruner Veltliner",
+            "Grüner Feltliner",
+            "Gruener Veltliner"
+          ],
+          "pronunciation": "GROO-ner FELT-lee-ner",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Albariño",
+          "alternatives": ["Albarino", "Albarinio", "Albarinjo"],
+          "pronunciation": "al-ba-REEN-yoh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Verdejo",
+          "alternatives": ["Verdekho", "Verdecho", "Verdeho"],
+          "pronunciation": "ver-DEH-ho",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Vermentino",
+          "alternatives": ["Vermentino", "Vermentienoh", "Vermintino"],
+          "pronunciation": "ver-men-TEE-noh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Torrontés",
+          "alternatives": ["Torrontes", "Torontes", "Torrontez"],
+          "pronunciation": "tor-ron-TESS",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Marsanne",
+          "alternatives": ["Marsan", "Marsanne", "Marsann"],
+          "pronunciation": "mar-SAN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Roussanne",
+          "alternatives": ["Rousanne", "Roussan", "Roesanne"],
+          "pronunciation": "roo-SAN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Trebbiano",
+          "alternatives": ["Trebiano", "Trebbianno", "Ugni Blanc"],
+          "pronunciation": "treh-bee-AH-noh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Ugni Blanc",
+          "alternatives": ["Ugni Blan", "Uni Blanc", "Trebbiano"],
+          "pronunciation": "oo-NYEE BLAHN",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Garganega",
+          "alternatives": ["Garganegga", "Garganega", "Garganeega"],
+          "pronunciation": "gar-gah-NEH-gah",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Cortese",
+          "alternatives": ["Kortese", "Corteze", "Cortesse"],
+          "pronunciation": "kor-TEH-zeh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Fiano",
+          "alternatives": ["Fianno", "Fianoh", "Fieno"],
+          "pronunciation": "fee-AH-noh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Greco",
+          "alternatives": ["Greeko", "Greco", "Grego"],
+          "pronunciation": "GREH-koh",
+          "category": "druivenrassen"
+        },
+        {
+          "term": "Müller-Thurgau",
+          "alternatives": [
+            "Mueller-Thurgau",
+            "Muller-Thurgau",
+            "Muller Thurgau"
+          ],
+          "pronunciation": "MYOO-ler TOOR-gow",
+          "category": "druivenrassen"
+        }
+      ]
+    },
+    "wijnregios": {
+      "label": "Wijnregio's",
+      "terms": [
+        {
+          "term": "Bordeaux",
+          "alternatives": ["Bordo", "Bordoh", "Bordeow"],
+          "pronunciation": "bor-DOH",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Bourgogne",
+          "alternatives": ["Boergogne", "Burgundy", "Boergonje"],
+          "pronunciation": "boor-GON-yuh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Burgundy",
+          "alternatives": ["Boergondie", "Burgundie", "Bourgogne"],
+          "pronunciation": "BUR-gun-dee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Champagne",
+          "alternatives": ["Sjampagne", "Sjampanje", "Champanje"],
+          "pronunciation": "sham-PAN-yuh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Loire",
+          "alternatives": ["Lwar", "Loir", "Loar"],
+          "pronunciation": "LWAHR",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rhône",
+          "alternatives": ["Rone", "Rhone", "Roon"],
+          "pronunciation": "ROHN",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Alsace",
+          "alternatives": ["Alsas", "Alzas", "Alsace"],
+          "pronunciation": "al-SASS",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Languedoc-Roussillon",
+          "alternatives": [
+            "Languedoc Roussillon",
+            "Langdoc Roussiljon",
+            "Languedok"
+          ],
+          "pronunciation": "lahn-guh-DOCK roo-see-YOHN",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Provence",
+          "alternatives": ["Provans", "Provonce", "Provance"],
+          "pronunciation": "proh-VAHNSS",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Jura",
+          "alternatives": ["Jura", "Djura", "Joera"],
+          "pronunciation": "ZHOO-rah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Beaujolais",
+          "alternatives": ["Beaujole", "Bojolais", "Beaujolee"],
+          "pronunciation": "boh-zhoh-LAY",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Chablis",
+          "alternatives": ["Sjabli", "Chablie", "Sjablis"],
+          "pronunciation": "shah-BLEE",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Côtes du Rhône",
+          "alternatives": ["Cotes du Rhone", "Cote du Rone", "Côte du Rhône"],
+          "pronunciation": "KOHT doo ROHN",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Saint-Émilion",
+          "alternatives": ["Saint Emilion", "St. Emilion", "Sint Emilion"],
+          "pronunciation": "san-teh-mee-LYOHN",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Pauillac",
+          "alternatives": ["Pauillak", "Poillac", "Paujak"],
+          "pronunciation": "poh-yak",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Margaux",
+          "alternatives": ["Margo", "Margoh", "Margoux"],
+          "pronunciation": "mar-GOH",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Médoc",
+          "alternatives": ["Medoc", "Medok", "Médok"],
+          "pronunciation": "meh-DOCK",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Pomerol",
+          "alternatives": ["Pomerol", "Pommeral", "Pommerol"],
+          "pronunciation": "pom-eh-ROLL",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Sauternes",
+          "alternatives": ["Sotern", "Sautern", "Soternes"],
+          "pronunciation": "soh-TAIRN",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Toscane",
+          "alternatives": ["Toscana", "Toskane", "Toskaana"],
+          "pronunciation": "tos-KAH-neh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Toscana",
+          "alternatives": ["Toscane", "Toskana", "Toskaana"],
+          "pronunciation": "tos-KAH-nah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Piemonte",
+          "alternatives": ["Piedmont", "Piemonteh", "Piemont"],
+          "pronunciation": "pee-eh-MON-teh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Piedmont",
+          "alternatives": ["Piemonte", "Piedmon", "Piemant"],
+          "pronunciation": "PEED-mont",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Veneto",
+          "alternatives": ["Venetoh", "Venetoh", "Venetto"],
+          "pronunciation": "VEH-neh-toh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Sicilië",
+          "alternatives": ["Sicilie", "Sicilie", "Sicily"],
+          "pronunciation": "see-CHEE-lee-eh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Puglia",
+          "alternatives": ["Poulia", "Poelja", "Poulja"],
+          "pronunciation": "POO-lyah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Lombardije",
+          "alternatives": ["Lombardia", "Lombardy", "Lombardie"],
+          "pronunciation": "lom-bar-DEE-yeh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Friuli",
+          "alternatives": ["Friuli", "Friulie", "Frioeli"],
+          "pronunciation": "free-OO-lee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Sardinie",
+          "alternatives": ["Sardinia", "Sardinië", "Sardinie"],
+          "pronunciation": "sar-DEE-nee-eh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Chianti",
+          "alternatives": ["Kjianti", "Chianti", "Kanti"],
+          "pronunciation": "kee-AHN-tee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Barolo",
+          "alternatives": ["Baroloh", "Barrollo", "Barollo"],
+          "pronunciation": "bah-ROH-loh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Barbaresco",
+          "alternatives": ["Barbaresco", "Babaresco", "Barbarescoh"],
+          "pronunciation": "bar-bah-REHS-koh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Brunello di Montalcino",
+          "alternatives": [
+            "Brunello di Montalchino",
+            "Brunello di Montalsino",
+            "Brunelo di Montalcino"
+          ],
+          "pronunciation": "broo-NEL-loh dee mon-tahl-CHEE-noh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Valpolicella",
+          "alternatives": ["Valpolicela", "Valpolicella", "Valpolisella"],
+          "pronunciation": "val-po-lee-CHEL-lah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Prosecco",
+          "alternatives": ["Prosecco", "Proseko", "Prosekkoh"],
+          "pronunciation": "proh-SEH-koh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Amarone",
+          "alternatives": ["Amaroneh", "Ammarone", "Amaronne"],
+          "pronunciation": "ah-mah-ROH-neh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rioja",
+          "alternatives": ["Rioha", "Riocha", "Riokha"],
+          "pronunciation": "ree-OH-hah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Ribera del Duero",
+          "alternatives": [
+            "Ribera del Doero",
+            "Ribera del Duero",
+            "Ribera del Duëro"
+          ],
+          "pronunciation": "ree-BEH-rah del DWEH-roh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Priorat",
+          "alternatives": ["Priorat", "Prioraat", "Priorath"],
+          "pronunciation": "pree-oh-RAHT",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Navarra",
+          "alternatives": ["Navara", "Navarra", "Navvara"],
+          "pronunciation": "nah-VAR-rah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rueda",
+          "alternatives": ["Roeda", "Ruëda", "Rhueda"],
+          "pronunciation": "roo-EH-dah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rías Baixas",
+          "alternatives": ["Rias Baixas", "Rias Baijas", "Riaz Baixas"],
+          "pronunciation": "REE-ahs BYE-shahs",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Penedès",
+          "alternatives": ["Penedes", "Penedez", "Penedehs"],
+          "pronunciation": "peh-neh-DESS",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Jerez",
+          "alternatives": ["Herez", "Jerez", "Cheres"],
+          "pronunciation": "heh-RETH",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Sherry",
+          "alternatives": ["Sjerry", "Cherry", "Sherrie"],
+          "pronunciation": "SHEH-ree",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Mosel",
+          "alternatives": ["Mozel", "Moselle", "Moesel"],
+          "pronunciation": "MOH-zel",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rheingau",
+          "alternatives": ["Rijngau", "Rheingau", "Rjengau"],
+          "pronunciation": "RINE-gow",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Pfalz",
+          "alternatives": ["Pfalts", "Pfalz", "Pfaltz"],
+          "pronunciation": "PFALTS",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Rheinhessen",
+          "alternatives": ["Rijnhessen", "Rheinhesen", "Rjenhessen"],
+          "pronunciation": "RINE-heh-sen",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Baden",
+          "alternatives": ["Baden", "Baaden", "Baten"],
+          "pronunciation": "BAH-den",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Nahe",
+          "alternatives": ["Nahe", "Naheh", "Naa"],
+          "pronunciation": "NAH-eh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Franken",
+          "alternatives": ["Francken", "Franken", "Franconia"],
+          "pronunciation": "FRAN-ken",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Napa Valley",
+          "alternatives": ["Nappa Valley", "Napa Vallie", "Nappa Vally"],
+          "pronunciation": "NAH-pah VAL-lee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Sonoma",
+          "alternatives": ["Sonomah", "Sonnoma", "Sonoma"],
+          "pronunciation": "soh-NOH-mah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Barossa Valley",
+          "alternatives": ["Barrossa Valley", "Barosa Valley", "Barossa Vally"],
+          "pronunciation": "bah-ROH-sah VAL-lee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Margaret River",
+          "alternatives": [
+            "Margaret Rivier",
+            "Margeret River",
+            "Margaret Rivver"
+          ],
+          "pronunciation": "MAR-gret RIV-er",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Stellenbosch",
+          "alternatives": ["Stellenbos", "Stellenbosch", "Stellenbosch"],
+          "pronunciation": "STEL-len-bosh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Mendoza",
+          "alternatives": ["Mendosa", "Mendoza", "Mendozza"],
+          "pronunciation": "men-DOH-sah",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Maipo Valley",
+          "alternatives": ["Maipoh Valley", "Maypo Valley", "Maipo Vally"],
+          "pronunciation": "MY-poh VAL-lee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Casablanca Valley",
+          "alternatives": [
+            "Casablanca Vally",
+            "Casablanka Valley",
+            "Casa Blanca Valley"
+          ],
+          "pronunciation": "kah-sah-BLAHN-kah VAL-lee",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Marlborough",
+          "alternatives": ["Marlboro", "Marlborough", "Marlborogh"],
+          "pronunciation": "MARL-bruh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Central Otago",
+          "alternatives": ["Central Otagoh", "Sentral Otago", "Central Ottago"],
+          "pronunciation": "SEN-tral oh-TAH-goh",
+          "category": "wijnregios"
+        },
+        {
+          "term": "Hawke's Bay",
+          "alternatives": ["Hawks Bay", "Hawkes Bay", "Hawk's Bay"],
+          "pronunciation": "HAWKS BAY",
+          "category": "wijnregios"
+        }
+      ]
+    },
+    "vinificatie": {
+      "label": "Vinificatie Termen",
+      "terms": [
+        {
+          "term": "malolactische gisting",
+          "alternatives": [
+            "malolaktische gisting",
+            "malo-lactische gisting",
+            "malolactische fermentatie"
+          ],
+          "pronunciation": "mah-loh-LAK-tee-seh GHIS-ting",
+          "category": "vinificatie"
+        },
+        {
+          "term": "maceratie",
+          "alternatives": ["maceratie", "maseratie", "maceration"],
+          "pronunciation": "mah-seh-RAH-tsee",
+          "category": "vinificatie"
+        },
+        {
+          "term": "élevage",
+          "alternatives": ["elevage", "elevaazje", "élevage"],
+          "pronunciation": "eh-leh-VAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "bâtonnage",
+          "alternatives": ["batonnage", "batonnaazje", "bâtonnage"],
+          "pronunciation": "bah-toh-NAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "pigeage",
+          "alternatives": ["pigeage", "pigeasje", "piegeasje"],
+          "pronunciation": "pee-ZHAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "remontage",
+          "alternatives": ["remontage", "remontazje", "remontaazje"],
+          "pronunciation": "ruh-mon-TAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "débourbage",
+          "alternatives": ["debourbage", "debaurbazje", "débourbage"],
+          "pronunciation": "deh-boor-BAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "assemblage",
+          "alternatives": ["assemblage", "assemblaazje", "assemblaasj"],
+          "pronunciation": "ah-sahm-BLAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "cuvée",
+          "alternatives": ["cuvee", "kuvee", "suvee"],
+          "pronunciation": "koo-VAY",
+          "category": "vinificatie"
+        },
+        {
+          "term": "terroir",
+          "alternatives": ["terroar", "terrwaar", "terroir"],
+          "pronunciation": "teh-RWAHR",
+          "category": "vinificatie"
+        },
+        {
+          "term": "véraison",
+          "alternatives": ["veraison", "verezong", "veraisong"],
+          "pronunciation": "veh-ray-ZOHN",
+          "category": "vinificatie"
+        },
+        {
+          "term": "vinificatie",
+          "alternatives": ["vinifikatie", "wijnmaken", "vinificatie"],
+          "pronunciation": "vee-nee-fee-KAH-tsee",
+          "category": "vinificatie"
+        },
+        {
+          "term": "fermentatie",
+          "alternatives": ["fermentatie", "gisting", "fermentering"],
+          "pronunciation": "fer-men-TAH-tsee",
+          "category": "vinificatie"
+        },
+        {
+          "term": "chaptalisation",
+          "alternatives": ["chaptalisation", "sjaptalisatie", "chaptalisatie"],
+          "pronunciation": "shap-tah-lee-ZAH-see-ohn",
+          "category": "vinificatie"
+        },
+        {
+          "term": "oenologie",
+          "alternatives": ["enologie", "oenologie", "wijnkunde"],
+          "pronunciation": "eh-noh-loh-GHEE",
+          "category": "vinificatie"
+        },
+        {
+          "term": "enologie",
+          "alternatives": ["oenologie", "enologie", "wijnkunde"],
+          "pronunciation": "eh-noh-loh-GHEE",
+          "category": "vinificatie"
+        },
+        {
+          "term": "sulfiet",
+          "alternatives": ["sulfiet", "zwaveldioxide", "SO2"],
+          "pronunciation": "sul-FEET",
+          "category": "vinificatie"
+        },
+        {
+          "term": "tannine-extractie",
+          "alternatives": [
+            "tannine extractie",
+            "tannine-extraktie",
+            "tannine winnen"
+          ],
+          "pronunciation": "tah-NEE-neh ek-STRAK-see",
+          "category": "vinificatie"
+        },
+        {
+          "term": "koude maceratie",
+          "alternatives": ["koude maceratie", "koude maseratie", "cold soak"],
+          "pronunciation": "KOW-deh mah-seh-RAH-tsee",
+          "category": "vinificatie"
+        },
+        {
+          "term": "carbonic maceration",
+          "alternatives": [
+            "carbonic maseratie",
+            "carbonic maceration",
+            "koolzuurgisting"
+          ],
+          "pronunciation": "kar-BON-ik mah-seh-RAY-shun",
+          "category": "vinificatie"
+        },
+        {
+          "term": "lees",
+          "alternatives": ["lies", "moer", "bezinksels"],
+          "pronunciation": "LEES",
+          "category": "vinificatie"
+        },
+        {
+          "term": "moer",
+          "alternatives": ["lees", "lies", "bezinksels"],
+          "pronunciation": "MOOR",
+          "category": "vinificatie"
+        },
+        {
+          "term": "fûts de chêne",
+          "alternatives": ["futs de chene", "eiken vaten", "eikenhout"],
+          "pronunciation": "foo duh SHEN",
+          "category": "vinificatie"
+        },
+        {
+          "term": "barrique",
+          "alternatives": ["bariek", "barrique", "barriques"],
+          "pronunciation": "bah-REEK",
+          "category": "vinificatie"
+        },
+        {
+          "term": "micro-oxygenatie",
+          "alternatives": [
+            "micro oxygenatie",
+            "micro-oxidatie",
+            "micro oxygen"
+          ],
+          "pronunciation": "MEE-kroh ok-see-gheh-NAH-tsee",
+          "category": "vinificatie"
+        },
+        {
+          "term": "riddling",
+          "alternatives": ["remuage", "riddeling", "schudden"],
+          "pronunciation": "RID-ling",
+          "category": "vinificatie"
+        },
+        {
+          "term": "remuage",
+          "alternatives": ["riddling", "remuaazje", "remuage"],
+          "pronunciation": "reh-moo-AHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "dégorgement",
+          "alternatives": ["degorgement", "degorsjement", "dégorchement"],
+          "pronunciation": "deh-gor-zhuh-MAHN",
+          "category": "vinificatie"
+        },
+        {
+          "term": "dosage",
+          "alternatives": ["dosage", "dosaazje", "dosering"],
+          "pronunciation": "doh-ZAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "liqueur de tirage",
+          "alternatives": ["liqueur de tirage", "likeur de tiraazje", "tirage"],
+          "pronunciation": "lee-KUR duh tee-RAHZH",
+          "category": "vinificatie"
+        },
+        {
+          "term": "liqueur d'expédition",
+          "alternatives": [
+            "liqueur d'expedition",
+            "likeur d'expedisie",
+            "dosering"
+          ],
+          "pronunciation": "lee-KUR dek-speh-dee-SYOHN",
+          "category": "vinificatie"
+        },
+        {
+          "term": "botrytis",
+          "alternatives": ["botritis", "edele rotting", "Botrytis cinerea"],
+          "pronunciation": "boh-TREE-tis",
+          "category": "vinificatie"
+        },
+        {
+          "term": "edele rotting",
+          "alternatives": ["botrytis", "noble rot", "edele rotting"],
+          "pronunciation": "EH-deh-leh ROT-ting",
+          "category": "vinificatie"
+        },
+        {
+          "term": "passerillage",
+          "alternatives": ["passerillage", "passerillaazje", "drogen"],
+          "pronunciation": "pah-seh-ree-YAHZH",
+          "category": "vinificatie"
+        }
+      ]
+    },
+    "proefnotities": {
+      "label": "Proefnotities & Smaaktermen",
+      "terms": [
+        {
+          "term": "tannine",
+          "alternatives": ["tannine", "tannien", "tannines"],
+          "pronunciation": "tah-NEE-neh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "body",
+          "alternatives": ["body", "bodi", "lichaam"],
+          "pronunciation": "BO-dee",
+          "category": "proefnotities"
+        },
+        {
+          "term": "afdronk",
+          "alternatives": ["afdronk", "afdrink", "nasmaak"],
+          "pronunciation": "AF-dronk",
+          "category": "proefnotities"
+        },
+        {
+          "term": "neus",
+          "alternatives": ["neus", "geur", "aroma"],
+          "pronunciation": "NEUS",
+          "category": "proefnotities"
+        },
+        {
+          "term": "bouquet",
+          "alternatives": ["bouquet", "boeket", "boequet"],
+          "pronunciation": "boo-KET",
+          "category": "proefnotities"
+        },
+        {
+          "term": "mineraal",
+          "alternatives": ["mineraal", "minerale", "minerals"],
+          "pronunciation": "mee-neh-RAAL",
+          "category": "proefnotities"
+        },
+        {
+          "term": "mineraliteit",
+          "alternatives": ["mineraliteit", "mineralitijd", "minerale karakter"],
+          "pronunciation": "mee-neh-rah-lee-TITE",
+          "category": "proefnotities"
+        },
+        {
+          "term": "aards",
+          "alternatives": ["aards", "earthy", "aarde"],
+          "pronunciation": "AARDS",
+          "category": "proefnotities"
+        },
+        {
+          "term": "kruidig",
+          "alternatives": ["kruidig", "kruidige", "spicy"],
+          "pronunciation": "KROY-dikh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "fruitig",
+          "alternatives": ["fruitig", "fruity", "fruit"],
+          "pronunciation": "FROYT-ikh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "vol",
+          "alternatives": ["vol", "volle", "full-bodied"],
+          "pronunciation": "VOL",
+          "category": "proefnotities"
+        },
+        {
+          "term": "rond",
+          "alternatives": ["rond", "ronde", "round"],
+          "pronunciation": "RONT",
+          "category": "proefnotities"
+        },
+        {
+          "term": "strak",
+          "alternatives": ["strak", "strakke", "crisp"],
+          "pronunciation": "STRAK",
+          "category": "proefnotities"
+        },
+        {
+          "term": "zijdezacht",
+          "alternatives": ["zijdezacht", "zachte", "silky"],
+          "pronunciation": "ZY-deh-zakht",
+          "category": "proefnotities"
+        },
+        {
+          "term": "balans",
+          "alternatives": ["balans", "gebalanceerd", "balance"],
+          "pronunciation": "bah-LANS",
+          "category": "proefnotities"
+        },
+        {
+          "term": "complexiteit",
+          "alternatives": ["complexiteit", "complexity", "complex"],
+          "pronunciation": "kom-plek-see-TITE",
+          "category": "proefnotities"
+        },
+        {
+          "term": "elegantie",
+          "alternatives": ["elegantie", "elegant", "elegance"],
+          "pronunciation": "eh-leh-GHAN-tsee",
+          "category": "proefnotities"
+        },
+        {
+          "term": "structuur",
+          "alternatives": ["structuur", "structure", "struktuur"],
+          "pronunciation": "struk-TOOR",
+          "category": "proefnotities"
+        },
+        {
+          "term": "finesse",
+          "alternatives": ["finesse", "fijnheid", "finese"],
+          "pronunciation": "fee-NES-seh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "diepte",
+          "alternatives": ["diepte", "depth", "diepe"],
+          "pronunciation": "DEEP-teh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "lengte",
+          "alternatives": ["lengte", "length", "lange"],
+          "pronunciation": "LENG-teh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "persistentie",
+          "alternatives": ["persistentie", "persistence", "aanhoudend"],
+          "pronunciation": "per-sis-TEN-tsee",
+          "category": "proefnotities"
+        },
+        {
+          "term": "droog",
+          "alternatives": ["droog", "droge", "dry"],
+          "pronunciation": "DROGH",
+          "category": "proefnotities"
+        },
+        {
+          "term": "halfdroog",
+          "alternatives": ["halfdroog", "half droog", "off-dry"],
+          "pronunciation": "HALF-drogh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "halflief",
+          "alternatives": ["halflief", "half lief", "semi-sweet"],
+          "pronunciation": "HALF-leef",
+          "category": "proefnotities"
+        },
+        {
+          "term": "zoet",
+          "alternatives": ["zoet", "zoete", "sweet"],
+          "pronunciation": "ZOOT",
+          "category": "proefnotities"
+        },
+        {
+          "term": "mousse",
+          "alternatives": ["mousse", "moese", "schuim"],
+          "pronunciation": "MOOS",
+          "category": "proefnotities"
+        },
+        {
+          "term": "perlage",
+          "alternatives": ["perlage", "perlazje", "bubbles"],
+          "pronunciation": "per-LAHZH",
+          "category": "proefnotities"
+        },
+        {
+          "term": "citrus",
+          "alternatives": ["citrus", "citrusvruchten", "citroen"],
+          "pronunciation": "SIT-rus",
+          "category": "proefnotities"
+        },
+        {
+          "term": "tropisch",
+          "alternatives": ["tropisch", "tropische", "tropical"],
+          "pronunciation": "TROH-pies",
+          "category": "proefnotities"
+        },
+        {
+          "term": "steenfruit",
+          "alternatives": ["steenfruit", "stone fruit", "steenvruchten"],
+          "pronunciation": "STEEN-froyt",
+          "category": "proefnotities"
+        },
+        {
+          "term": "rood fruit",
+          "alternatives": ["rood fruit", "rode vruchten", "red fruit"],
+          "pronunciation": "ROHT FROYT",
+          "category": "proefnotities"
+        },
+        {
+          "term": "zwart fruit",
+          "alternatives": ["zwart fruit", "zwarte vruchten", "black fruit"],
+          "pronunciation": "ZWART FROYT",
+          "category": "proefnotities"
+        },
+        {
+          "term": "specerijen",
+          "alternatives": ["specerijen", "specery", "kruiden"],
+          "pronunciation": "speh-seh-RY-en",
+          "category": "proefnotities"
+        },
+        {
+          "term": "vanille",
+          "alternatives": ["vanille", "vanilla", "vanillie"],
+          "pronunciation": "vah-NIL-leh",
+          "category": "proefnotities"
+        },
+        {
+          "term": "toast",
+          "alternatives": ["toast", "getoast", "geroosterd"],
+          "pronunciation": "TOHST",
+          "category": "proefnotities"
+        },
+        {
+          "term": "eikenhout",
+          "alternatives": ["eikenhout", "eiken", "oak"],
+          "pronunciation": "AY-ken-howt",
+          "category": "proefnotities"
+        },
+        {
+          "term": "leer",
+          "alternatives": ["leer", "leather", "lederen"],
+          "pronunciation": "LEER",
+          "category": "proefnotities"
+        },
+        {
+          "term": "tabak",
+          "alternatives": ["tabak", "tobacco", "tabakken"],
+          "pronunciation": "tah-BAK",
+          "category": "proefnotities"
+        },
+        {
+          "term": "ceder",
+          "alternatives": ["ceder", "cederhout", "cedar"],
+          "pronunciation": "SEE-der",
+          "category": "proefnotities"
+        },
+        {
+          "term": "eucalyptus",
+          "alternatives": ["eucalyptus", "eukalyptus", "eucalyptoes"],
+          "pronunciation": "oy-kah-LIP-tus",
+          "category": "proefnotities"
+        },
+        {
+          "term": "munt",
+          "alternatives": ["munt", "mint", "pepermunt"],
+          "pronunciation": "MUNT",
+          "category": "proefnotities"
+        },
+        {
+          "term": "peper",
+          "alternatives": ["peper", "pepper", "pepperig"],
+          "pronunciation": "PEH-per",
+          "category": "proefnotities"
+        },
+        {
+          "term": "kaneel",
+          "alternatives": ["kaneel", "cinnamon", "kaniel"],
+          "pronunciation": "kah-NEEL",
+          "category": "proefnotities"
+        },
+        {
+          "term": "kruidnagel",
+          "alternatives": ["kruidnagel", "kruidnagels", "clove"],
+          "pronunciation": "KROYT-nah-ghel",
+          "category": "proefnotities"
+        },
+        {
+          "term": "anijs",
+          "alternatives": ["anijs", "anise", "anijsaad"],
+          "pronunciation": "ah-NYS",
+          "category": "proefnotities"
+        }
+      ]
+    },
+    "classificaties": {
+      "label": "Classificaties",
+      "terms": [
+        {
+          "term": "AOC",
+          "alternatives": ["A.O.C.", "Appellation d'Origine Contrôlée", "AOP"],
+          "pronunciation": "ah-oh-SEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "AOP",
+          "alternatives": ["A.O.P.", "Appellation d'Origine Protégée", "AOC"],
+          "pronunciation": "ah-oh-PEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "DOC",
+          "alternatives": [
+            "D.O.C.",
+            "Denominazione di Origine Controllata",
+            "DOCG"
+          ],
+          "pronunciation": "dee-oh-SEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "DOCG",
+          "alternatives": [
+            "D.O.C.G.",
+            "Denominazione di Origine Controllata e Garantita",
+            "DOC"
+          ],
+          "pronunciation": "dee-oh-see-JJEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "IGT",
+          "alternatives": ["I.G.T.", "Indicazione Geografica Tipica", "IGP"],
+          "pronunciation": "ee-jee-TEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "IGP",
+          "alternatives": ["I.G.P.", "Indicazione Geografica Protetta", "IGT"],
+          "pronunciation": "ee-jee-PEE",
+          "category": "classificaties"
+        },
+        {
+          "term": "Vin de France",
+          "alternatives": ["Vin de France", "Van de Frans", "Franse wijn"],
+          "pronunciation": "VAN duh FRAHNSS",
+          "category": "classificaties"
+        },
+        {
+          "term": "Cru Classé",
+          "alternatives": ["Cru Classe", "Cru Klasse", "Kru Klasse"],
+          "pronunciation": "KROO klah-SAY",
+          "category": "classificaties"
+        },
+        {
+          "term": "Grand Cru",
+          "alternatives": ["Grand Cru", "Gran Kru", "Groot Gewas"],
+          "pronunciation": "GRAHN KROO",
+          "category": "classificaties"
+        },
+        {
+          "term": "Premier Cru",
+          "alternatives": ["Premier Cru", "Premiere Kru", "Eerste Gewas"],
+          "pronunciation": "preh-MYAY KROO",
+          "category": "classificaties"
+        },
+        {
+          "term": "Cru Bourgeois",
+          "alternatives": ["Cru Bourgeois", "Kru Bourgeois", "Cru Boergeois"],
+          "pronunciation": "KROO boor-ZHWAH",
+          "category": "classificaties"
+        },
+        {
+          "term": "Qualitätswein",
+          "alternatives": ["Qualitatswein", "Kwaliteitswijn", "QbA"],
+          "pronunciation": "kvah-lee-TETZ-vine",
+          "category": "classificaties"
+        },
+        {
+          "term": "Prädikatswein",
+          "alternatives": ["Pradikatswein", "Predikaatwijn", "Predikatswein"],
+          "pronunciation": "preh-dee-KAHTS-vine",
+          "category": "classificaties"
+        },
+        {
+          "term": "Kabinett",
+          "alternatives": ["Kabinet", "Kabinett", "Kabinet"],
+          "pronunciation": "kah-bee-NET",
+          "category": "classificaties"
+        },
+        {
+          "term": "Spätlese",
+          "alternatives": ["Spatlese", "Spaetlese", "Spätleeze"],
+          "pronunciation": "SHPAYT-lay-zeh",
+          "category": "classificaties"
+        },
+        {
+          "term": "Auslese",
+          "alternatives": ["Auslese", "Ausleeze", "Ausleze"],
+          "pronunciation": "OWS-lay-zeh",
+          "category": "classificaties"
+        },
+        {
+          "term": "Beerenauslese",
+          "alternatives": ["Beerenauslese", "Beerenausleeze", "BA"],
+          "pronunciation": "BEH-ren-OWS-lay-zeh",
+          "category": "classificaties"
+        },
+        {
+          "term": "Trockenbeerenauslese",
+          "alternatives": [
+            "Trockenbeerenauslese",
+            "Trockenbeerenausleeze",
+            "TBA"
+          ],
+          "pronunciation": "TROK-ken-BEH-ren-OWS-lay-zeh",
+          "category": "classificaties"
+        },
+        {
+          "term": "Eiswein",
+          "alternatives": ["Eiswein", "Ayswein", "IJs wijn"],
+          "pronunciation": "ICE-vine",
+          "category": "classificaties"
+        },
+        {
+          "term": "DO",
+          "alternatives": ["D.O.", "Denominación de Origen", "DOCa"],
+          "pronunciation": "dee-OH",
+          "category": "classificaties"
+        },
+        {
+          "term": "DOCa",
+          "alternatives": [
+            "D.O.Ca.",
+            "Denominación de Origen Calificada",
+            "DO"
+          ],
+          "pronunciation": "dee-oh-KAH",
+          "category": "classificaties"
+        },
+        {
+          "term": "Reserva",
+          "alternatives": ["Reserva", "Reserve", "Reservva"],
+          "pronunciation": "reh-SEHR-vah",
+          "category": "classificaties"
+        },
+        {
+          "term": "Gran Reserva",
+          "alternatives": ["Gran Reserva", "Gran Reserve", "Grote Reserva"],
+          "pronunciation": "GRAHN reh-SEHR-vah",
+          "category": "classificaties"
+        },
+        {
+          "term": "Crianza",
+          "alternatives": ["Crianza", "Krianza", "Criansa"],
+          "pronunciation": "kree-AHN-sah",
+          "category": "classificaties"
+        },
+        {
+          "term": "Riserva",
+          "alternatives": ["Riserva", "Rizzerva", "Reserve"],
+          "pronunciation": "ree-ZEHR-vah",
+          "category": "classificaties"
+        }
+      ]
+    },
+    "serveren": {
+      "label": "Serveren & Bewaren",
+      "terms": [
+        {
+          "term": "decanteerkaraf",
+          "alternatives": ["decanteerkaraf", "dekanteerkaraf", "decanter"],
+          "pronunciation": "deh-kan-TEER-kah-raf",
+          "category": "serveren"
+        },
+        {
+          "term": "sommelier",
+          "alternatives": ["sommelier", "somalier", "somelier"],
+          "pronunciation": "so-muh-LYAY",
+          "category": "serveren"
+        },
+        {
+          "term": "kurkentrekker",
+          "alternatives": ["kurkentrekker", "kurketrekker", "corkscrew"],
+          "pronunciation": "KUR-ken-trek-ker",
+          "category": "serveren"
+        },
+        {
+          "term": "wijnkoeler",
+          "alternatives": ["wijnkoeler", "wijnkoelaar", "wine cooler"],
+          "pronunciation": "WAYN-koo-ler",
+          "category": "serveren"
+        },
+        {
+          "term": "wijnklimaatkast",
+          "alternatives": ["wijnklimaatkast", "wijncave", "wijnkast"],
+          "pronunciation": "WAYN-klee-MAHT-kast",
+          "category": "serveren"
+        },
+        {
+          "term": "carafe",
+          "alternatives": ["carafe", "karaf", "karaffe"],
+          "pronunciation": "kah-RAF",
+          "category": "serveren"
+        },
+        {
+          "term": "magnum",
+          "alternatives": ["magnum", "magnumfles", "magnom"],
+          "pronunciation": "MAG-num",
+          "category": "serveren"
+        },
+        {
+          "term": "jeroboam",
+          "alternatives": ["jeroboam", "djeroboam", "jeroboem"],
+          "pronunciation": "jeh-roh-BOH-am",
+          "category": "serveren"
+        },
+        {
+          "term": "balthazar",
+          "alternatives": ["balthazar", "baltazar", "baltazaar"],
+          "pronunciation": "bal-tah-ZAR",
+          "category": "serveren"
+        },
+        {
+          "term": "nabucodonosor",
+          "alternatives": ["nabucodonosor", "nebuchadnezzar", "nabucodonozor"],
+          "pronunciation": "nah-boo-koh-doh-NOH-zor",
+          "category": "serveren"
+        },
+        {
+          "term": "drinktemperatuur",
+          "alternatives": [
+            "drinktemperatuur",
+            "drink temperatuur",
+            "serving temperature"
+          ],
+          "pronunciation": "DRINK-tem-peh-rah-TOOR",
+          "category": "serveren"
+        },
+        {
+          "term": "serveertemperatuur",
+          "alternatives": [
+            "serveertemperatuur",
+            "serveer temperatuur",
+            "serving temperature"
+          ],
+          "pronunciation": "ser-VEER-tem-peh-rah-TOOR",
+          "category": "serveren"
+        },
+        {
+          "term": "schenken",
+          "alternatives": ["schenken", "inschenken", "pouring"],
+          "pronunciation": "SKENK-ken",
+          "category": "serveren"
+        },
+        {
+          "term": "beluchten",
+          "alternatives": ["beluchten", "luchten", "aerate"],
+          "pronunciation": "beh-LUKH-ten",
+          "category": "serveren"
+        },
+        {
+          "term": "decanteren",
+          "alternatives": ["decanteren", "dekanteren", "decanting"],
+          "pronunciation": "deh-kan-TEH-ren",
+          "category": "serveren"
+        },
+        {
+          "term": "wijnglas",
+          "alternatives": ["wijnglas", "wijn glas", "wine glass"],
+          "pronunciation": "WAYN-glas",
+          "category": "serveren"
+        },
+        {
+          "term": "proefglas",
+          "alternatives": ["proefglas", "proef glas", "tasting glass"],
+          "pronunciation": "PROEF-glas",
+          "category": "serveren"
+        }
+      ]
+    },
+    "webshop": {
+      "label": "Nederlandse Webshop Context",
+      "terms": [
+        {
+          "term": "Mollie",
+          "alternatives": ["Mollie", "Mollie payment", "Molly"],
+          "pronunciation": "MO-lee",
+          "category": "webshop"
+        },
+        {
+          "term": "iDEAL",
+          "alternatives": ["iDEAL", "ideal", "I-deal"],
+          "pronunciation": "ai-DEE-al",
+          "category": "webshop"
+        },
+        {
+          "term": "PostNL",
+          "alternatives": ["PostNL", "Post NL", "Post Nederland"],
+          "pronunciation": "POST-nee-EL",
+          "category": "webshop"
+        },
+        {
+          "term": "bezorgkosten",
+          "alternatives": ["bezorgkosten", "verzendkosten", "shipping costs"],
+          "pronunciation": "beh-ZORKH-kos-ten",
+          "category": "webshop"
+        },
+        {
+          "term": "leeftijdsverificatie",
+          "alternatives": [
+            "leeftijdsverificatie",
+            "leeftijdscontrole",
+            "age verification"
+          ],
+          "pronunciation": "LEEF-tyds-veh-ree-fee-KAH-tsee",
+          "category": "webshop"
+        },
+        {
+          "term": "wijnabonnement",
+          "alternatives": [
+            "wijnabonnement",
+            "wijn abonnement",
+            "wine subscription"
+          ],
+          "pronunciation": "WAYN-ah-boh-neh-ment",
+          "category": "webshop"
+        },
+        {
+          "term": "proefpakket",
+          "alternatives": ["proefpakket", "proef pakket", "tasting pack"],
+          "pronunciation": "PROEF-pah-ket",
+          "category": "webshop"
+        },
+        {
+          "term": "Vino12",
+          "alternatives": ["Vino12", "Vino twaalf", "Vino twelve"],
+          "pronunciation": "VEE-noh-TWAALF",
+          "category": "webshop"
+        },
+        {
+          "term": "Gabrielle",
+          "alternatives": ["Gabrielle", "Gabriëlle", "Gabriele"],
+          "pronunciation": "ghah-bree-EL-leh",
+          "category": "webshop"
+        },
+        {
+          "term": "mandje",
+          "alternatives": ["mandje", "winkelwagentje", "cart"],
+          "pronunciation": "MAN-tjeh",
+          "category": "webshop"
+        },
+        {
+          "term": "winkelwagen",
+          "alternatives": ["winkelwagen", "mandje", "shopping cart"],
+          "pronunciation": "WIN-kel-wah-ghen",
+          "category": "webshop"
+        },
+        {
+          "term": "afrekenen",
+          "alternatives": ["afrekenen", "checkout", "betalen"],
+          "pronunciation": "AF-reh-keh-nen",
+          "category": "webshop"
+        },
+        {
+          "term": "verzendkosten",
+          "alternatives": ["verzendkosten", "bezorgkosten", "shipping costs"],
+          "pronunciation": "ver-ZENT-kos-ten",
+          "category": "webshop"
+        },
+        {
+          "term": "track & trace",
+          "alternatives": ["track en trace", "track and trace", "tracking"],
+          "pronunciation": "TREK en TRAYS",
+          "category": "webshop"
+        },
+        {
+          "term": "retourbeleid",
+          "alternatives": ["retourbeleid", "retour beleid", "return policy"],
+          "pronunciation": "reh-TOOR-beh-LIDE",
+          "category": "webshop"
+        },
+        {
+          "term": "kratten",
+          "alternatives": ["kratten", "flessenkratten", "crates"],
+          "pronunciation": "KRAT-ten",
+          "category": "webshop"
+        },
+        {
+          "term": "flessenpost",
+          "alternatives": ["flessenpost", "flessen post", "wine delivery"],
+          "pronunciation": "FLES-sen-post",
+          "category": "webshop"
+        },
+        {
+          "term": "wijnkado",
+          "alternatives": ["wijnkado", "wijn cadeau", "wine gift"],
+          "pronunciation": "WAYN-kah-DOH",
+          "category": "webshop"
+        },
+        {
+          "term": "cadeauverpakking",
+          "alternatives": [
+            "cadeauverpakking",
+            "cadeau verpakking",
+            "gift wrapping"
+          ],
+          "pronunciation": "kah-DOH-ver-pak-king",
+          "category": "webshop"
+        },
+        {
+          "term": "geschenkdoos",
+          "alternatives": ["geschenkdoos", "geschenk doos", "gift box"],
+          "pronunciation": "gheh-SKHENK-dohs",
+          "category": "webshop"
+        },
+        {
+          "term": "wijnadvies",
+          "alternatives": ["wijnadvies", "wijn advies", "wine advice"],
+          "pronunciation": "WAYN-at-FEES",
+          "category": "webshop"
+        },
+        {
+          "term": "smaakprofiel",
+          "alternatives": ["smaakprofiel", "smaak profiel", "taste profile"],
+          "pronunciation": "SMAHK-proh-FEEL",
+          "category": "webshop"
+        },
+        {
+          "term": "druivenras",
+          "alternatives": ["druivenras", "druiven ras", "grape variety"],
+          "pronunciation": "DROY-ven-ras",
+          "category": "webshop"
+        },
+        {
+          "term": "jaargangwijn",
+          "alternatives": ["jaargangwijn", "jaargang wijn", "vintage wine"],
+          "pronunciation": "YAHR-ghang-wayn",
+          "category": "webshop"
+        },
+        {
+          "term": "biodynamisch",
+          "alternatives": ["biodynamisch", "bio-dynamisch", "biodynamic"],
+          "pronunciation": "BEE-oh-dee-NAH-mies",
+          "category": "webshop"
+        },
+        {
+          "term": "biologisch",
+          "alternatives": ["biologisch", "bio", "organic"],
+          "pronunciation": "BEE-oh-LOH-ghies",
+          "category": "webshop"
+        },
+        {
+          "term": "natuurwijn",
+          "alternatives": ["natuurwijn", "natuur wijn", "natural wine"],
+          "pronunciation": "nah-TOOR-wayn",
+          "category": "webshop"
+        },
+        {
+          "term": "oranje wijn",
+          "alternatives": ["oranje wijn", "oranjewijn", "orange wine"],
+          "pronunciation": "oh-RAN-jeh WAYN",
+          "category": "webshop"
+        },
+        {
+          "term": "sulfietvrij",
+          "alternatives": ["sulfietvrij", "sulfiet vrij", "sulfite free"],
+          "pronunciation": "sul-FEET-fray",
+          "category": "webshop"
+        },
+        {
+          "term": "vegan wijn",
+          "alternatives": ["vegan wijn", "veganwijn", "vegan wine"],
+          "pronunciation": "VEE-ghan WAYN",
+          "category": "webshop"
+        }
+      ]
+    }
+  }
+}
