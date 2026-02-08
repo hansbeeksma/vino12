@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  visual-tests:
+    image: mcr.microsoft.com/playwright:v1.49.0-noble
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npx playwright test --project=visual
+    environment:
+      - CI=true
+      - BASE_URL=http://host.docker.internal:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    network_mode: host
