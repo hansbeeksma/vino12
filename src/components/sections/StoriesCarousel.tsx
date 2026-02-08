@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import type { WineRow } from "@/lib/api/wines";
+import { bodyColor } from "@/lib/wine-colors";
 import { StorySlide } from "@/components/instagram/StorySlide";
 import { StoryProgressBar } from "@/components/instagram/StoryProgressBar";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -39,10 +41,29 @@ export function StoriesCarousel({ wines }: StoriesCarouselProps) {
     [next, prev],
   );
 
+  const prefersReducedMotion = useReducedMotion();
+
+  const slideColor = useMemo(() => {
+    if (wines.length === 0) return "#000000";
+    const wine = wines[current];
+    const wineHex = bodyColor(wine.type, wine.body);
+    const r = parseInt(wineHex.slice(1, 3), 16);
+    const g = parseInt(wineHex.slice(3, 5), 16);
+    const b = parseInt(wineHex.slice(5, 7), 16);
+    return `rgb(${Math.round(r * 0.25)}, ${Math.round(g * 0.25)}, ${Math.round(b * 0.25)})`;
+  }, [current, wines]);
+
   if (wines.length === 0) return null;
 
   return (
-    <section className="section-padding bg-ink">
+    <motion.section
+      className="section-padding"
+      animate={
+        prefersReducedMotion ? undefined : { backgroundColor: slideColor }
+      }
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+      style={prefersReducedMotion ? { backgroundColor: "#000000" } : undefined}
+    >
       <div className="container-brutal">
         <AnimatedSection>
           <SectionLabel className="text-champagne/60!">
@@ -95,6 +116,6 @@ export function StoriesCarousel({ wines }: StoriesCarouselProps) {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

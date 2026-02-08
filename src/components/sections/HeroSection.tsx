@@ -12,6 +12,12 @@ const WineParticles = lazy(() =>
   })),
 );
 
+const HeroGradient = lazy(() =>
+  import("@/components/effects/HeroGradient").then((m) => ({
+    default: m.HeroGradient,
+  })),
+);
+
 interface HeroSectionProps {
   wines: WineRow[];
 }
@@ -32,9 +38,12 @@ export function HeroSection({ wines }: HeroSectionProps) {
       className="min-h-screen flex flex-col justify-center relative bg-offwhite overflow-hidden"
     >
       <Suspense fallback={null}>
+        <HeroGradient className="absolute inset-0 z-0 opacity-30 pointer-events-none" />
+      </Suspense>
+      <Suspense fallback={null}>
         <WineParticles
           variant="hero"
-          className="absolute inset-0 z-0 pointer-events-none"
+          className="absolute inset-0 z-[1] pointer-events-none"
         />
       </Suspense>
       <div className="container-brutal px-4 md:px-8 pt-16 pb-0 relative z-10">

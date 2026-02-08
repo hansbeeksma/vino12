@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { WineType, WineBody } from "@/lib/schemas/wine";
+export { bodyColor, bodyGradient } from "@/lib/wine-colors";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

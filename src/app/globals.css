@@ -26,6 +26,22 @@
   --color-champagne-light: #fbf2e3;
   --color-champagne-dark: #e8cfa3;
 
+  --color-gold: #D4AF37;
+  --color-gold-50: #fdf8e8;
+  --color-gold-100: #f9ecbe;
+  --color-gold-200: #f0d97a;
+  --color-gold-300: #e6c54a;
+  --color-gold-400: #D4AF37;
+  --color-gold-500: #b8942e;
+  --color-gold-600: #9a7a25;
+  --color-gold-700: #7c611d;
+  --color-gold-800: #5e4916;
+  --color-gold-900: #40310f;
+
+  --color-cream: #F5E1D3;
+  --color-cream-light: #FBF0E8;
+  --color-cream-dark: #E4C1B0;
+
   --color-offwhite: #fafaf5;
   --color-ink: #000000;
   --color-background: hsl(var(--background));
@@ -209,6 +225,24 @@
     --color-ink: #000000;
     --color-emerald: #00674f;
 
+    /* Gold palette */
+    --color-gold: #D4AF37;
+    --color-gold-50: #fdf8e8;
+    --color-gold-100: #f9ecbe;
+    --color-gold-200: #f0d97a;
+    --color-gold-300: #e6c54a;
+    --color-gold-400: #D4AF37;
+    --color-gold-500: #b8942e;
+    --color-gold-600: #9a7a25;
+    --color-gold-700: #7c611d;
+    --color-gold-800: #5e4916;
+    --color-gold-900: #40310f;
+
+    /* Cream/beige */
+    --color-cream: #F5E1D3;
+    --color-cream-light: #FBF0E8;
+    --color-cream-dark: #E4C1B0;
+
     /* Typography scale - Major Third (1.25) */
     --font-size-xs: 0.625rem;
     --font-size-sm: 0.75rem;
@@ -268,30 +302,30 @@
     --radius: 0rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 0 0% 7%;
+    --foreground: 36 65% 88%;
+    --card: 0 0% 10%;
+    --card-foreground: 36 65% 88%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 36 65% 88%;
+    --primary: 43 63% 52%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 353 43% 31.6%;
+    --secondary-foreground: 36 65% 88%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 36 30% 60%;
+    --accent: 164 100% 20%;
+    --accent-foreground: 36 65% 88%;
+    --destructive: 348 72% 44%;
+    --destructive-foreground: 36 65% 88%;
+    --border: 36 20% 20%;
+    --input: 36 20% 20%;
+    --ring: 43 63% 52%;
+    --chart-1: 353 43% 40%;
+    --chart-2: 43 63% 52%;
+    --chart-3: 164 60% 35%;
+    --chart-4: 36 65% 70%;
+    --chart-5: 330 50% 40%;
   }
 }
 
@@ -324,4 +358,30 @@
   .ticker-scroll {
     animation: none;
   }
+  .shimmer-loading {
+    animation: none;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@utility shimmer-loading {
+  background: linear-gradient(90deg, #F5E1D3 0%, #E4C1B0 50%, #F5E1D3 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+@property --gradient-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@utility gradient-wine-shift {
+  background: linear-gradient(var(--gradient-angle), #722f37 0%, #D4AF37 100%);
+  transition: --gradient-angle 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover { --gradient-angle: 180deg; }
 }

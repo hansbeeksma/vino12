@@ -2,7 +2,7 @@
 
 interface BrutalButtonProps {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline-solid";
+  variant?: "primary" | "secondary" | "outline-solid" | "gold";
   size?: "sm" | "md" | "lg";
   className?: string;
   onClick?: () => void;
@@ -24,6 +24,7 @@ export function BrutalButton({
     primary: "bg-wine text-champagne hover:bg-burgundy",
     secondary: "bg-emerald text-champagne hover:bg-ink",
     "outline-solid": "bg-transparent text-ink hover:bg-ink hover:text-offwhite",
+    gold: "bg-gold text-ink hover:bg-gold-600 border-gold-700",
   };
 
   const sizes = {

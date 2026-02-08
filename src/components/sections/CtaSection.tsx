@@ -25,7 +25,7 @@ export function CtaSection() {
           </p>
 
           <div className="flex flex-col items-center gap-4">
-            <BrutalButton variant="primary" size="lg" href="/wijnen">
+            <BrutalButton variant="gold" size="lg" href="/wijnen">
               Bekijk wijnen →
             </BrutalButton>
             <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest">

@@ -1,9 +1,18 @@
+"use client";
+
+import { lazy, Suspense, useState } from "react";
 import Image from "next/image";
 import type { WineRow } from "@/lib/api/wines";
 import { typeColorHex, typeLabel, bodyLabel } from "@/lib/utils";
 import { BrutalBadge } from "@/components/ui/BrutalBadge";
 import { BodyScale } from "./BodyScale";
 import { WishlistButton } from "./WishlistButton";
+
+const WineBottleShowcase = lazy(() =>
+  import("@/components/three/WineBottleShowcase").then((m) => ({
+    default: m.WineBottleShowcase,
+  })),
+);
 
 interface WineDetailProps {
   wine: WineRow;
@@ -12,26 +21,76 @@ interface WineDetailProps {
 export function WineDetail({ wine }: WineDetailProps) {
   const isRed = wine.type === "red";
   const body = bodyLabel(wine.body);
+  const [view, setView] = useState<"photo" | "3d">("photo");
 
   return (
     <div className="container-brutal px-4 py-8 md:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-        {/* Left: Product photo */}
-        <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-3/4 flex items-center justify-center relative p-8">
-          <div
-            className="absolute top-0 left-0 right-0 h-3"
-            style={{ backgroundColor: typeColorHex(wine.type) }}
-          />
-          {wine.image_url && (
-            <Image
-              src={wine.image_url}
-              alt={`${wine.name}${wine.region ? ` - ${wine.region.name}` : ""}`}
-              width={500}
-              height={667}
-              className="object-contain max-h-full w-auto"
-              priority
-            />
+        {/* Left: Product visual */}
+        <div>
+          {view === "photo" ? (
+            <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-3/4 flex items-center justify-center relative p-8">
+              <div
+                className="absolute top-0 left-0 right-0 h-3"
+                style={{ backgroundColor: typeColorHex(wine.type) }}
+              />
+              {wine.image_url && (
+                <Image
+                  src={wine.image_url}
+                  alt={`${wine.name}${wine.region ? ` - ${wine.region.name}` : ""}`}
+                  width={500}
+                  height={667}
+                  className="object-contain max-h-full w-auto"
+                  priority
+                />
+              )}
+            </div>
+          ) : (
+            <div className="border-brutal border-ink brutal-shadow bg-offwhite aspect-3/4 relative">
+              <div
+                className="absolute top-0 left-0 right-0 h-3 z-10"
+                style={{ backgroundColor: typeColorHex(wine.type) }}
+              />
+              <Suspense
+                fallback={
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="font-accent text-xs uppercase tracking-widest text-ink/40 animate-pulse">
+                      3D laden...
+                    </span>
+                  </div>
+                }
+              >
+                <WineBottleShowcase
+                  wineType={wine.type as "red" | "white" | "rosé" | "sparkling"}
+                  className="w-full h-full"
+                />
+              </Suspense>
+            </div>
           )}
+
+          {/* View toggle */}
+          <div className="flex gap-2 mt-3">
+            <button
+              onClick={() => setView("photo")}
+              className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
+                view === "photo"
+                  ? "bg-ink text-offwhite"
+                  : "bg-offwhite text-ink hover:bg-ink/5"
+              }`}
+            >
+              Foto
+            </button>
+            <button
+              onClick={() => setView("3d")}
+              className={`font-accent text-xs uppercase tracking-widest px-4 py-2 border-2 border-ink transition-colors ${
+                view === "3d"
+                  ? "bg-ink text-offwhite"
+                  : "bg-offwhite text-ink hover:bg-ink/5"
+              }`}
+            >
+              3D Bekijken
+            </button>
+          </div>
         </div>
 
         {/* Right: Details */}

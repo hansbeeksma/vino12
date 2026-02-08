@@ -17,7 +17,11 @@ export function WineCard({ wine, className = "" }: WineCardProps) {
 
   return (
     <motion.div
-      whileHover={{ y: -6 }}
+      whileHover={{
+        y: -6,
+        boxShadow:
+          "0 0 30px rgba(212, 175, 55, 0.4), 4px 4px 0px rgba(0, 0, 0, 0.8)",
+      }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       <Link href={`/wijn/${wine.slug}`} className={`block group ${className}`}>
