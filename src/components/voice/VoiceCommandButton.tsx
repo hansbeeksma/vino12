@@ -10,6 +10,10 @@ const COMMAND_LABELS: Record<VoiceCommand["type"], string> = {
   navigate: "Navigeren...",
   filter: "Filteren...",
   addToCart: "Toevoegen...",
+  recommend: "Aanbeveling...",
+  pair: "Pairing zoeken...",
+  surprise: "Verrassing!",
+  info: "Info ophalen...",
   unknown: "Niet herkend",
 };
 

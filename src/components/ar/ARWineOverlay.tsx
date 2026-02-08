@@ -10,6 +10,7 @@ interface ARWineOverlayProps {
   tastingNotes: string;
   slug: string;
   onClose: () => void;
+  onShare?: () => void;
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -29,6 +30,7 @@ export function ARWineOverlay({
   tastingNotes,
   slug,
   onClose,
+  onShare,
 }: ARWineOverlayProps) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-4 animate-in slide-in-from-bottom">
@@ -67,6 +69,26 @@ export function ARWineOverlay({
           >
             Bekijk Details
           </Link>
+          {onShare && (
+            <button
+              onClick={onShare}
+              className="px-4 py-3 border-2 border-ink font-accent text-xs uppercase tracking-widest text-ink hover:bg-champagne transition-colors"
+              aria-label="Deel AR capture"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                className="inline-block"
+              >
+                <path
+                  d="M12 5.333a2.667 2.667 0 1 0-1.893-.784L5.96 7.18a2.667 2.667 0 0 0 0 1.64l4.147 2.631a2.667 2.667 0 1 0 .8-1.265L6.76 7.555a2.667 2.667 0 0 0 0-.11l4.147-2.631c.3.318.692.519 1.093.519Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
     </div>

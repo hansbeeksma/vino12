@@ -25,7 +25,7 @@ const darkerGrotesque = Darker_Grotesque({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vino12.com",
+    process.env.NEXT_PUBLIC_APP_URL || "https://vino12.com",
   ),
   title: {
     default: "Vino12 — 6 Rood. 6 Wit. Perfecte Balans.",

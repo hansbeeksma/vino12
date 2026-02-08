@@ -131,7 +131,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Create first payment (mandate creation)
-  const origin = process.env.NEXT_PUBLIC_SITE_URL ?? "https://vino12.nl";
+  const origin = process.env.NEXT_PUBLIC_APP_URL ?? "https://vino12.com";
   const payment = await mollieClient.payments.create({
     amount: {
       value: (plan.cents / 100).toFixed(2),

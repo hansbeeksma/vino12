@@ -142,7 +142,7 @@ export async function POST(request: NextRequest) {
     const { mollieClient } = await import("@/lib/mollie");
     const { PaymentMethod } = await import("@mollie/api-client");
     const totalEur = (data.total_cents / 100).toFixed(2);
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "https://vino12.com";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://vino12.com";
 
     if (order.mollie_payment_id) {
       const existingPayment = await mollieClient.payments.get(

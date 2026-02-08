@@ -114,7 +114,7 @@ export function formatIdeaReply(analysis: {
     other: "Overig",
   };
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://vino12.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://vino12.com";
 
   return [
     `✅ *Idee geanalyseerd!*`,

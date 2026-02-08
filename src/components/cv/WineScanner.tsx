@@ -3,22 +3,17 @@
 import { useState, useCallback } from "react";
 import { useCamera } from "@/hooks/useCamera";
 import { ScanResult } from "./ScanResult";
-
-interface MatchResult {
-  name: string;
-  slug: string;
-  confidence: number;
-}
+import type { MatchResult } from "@/lib/cv/wine-matcher";
 
 export function WineScanner() {
   const { videoRef, isActive, error, startCamera, stopCamera, captureFrame } =
     useCamera();
   const [modelLoading, setModelLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
-  const [match, setMatch] = useState<MatchResult | null>(null);
+  const [matches, setMatches] = useState<MatchResult[]>([]);
 
   const handleStart = useCallback(async () => {
-    setMatch(null);
+    setMatches([]);
     await startCamera("environment");
   }, [startCamera]);
 
@@ -30,20 +25,15 @@ export function WineScanner() {
     setModelLoading(true);
 
     try {
-      // Dynamic import CV module only when capture happens
-      const { extractFeatures, findClosestWine } =
+      const { extractFeatures, findClosestWines } =
         await import("@/lib/cv/wine-matcher");
       setModelLoading(false);
 
       const features = await extractFeatures(frame);
-      const result = await findClosestWine(features);
+      const results = await findClosestWines(features, 3);
 
-      if (result) {
-        setMatch({
-          name: result.name,
-          slug: result.slug,
-          confidence: result.confidence,
-        });
+      if (results.length > 0) {
+        setMatches(results);
         stopCamera();
       }
     } catch (err) {
@@ -55,20 +45,14 @@ export function WineScanner() {
   }, [captureFrame, stopCamera]);
 
   const handleRetry = useCallback(() => {
-    setMatch(null);
+    setMatches([]);
     handleStart();
   }, [handleStart]);
 
-  // Show result
-  if (match) {
+  if (matches.length > 0) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] px-4">
-        <ScanResult
-          name={match.name}
-          slug={match.slug}
-          confidence={match.confidence}
-          onRetry={handleRetry}
-        />
+        <ScanResult matches={matches} onRetry={handleRetry} />
       </div>
     );
   }
@@ -114,7 +98,6 @@ export function WineScanner() {
 
           {/* Scanning frame overlay */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Dark overlay outside scan area */}
             <div className="absolute inset-0 bg-ink/30" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-80 bg-transparent shadow-[0_0_0_9999px_rgba(0,0,0,0.3)]" />
 
@@ -154,7 +137,7 @@ export function WineScanner() {
             <button
               onClick={() => {
                 stopCamera();
-                setMatch(null);
+                setMatches([]);
               }}
               className="bg-offwhite text-ink font-accent text-xs uppercase tracking-widest px-4 py-4 border-2 border-ink"
             >

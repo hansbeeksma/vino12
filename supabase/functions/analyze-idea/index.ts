@@ -250,8 +250,7 @@ Deno.serve(async (req) => {
       .eq("id", ideaId);
 
     // Send WhatsApp reply
-    const appUrl =
-      Deno.env.get("NEXT_PUBLIC_APP_URL") ?? "https://vino12.vercel.app";
+    const appUrl = Deno.env.get("NEXT_PUBLIC_APP_URL") ?? "https://vino12.com";
 
     await sendWhatsAppReply(
       whatsapp_sender,

@@ -11,7 +11,7 @@ function layout(content: string): string {
       ${content}
       <hr style="border:2px solid #000;margin:24px 0" />
       <p style="color:#999;font-size:10px;text-transform:uppercase;letter-spacing:2px">
-        VINO12 · Premium Wijnbox · vino12.nl
+        VINO12 · Premium Wijnbox · vino12.com
       </p>
     </div>
   `;

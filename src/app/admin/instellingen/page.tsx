@@ -19,7 +19,7 @@ export default function AdminSettingsPage() {
           </h2>
           <dl className="space-y-3">
             <SettingRow label="Winkelnaam" value="VINO12" />
-            <SettingRow label="Domein" value="vino12.nl" />
+            <SettingRow label="Domein" value="vino12.com" />
             <SettingRow label="Valuta" value="EUR (€)" />
             <SettingRow label="Taal" value="Nederlands" />
           </dl>
