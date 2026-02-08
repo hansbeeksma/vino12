@@ -5,7 +5,7 @@ import { CollectionGrid } from "@/components/sections/CollectionGrid";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SearchBar } from "@/components/search/SearchBar";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Wijnen | VINO12",

@@ -10,7 +10,7 @@ import { PhilosophySection } from "@/components/sections/PhilosophySection";
 import { CtaSection } from "@/components/sections/CtaSection";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "VINO12 | Premium Wijnbox — 12 Wijnen, Perfecte Balans",
@@ -19,7 +19,13 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const wines = await getWines();
+  let wines: Awaited<ReturnType<typeof getWines>>;
+  try {
+    wines = await getWines();
+  } catch (err) {
+    console.error("Homepage wine fetch failed:", err);
+    wines = [];
+  }
 
   return (
     <>
@@ -28,9 +34,9 @@ export default async function HomePage() {
       <HeroSection />
       <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · €175 PER BOX · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />
-      <WineJourney wines={wines} />
+      {wines.length > 0 && <WineJourney wines={wines} />}
       <StatsBar />
-      <StoriesCarousel wines={wines} />
+      {wines.length > 0 && <StoriesCarousel wines={wines} />}
       <PhilosophySection />
       <CtaSection />
     </>

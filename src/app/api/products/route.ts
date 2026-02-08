@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServiceRoleClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get("q");
   const sortBy = searchParams.get("sort") ?? "name_asc";
 
-  const supabase = await createServerSupabaseClient();
+  const supabase = createServiceRoleClient();
 
   let query = supabase
     .from("wines")
