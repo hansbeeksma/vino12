@@ -1,15 +1,16 @@
-import Image from "next/image";
 import { BrutalButton } from "@/components/ui/BrutalButton";
+import { WineCarousel } from "@/components/sections/WineCarousel";
+import type { WineRow } from "@/lib/api/wines";
 
-export function HeroSection() {
+interface HeroSectionProps {
+  wines: WineRow[];
+}
+
+export function HeroSection({ wines }: HeroSectionProps) {
   return (
     <section className="min-h-screen flex flex-col justify-center relative bg-offwhite border-b-brutal-lg border-ink overflow-hidden">
-      <div className="container-brutal px-4 md:px-8 pt-24 pb-8 relative z-10">
+      <div className="container-brutal px-4 md:px-8 pt-16 pb-8 relative z-10">
         <div>
-          <p className="font-accent text-xs uppercase tracking-[0.3em] text-wine mb-4 md:mb-6">
-            Premium Wijnbox
-          </p>
-
           <h1 className="font-display text-display-hero text-ink leading-none mb-6">
             VINO
             <br />
@@ -17,12 +18,8 @@ export function HeroSection() {
           </h1>
 
           <div className="max-w-xl">
-            <p className="font-display text-xl md:text-2xl font-bold text-ink mb-2">
+            <p className="font-display text-xl md:text-2xl font-bold text-ink mb-8">
               6 ROOD. 6 WIT. PERFECTE BALANS.
-            </p>
-            <p className="font-body text-xl md:text-2xl text-ink/70 mb-8">
-              12 premium wijnen, zorgvuldig gecureerd. Van licht en fris tot vol
-              en complex. Eén box, alle smaken.
             </p>
           </div>
 
@@ -37,16 +34,17 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="w-full">
-        <Image
-          src="/images/wines/collection-feb.svg"
-          alt="VINO12 collectie — 12 premium wijnen naast elkaar"
-          width={1920}
-          height={400}
-          className="w-full h-auto"
-          priority
-        />
-      </div>
+      {wines.length > 0 ? (
+        <WineCarousel wines={wines} />
+      ) : (
+        <div className="w-full overflow-hidden">
+          <img
+            src="/images/wines/collection-feb.svg"
+            alt="VINO12 collectie — 12 premium wijnen"
+            className="h-auto w-full"
+          />
+        </div>
+      )}
     </section>
   );
 }

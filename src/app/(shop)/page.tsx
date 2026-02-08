@@ -30,7 +30,7 @@ export default async function HomePage() {
     <>
       <OrganizationJsonLd />
       <WebSiteJsonLd />
-      <HeroSection />
+      <HeroSection wines={wines} />
       <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />
       {wines.length > 0 && <WineJourney wines={wines} />}
