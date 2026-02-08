@@ -56,6 +56,7 @@ export function useCamera(): UseCameraReturn {
   const captureFrame = useCallback((): ImageData | null => {
     const video = videoRef.current;
     if (!video || !isActive) return null;
+    if (!video.videoWidth || !video.videoHeight) return null;
 
     if (!canvasRef.current) {
       canvasRef.current = document.createElement("canvas");
