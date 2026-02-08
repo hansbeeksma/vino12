@@ -1,0 +1,202 @@
+# VINO12 Personal Dictionary
+# Dicteer deze termen regelmatig zodat Wispr Flow ze leert herkennen.
+# Gegroepeerd per categorie.
+
+## ━━━ MERK & PLATFORM ━━━
+VINO12
+Vino12
+vino12.com
+
+## ━━━ DRUIVENRASSEN ━━━
+Pinot Noir
+Gamay
+Grenache
+Merlot
+Cabernet Franc
+Cabernet Sauvignon
+Sauvignon Blanc
+Albariño
+Vermentino
+Chardonnay
+Viognier
+Riesling
+
+## ━━━ WIJNREGIO'S ━━━
+Bourgogne
+Beaujolais
+Côtes du Rhône
+Saint-Émilion
+Loire Valley
+Mendoza
+Marlborough
+Rías Baixas
+Gallura
+Chablis
+Condrieu
+Alsace
+
+## ━━━ LANDEN ━━━
+Frankrijk
+Argentinië
+Nieuw-Zeeland
+Spanje
+Italië
+
+## ━━━ PROEFNOTITIES — NEUS ━━━
+Rode kers
+Aardbei
+Viooltje
+Violette
+Framboos
+Banaan
+Peony
+Pruim
+Braam
+Cassis
+Eucalyptus
+Groene appel
+Gemaaid gras
+Citroenschil
+Passievrucht
+Witte bloemen
+Perzik
+Abrikoos
+Oranjebloesem
+Honing
+Citrusfruit
+Limoen
+Petroleum
+Vuursteen
+
+## ━━━ PROEFNOTITIES — SMAAK ━━━
+Zijdezacht
+Rode vruchten
+Licht kruidig
+Sappig
+Fris
+Licht peppig
+Rond
+Stevig
+Donker fruit
+Bramenjam
+Krachtig
+Weelderig
+Fluweelzacht
+Rijpe kers
+Donkere chocolade
+Oliachtig
+Ziltig
+Mineraal
+Strak
+Krijtachtig
+Scherp
+Tropisch fruit
+Citrus
+Honingdauw
+Witte perzik
+Droog
+Groene peper
+Grafiet
+Mokka
+
+## ━━━ PROEFNOTITIES — OVERIG ━━━
+Tannines
+Zuurgraad
+Body
+Afdronk
+Middellang
+Lang
+Kort
+Bouquet
+Terroir
+Cuvée
+Millésime
+Appellation
+Grand Cru
+Premier Cru
+
+## ━━━ WIJN BESCHRIJVINGEN ━━━
+Full-bodied
+Medium-bodied
+Light-bodied
+Crispy
+Elegant
+Robuust
+Fruitig
+Floraal
+Kruidig
+Mineraal
+Houtrijp
+Eiken gerijpt
+Ongehouted
+Biodynamisch
+Biologisch
+Natuurwijn
+Orange wine
+Pétillant naturel
+Pét-nat
+
+## ━━━ FOOD PAIRING ━━━
+Gegrilde zalm
+Brie
+Paddenstoelrisotto
+Charcuterie
+Quiche Lorraine
+Raclette
+Geitenkaas
+Gegrilde groenten
+Ratatouille
+Olijventapenade
+Bruschetta
+Pesto pasta
+Oesters
+Zeevruchten
+Kreeft
+Zeebaars
+Sushi
+Aziatische keuken
+Lamskoteletjes
+Ossenhaas
+Rib-eye steak
+Wild zwijn
+Eend
+Truffelrisotto
+Foie gras
+Bourgondische escargots
+Choucroute garnie
+Manchego
+Oude Gouda
+Belegen kaas
+Jonge Comté
+Geitenkaas salade
+Pulpo a la gallega
+Lichte pasta
+Curry
+
+## ━━━ BUSINESS TERMEN ━━━
+Dropshipping
+Fulfillment
+Mollie
+iDEAL
+Bancontact
+GDPR
+AVG
+Leeftijdsverificatie
+Winkelwagen
+Afrekenen
+Bezorgkosten
+Verzendkosten
+Retourbeleid
+Leverancier
+Marge
+Inkoopprijs
+Verkoopprijs
+Assortiment
+Collectie
+Seizoenswijn
+Limited edition
+Pre-order
+Wine club
+Wijnabonnement
+Proefpakket
+Cadeauverpakking
