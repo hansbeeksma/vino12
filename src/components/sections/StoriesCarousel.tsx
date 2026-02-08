@@ -5,6 +5,7 @@ import type { WineRow } from "@/lib/api/wines";
 import { StorySlide } from "@/components/instagram/StorySlide";
 import { StoryProgressBar } from "@/components/instagram/StoryProgressBar";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedSection } from "@/components/motion/AnimatedSection";
 
 interface StoriesCarouselProps {
   wines: WineRow[];
@@ -43,14 +44,16 @@ export function StoriesCarousel({ wines }: StoriesCarouselProps) {
   return (
     <section className="section-padding bg-ink">
       <div className="container-brutal">
-        <SectionLabel className="text-champagne/60!">
-          Instagram Stories
-        </SectionLabel>
-        <h2 className="font-display text-display-md text-champagne mb-8">
-          SWIPE DOOR
-          <br />
-          <span className="text-wine">ONZE WIJNEN.</span>
-        </h2>
+        <AnimatedSection>
+          <SectionLabel className="text-champagne/60!">
+            Instagram Stories
+          </SectionLabel>
+          <h2 className="font-display text-display-md text-champagne mb-8">
+            SWIPE DOOR
+            <br />
+            <span className="text-wine">ONZE WIJNEN.</span>
+          </h2>
+        </AnimatedSection>
       </div>
 
       <div className="flex justify-center px-4">

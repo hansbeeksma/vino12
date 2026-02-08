@@ -4,6 +4,7 @@ import { useRef } from "react";
 import type { WineRow } from "@/lib/api/wines";
 import { typeColorHex, bodyToNumber, bodyLabel } from "@/lib/utils";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedSection } from "@/components/motion/AnimatedSection";
 
 interface WineJourneyProps {
   wines: WineRow[];
@@ -21,17 +22,19 @@ export function WineJourney({ wines }: WineJourneyProps) {
       className="section-padding bg-champagne border-y-brutal border-ink"
     >
       <div className="container-brutal">
-        <SectionLabel>De Wijnreis</SectionLabel>
-        <h2 className="font-display text-display-md text-ink mb-4">
-          VAN LICHT
-          <br />
-          <span className="text-wine">NAAR VOL.</span>
-        </h2>
-        <p className="font-body text-xl text-ink/70 max-w-lg mb-8">
-          Elke box vertelt een verhaal. Van delicate Pinot Noir tot krachtige
-          Cabernet Sauvignon. Van frisse Sauvignon Blanc tot weelderige
-          Viognier.
-        </p>
+        <AnimatedSection>
+          <SectionLabel>De Wijnreis</SectionLabel>
+          <h2 className="font-display text-display-md text-ink mb-4">
+            VAN LICHT
+            <br />
+            <span className="text-wine">NAAR VOL.</span>
+          </h2>
+          <p className="font-body text-xl text-ink/70 max-w-lg mb-8">
+            Elke box vertelt een verhaal. Van delicate Pinot Noir tot krachtige
+            Cabernet Sauvignon. Van frisse Sauvignon Blanc tot weelderige
+            Viognier.
+          </p>
+        </AnimatedSection>
       </div>
 
       <div ref={scrollRef} className="overflow-x-auto scrollbar-hide pb-4">

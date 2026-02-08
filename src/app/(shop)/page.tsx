@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getWines } from "@/lib/api/wines";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { MarqueeStrip } from "@/components/ui/MarqueeStrip";
 import { CollectionGrid } from "@/components/sections/CollectionGrid";
 import { WineJourney } from "@/components/sections/WineJourney";
 import { StoriesCarousel } from "@/components/sections/StoriesCarousel";
@@ -31,7 +30,6 @@ export default async function HomePage() {
       <OrganizationJsonLd />
       <WebSiteJsonLd />
       <HeroSection wines={wines} />
-      <MarqueeStrip text="6 ROOD · 6 WIT · PERFECTE BALANS · GRATIS VERZENDING · PREMIUM WIJNEN" />
       <CollectionGrid wines={wines} />
       {wines.length > 0 && <WineJourney wines={wines} />}
       {wines.length > 0 && <StoriesCarousel wines={wines} />}

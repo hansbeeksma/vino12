@@ -6,6 +6,8 @@ import type { WineRow } from "@/lib/api/wines";
 import type { WineType, WineBody } from "@/lib/schemas/wine";
 import { WineCard } from "@/components/wine/WineCard";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { AnimatedSection } from "@/components/motion/AnimatedSection";
+import { StaggerGrid, StaggerItem } from "@/components/motion/StaggerGrid";
 
 type TypeFilter = "all" | WineType;
 type BodyFilter = "all" | WineBody;
@@ -123,12 +125,14 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
   return (
     <section id="collectie" className="section-padding bg-offwhite">
       <div className="container-brutal">
-        <SectionLabel>De Collectie</SectionLabel>
-        <h2 className="font-display text-display-md text-ink mb-8">
-          12 WIJNEN.
-          <br />
-          <span className="text-wine">ZORGVULDIG GEKOZEN.</span>
-        </h2>
+        <AnimatedSection>
+          <SectionLabel>De Collectie</SectionLabel>
+          <h2 className="font-display text-display-md text-ink mb-8">
+            12 WIJNEN.
+            <br />
+            <span className="text-wine">ZORGVULDIG GEKOZEN.</span>
+          </h2>
+        </AnimatedSection>
 
         {/* Type filter */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -239,11 +243,13 @@ export function CollectionGrid({ wines }: CollectionGridProps) {
         </p>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        <StaggerGrid className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
           {filtered.map((wine) => (
-            <WineCard key={wine.id} wine={wine} />
+            <StaggerItem key={wine.id}>
+              <WineCard wine={wine} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGrid>
 
         {filtered.length === 0 && (
           <div className="text-center py-16">

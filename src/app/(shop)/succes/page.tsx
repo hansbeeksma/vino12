@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { OrderStatus } from "./OrderStatus";
+import { SuccessCelebration } from "./SuccessCelebration";
 
 export const metadata: Metadata = {
   title: "Bestelling bevestigd | VINO12",
@@ -15,8 +16,9 @@ export default async function SuccesPage({ searchParams }: Props) {
   const { order } = await searchParams;
 
   return (
-    <div className="bg-offwhite min-h-screen section-padding">
-      <div className="container-brutal text-center py-20">
+    <div className="bg-offwhite min-h-screen section-padding relative">
+      <SuccessCelebration />
+      <div className="container-brutal text-center py-20 relative z-10">
         <div className="inline-block border-brutal-lg border-ink bg-offwhite brutal-shadow-lg p-8 md:p-12 mb-8">
           <Suspense>
             <OrderStatus />
