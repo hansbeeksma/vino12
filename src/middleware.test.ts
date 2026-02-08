@@ -39,8 +39,8 @@ describe("middleware", () => {
     vi.clearAllMocks();
     process.env.NEXT_PUBLIC_SUPABASE_URL = "https://test.supabase.co";
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "test-anon-key";
-    process.env.ADMIN_EMAILS = "admin@vino12.nl";
-    process.env.CONTRIBUTOR_EMAILS = "gabrielle@vino12.nl";
+    process.env.ADMIN_EMAILS = "admin@vino12.com";
+    process.env.CONTRIBUTOR_EMAILS = "gabrielle@vino12.com";
     mockGetUser.mockResolvedValue({ data: { user: null } });
   });
 
@@ -155,7 +155,7 @@ describe("middleware", () => {
 
     it("allows admin via ADMIN_EMAILS env", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "admin@vino12.nl" }) },
+        data: { user: mockUser({ email: "admin@vino12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin"));
@@ -165,7 +165,7 @@ describe("middleware", () => {
 
     it("allows admin with case-insensitive email", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "Admin@VINO12.nl" }) },
+        data: { user: mockUser({ email: "Admin@VINO12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin"));
@@ -175,7 +175,7 @@ describe("middleware", () => {
 
     it("allows contributor to access /admin", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "gabrielle@vino12.nl" }) },
+        data: { user: mockUser({ email: "gabrielle@vino12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin"));
@@ -185,7 +185,7 @@ describe("middleware", () => {
 
     it("allows contributor to access /admin/creative", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "gabrielle@vino12.nl" }) },
+        data: { user: mockUser({ email: "gabrielle@vino12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin/creative"));
@@ -210,7 +210,7 @@ describe("middleware", () => {
     for (const path of blockedPaths) {
       it(`blocks contributor from ${path}`, async () => {
         mockGetUser.mockResolvedValue({
-          data: { user: mockUser({ email: "gabrielle@vino12.nl" }) },
+          data: { user: mockUser({ email: "gabrielle@vino12.com" }) },
         });
 
         const res = await middleware(makeRequest(path));
@@ -222,7 +222,7 @@ describe("middleware", () => {
 
     it("blocks contributor from nested blocked path", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "gabrielle@vino12.nl" }) },
+        data: { user: mockUser({ email: "gabrielle@vino12.com" }) },
       });
 
       const res = await middleware(
@@ -235,7 +235,7 @@ describe("middleware", () => {
 
     it("allows admin to access blocked paths", async () => {
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "admin@vino12.nl" }) },
+        data: { user: mockUser({ email: "admin@vino12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin/bestellingen"));
@@ -244,11 +244,11 @@ describe("middleware", () => {
     });
 
     it("allows user who is both admin and contributor", async () => {
-      process.env.ADMIN_EMAILS = "gabrielle@vino12.nl";
-      process.env.CONTRIBUTOR_EMAILS = "gabrielle@vino12.nl";
+      process.env.ADMIN_EMAILS = "gabrielle@vino12.com";
+      process.env.CONTRIBUTOR_EMAILS = "gabrielle@vino12.com";
 
       mockGetUser.mockResolvedValue({
-        data: { user: mockUser({ email: "gabrielle@vino12.nl" }) },
+        data: { user: mockUser({ email: "gabrielle@vino12.com" }) },
       });
 
       const res = await middleware(makeRequest("/admin/bestellingen"));

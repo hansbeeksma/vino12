@@ -26,7 +26,7 @@ const mockGetUserRole = getUserRole as ReturnType<typeof vi.fn>;
 const mockProcessIdea = processIdeaAnalysis as ReturnType<typeof vi.fn>;
 
 const adminUser = {
-  user: { id: "user-1", email: "admin@vino12.nl" },
+  user: { id: "user-1", email: "admin@vino12.com" },
   role: "admin" as const,
 };
 
@@ -161,7 +161,7 @@ describe("POST /api/ideas/create", () => {
 
   it("allows contributor role", async () => {
     mockGetUserRole.mockResolvedValue({
-      user: { id: "u-3", email: "gabrielle@vino12.nl" },
+      user: { id: "u-3", email: "gabrielle@vino12.com" },
       role: "contributor",
     });
 

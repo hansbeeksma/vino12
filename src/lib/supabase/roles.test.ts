@@ -60,17 +60,17 @@ describe("getUserRole", () => {
   });
 
   it("returns admin role for user in ADMIN_EMAILS", async () => {
-    process.env.ADMIN_EMAILS = "admin@vino12.nl, BOSS@vino12.nl";
+    process.env.ADMIN_EMAILS = "admin@vino12.com, BOSS@vino12.com";
 
     mockSupabaseUser({
       id: "user-2",
-      email: "Admin@vino12.nl",
+      email: "Admin@vino12.com",
       app_metadata: {},
     });
 
     const result = await getUserRole();
     expect(result).toEqual({
-      user: { id: "user-2", email: "Admin@vino12.nl" },
+      user: { id: "user-2", email: "Admin@vino12.com" },
       role: "admin",
     });
   });
@@ -92,7 +92,7 @@ describe("getUserRole", () => {
   });
 
   it("returns customer role for unknown user", async () => {
-    process.env.ADMIN_EMAILS = "admin@vino12.nl";
+    process.env.ADMIN_EMAILS = "admin@vino12.com";
     process.env.CONTRIBUTOR_EMAILS = "gabrielle@example.com";
 
     mockSupabaseUser({
@@ -109,12 +109,12 @@ describe("getUserRole", () => {
   });
 
   it("admin takes precedence over contributor", async () => {
-    process.env.ADMIN_EMAILS = "both@vino12.nl";
-    process.env.CONTRIBUTOR_EMAILS = "both@vino12.nl";
+    process.env.ADMIN_EMAILS = "both@vino12.com";
+    process.env.CONTRIBUTOR_EMAILS = "both@vino12.com";
 
     mockSupabaseUser({
       id: "user-5",
-      email: "both@vino12.nl",
+      email: "both@vino12.com",
       app_metadata: {},
     });
 

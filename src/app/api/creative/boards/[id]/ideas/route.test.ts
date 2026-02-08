@@ -22,7 +22,7 @@ import { getUserRole } from "@/lib/supabase/roles";
 const mockGetUserRole = getUserRole as ReturnType<typeof vi.fn>;
 
 const adminUser = {
-  user: { id: "user-1", email: "admin@vino12.nl" },
+  user: { id: "user-1", email: "admin@vino12.com" },
   role: "admin" as const,
 };
 
