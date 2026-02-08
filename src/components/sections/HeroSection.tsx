@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, lazy, Suspense } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { lazy, Suspense } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { WineCarousel } from "@/components/sections/WineCarousel";
 import type { WineRow } from "@/lib/api/wines";
@@ -23,20 +22,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ wines }: HeroSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const yTitle = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
-  const opacityTitle = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-
   return (
-    <section
-      ref={sectionRef}
-      className="min-h-screen flex flex-col justify-center relative bg-offwhite overflow-hidden"
-    >
+    <section className="min-h-screen flex flex-col justify-center relative bg-offwhite overflow-hidden">
       <Suspense fallback={null}>
         <HeroGradient className="absolute inset-0 z-0 opacity-30 pointer-events-none" />
       </Suspense>
@@ -46,17 +33,6 @@ export function HeroSection({ wines }: HeroSectionProps) {
           className="absolute inset-0 z-[1] pointer-events-none"
         />
       </Suspense>
-      <div className="container-brutal px-4 md:px-8 pt-16 pb-0 relative z-10">
-        <motion.h1
-          style={{ y: yTitle, opacity: opacityTitle }}
-          className="font-display text-display-hero text-ink leading-none"
-        >
-          VINO
-          <br />
-          <span className="text-wine">12</span>
-        </motion.h1>
-      </div>
-
       {wines.length > 0 ? (
         <WineCarousel wines={wines} />
       ) : (
