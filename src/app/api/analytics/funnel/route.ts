@@ -13,7 +13,7 @@ const funnelEventSchema = z.object({
     "checkout_started",
     "order_completed",
   ]),
-  event_data: z.record(z.any()).optional(),
+  event_data: z.record(z.unknown()).optional(),
   device_type: z.enum(["mobile", "desktop", "tablet"]).optional(),
   browser: z.string().optional(),
   referrer: z.string().optional(),
