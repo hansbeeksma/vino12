@@ -3,6 +3,7 @@ import {
   RESEARCHER_SYSTEM_PROMPT,
   PLANNER_SYSTEM_PROMPT,
 } from "./prompts";
+import { callClaude, parseJSON } from "./claude";
 
 interface ClassifierResult {
   title: string;
@@ -51,43 +52,6 @@ export interface AnalysisResult {
   planner: PlannerResult;
 }
 
-async function callClaude(
-  systemPrompt: string,
-  userMessage: string,
-  model: string = "claude-haiku-4-5-20251001",
-): Promise<string> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY not configured");
-  }
-
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model,
-      max_tokens: 2048,
-      system: systemPrompt,
-      messages: [{ role: "user", content: userMessage }],
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Claude API error: ${response.status} - ${error}`);
-  }
-
-  const data = await response.json();
-  const textBlock = data.content?.find(
-    (block: { type: string }) => block.type === "text",
-  );
-  return textBlock?.text ?? "";
-}
-
 async function callPerplexity(query: string): Promise<string> {
   const apiKey = process.env.PERPLEXITY_API_KEY;
   if (!apiKey) {
@@ -117,13 +81,6 @@ async function callPerplexity(query: string): Promise<string> {
 
   const data = await response.json();
   return data.choices?.[0]?.message?.content ?? "";
-}
-
-function parseJSON<T>(text: string): T {
-  // Extract JSON from potential markdown code blocks
-  const jsonMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-  const jsonStr = jsonMatch ? jsonMatch[1].trim() : text.trim();
-  return JSON.parse(jsonStr);
 }
 
 export async function classifyIdea(
