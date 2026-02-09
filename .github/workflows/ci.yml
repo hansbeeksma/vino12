@@ -47,7 +47,7 @@ jobs:
         run: npm run storybook:build
 
       - name: Upload Storybook artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: storybook-static
           path: storybook-static/
@@ -89,7 +89,7 @@ jobs:
 
       - name: Upload visual regression diffs
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: storybook-visual-diffs
           path: .storybook/__snapshots__/__diff_output__/
@@ -129,7 +129,7 @@ jobs:
 
       - name: Upload Lighthouse results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: lighthouse-results
           path: .lighthouseci/
