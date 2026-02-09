@@ -1,0 +1,174 @@
+{
+  "totalScore": 3.75,
+  "decision": "GO",
+  "passedThresholds": true,
+  "timestamp": "2026-02-09T00:30:00.000Z",
+  "thresholdChecks": [
+    {
+      "criterion": "Problem Validation",
+      "required": "≥3.0",
+      "actual": 4,
+      "passed": true
+    },
+    {
+      "criterion": "Willingness to Pay",
+      "required": "≥2.0",
+      "actual": 3,
+      "passed": true
+    },
+    {
+      "criterion": "Market Size (SOM)",
+      "required": ">€500K",
+      "actual": 4,
+      "passed": true
+    }
+  ],
+  "criterionScores": [
+    {
+      "criterionId": 1,
+      "score": 4,
+      "rationale": "Strong problem validation from JTBD interviews. 8 out of 10 interviewees confirmed the wine discovery problem is painful and they actively look for solutions.",
+      "dataSource": "10 JTBD interviews (Jan 2026), Problem-solution fit survey (N=50)",
+      "confidenceLevel": "Hoog",
+      "keyFindings": [
+        "80% confirmed pain point",
+        "Willingness to pay evident",
+        "Active search for alternatives"
+      ]
+    },
+    {
+      "criterionId": 2,
+      "score": 3,
+      "rationale": "Moderate willingness to pay. 50% of survey respondents indicated they would pay €25/month for a curated wine subscription. Price sensitivity exists but acceptable conversion expected.",
+      "dataSource": "Pricing validation survey (N=50), Competitor pricing analysis",
+      "confidenceLevel": "Medium",
+      "keyFindings": [
+        "50% yes at €25/month",
+        "35% yes at €20/month",
+        "Competitor range: €15-€40/month"
+      ]
+    },
+    {
+      "criterionId": 3,
+      "score": 4,
+      "rationale": "SOM calculated at €1.5M based on conservative assumptions. Wine subscription market in NL growing 15% YoY. TAM €50M, SAM €10M with 15% obtainable market share.",
+      "dataSource": "CBS wine market data, Competitor revenue estimates, Industry reports",
+      "confidenceLevel": "Hoog",
+      "keyFindings": [
+        "TAM: €50M (NL wine subscriptions)",
+        "SAM: €10M (digital-first segment)",
+        "SOM: €1.5M (15% market share, year 3)"
+      ]
+    },
+    {
+      "criterionId": 4,
+      "score": 3,
+      "rationale": "Moderate differentiation through personalized curation algorithm and educational content. 3 main competitors exist but focus on volume over personalization.",
+      "dataSource": "Competitive analysis (5 competitors), Value proposition testing",
+      "confidenceLevel": "Medium",
+      "keyFindings": [
+        "Main competitors: WijnVoordeel, Winelovers, Sommable",
+        "Unique: AI-powered taste profile matching",
+        "Defensibility through data network effects"
+      ]
+    },
+    {
+      "criterionId": 5,
+      "score": 5,
+      "rationale": "Fully feasible with current tech stack. Next.js 14 + Supabase + Mollie are proven technologies. No custom ML needed initially (rule-based matching). Timeline: 3 months to MVP.",
+      "dataSource": "Technical architecture review, Team capability assessment",
+      "confidenceLevel": "Hoog",
+      "keyFindings": [
+        "Proven tech stack (Next.js + Supabase + Mollie)",
+        "No external dependencies or integrations blocking",
+        "Timeline: 3 months to MVP, 6 months to public launch"
+      ]
+    },
+    {
+      "criterionId": 6,
+      "score": 3,
+      "rationale": "CAC €50 via Instagram/Google Ads, conversion rate 2%. Channels are viable but require optimization. LTV €200 provides acceptable unit economics.",
+      "dataSource": "Instagram ads test (€200 budget, 50 clicks), Google Ads test (€300 budget)",
+      "confidenceLevel": "Medium",
+      "keyFindings": [
+        "Instagram: CAC €45, CTR 1.2%",
+        "Google Ads: CAC €55, CTR 2.8%",
+        "Conversion rate: 2% (landing page test)"
+      ]
+    },
+    {
+      "criterionId": 7,
+      "score": 4,
+      "rationale": "Strong unit economics. LTV/CAC ratio of 4.0, contribution margin 45%. AOV €75, COGS €40 (wine + shipping), CAC €50. Break-even at 300 subscribers.",
+      "dataSource": "Unit economics model, Supplier pricing agreements",
+      "confidenceLevel": "Hoog",
+      "keyFindings": [
+        "AOV: €75 (monthly subscription)",
+        "COGS: €40 (€30 wine + €10 shipping)",
+        "Contribution margin: €35 (47%)",
+        "LTV: €200 (avg 8-month retention)",
+        "LTV/CAC: 4.0"
+      ]
+    },
+    {
+      "criterionId": 8,
+      "score": 4,
+      "rationale": "Strong team capability. 2 FTE developers (Next.js/React), 0.5 FTE designer (Figma/UI), 1 FTE product owner. Missing: wine sommelier expertise (can hire part-time).",
+      "dataSource": "Team skill matrix, Resource allocation plan",
+      "confidenceLevel": "Hoog",
+      "keyFindings": [
+        "Dev capacity: 2 FTE (80% allocation possible)",
+        "Design: 0.5 FTE (sufficient for MVP)",
+        "Product/PM: 1 FTE",
+        "Gap: Wine expertise (mitigated via advisor)"
+      ]
+    }
+  ],
+  "riskAnalysis": {
+    "highRisk": [],
+    "mediumRisk": [
+      {
+        "criterion": "Willingness to Pay",
+        "score": 3,
+        "description": "Moderate willingness to pay. 50% of survey respondents indicated they would pay €25/month for a curated wine subscription. Price sensitivity exists but acceptable conversion expected."
+      },
+      {
+        "criterion": "Competition & Differentiation",
+        "score": 3,
+        "description": "Moderate differentiation through personalized curation algorithm and educational content. 3 main competitors exist but focus on volume over personalization."
+      },
+      {
+        "criterion": "Channel Viability",
+        "score": 3,
+        "description": "CAC €50 via Instagram/Google Ads, conversion rate 2%. Channels are viable but require optimization. LTV €200 provides acceptable unit economics."
+      }
+    ],
+    "lowRisk": [
+      {
+        "criterion": "Problem Validation",
+        "score": 4,
+        "description": "Strong problem validation from JTBD interviews. 8 out of 10 interviewees confirmed the wine discovery problem is painful and they actively look for solutions."
+      },
+      {
+        "criterion": "Market Size (SOM)",
+        "score": 4,
+        "description": "SOM calculated at €1.5M based on conservative assumptions. Wine subscription market in NL growing 15% YoY. TAM €50M, SAM €10M with 15% obtainable market share."
+      },
+      {
+        "criterion": "Technical Feasibility",
+        "score": 5,
+        "description": "Fully feasible with current tech stack. Next.js 14 + Supabase + Mollie are proven technologies. No custom ML needed initially (rule-based matching). Timeline: 3 months to MVP."
+      },
+      {
+        "criterion": "Business Model Viability",
+        "score": 4,
+        "description": "Strong unit economics. LTV/CAC ratio of 4.0, contribution margin 45%. AOV €75, COGS €40 (wine + shipping), CAC €50. Break-even at 300 subscribers."
+      },
+      {
+        "criterion": "Team & Execution Capability",
+        "score": 4,
+        "description": "Strong team capability. 2 FTE developers (Next.js/React), 0.5 FTE designer (Figma/UI), 1 FTE product owner. Missing: wine sommelier expertise (can hire part-time)."
+      }
+    ]
+  }
+}

@@ -70,8 +70,10 @@ async function main() {
         type: "numeral",
         name: "score",
         message: `Score voor ${criterion.name} (0-5):`,
-        validate: (value) =>
-          value >= 0 && value <= 5 ? true : "Score moet tussen 0 en 5 zijn",
+        validate: (value: string | number) => {
+          const num = Number(value);
+          return num >= 0 && num <= 5 ? true : "Score moet tussen 0 en 5 zijn";
+        },
       },
       {
         type: "input",
