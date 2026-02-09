@@ -474,6 +474,298 @@ Funnel drop-offs are **primary targets** for A/B tests:
 
 ---
 
+## Testing
+
+### Prerequisites
+
+**Before testing, ensure:**
+
+1. ✅ Next.js dev server is running (or Turbopack cache cleared)
+2. ✅ SQL migrations applied (015_aarrr_metrics.sql, 016_conversion_funnel.sql)
+3. ✅ Supabase connection configured (.env.local)
+
+### Fix Turbopack Cache Issue (if needed)
+
+**Symptom:** Dev server crashes with `range start index ... out of range` errors
+
+**Fix:**
+
+```bash
+cd ~/Development/products/vino12
+rm -rf .next
+npm run dev > /tmp/vino12-dev.log 2>&1 &
+```
+
+**Verify running:**
+
+```bash
+curl http://localhost:3000
+# Should return HTML (Next.js running)
+```
+
+### Apply SQL Migrations
+
+**Reset database (applies all migrations):**
+
+```bash
+cd ~/Development/products/vino12
+supabase db reset
+```
+
+**Or apply specific migrations:**
+
+```bash
+supabase migration up 015_aarrr_metrics.sql
+supabase migration up 016_conversion_funnel.sql
+```
+
+**Verify migrations applied:**
+
+```sql
+-- Check tables exist
+SELECT tablename FROM pg_tables
+WHERE schemaname = 'public'
+  AND tablename IN ('funnel_events', 'referrals');
+
+-- Check views exist
+SELECT table_name FROM information_schema.views
+WHERE table_schema = 'public'
+  AND table_name LIKE '%funnel%';
+
+-- Expected: funnel_overview, funnel_by_device, funnel_by_browser,
+--           funnel_sankey, funnel_dropoffs, session_journeys
+```
+
+### Test API Route
+
+**Health check:**
+
+```bash
+curl http://localhost:3000/api/analytics/funnel
+# Expected: {"status":"ok","endpoint":"/api/analytics/funnel","methods":["POST"]}
+```
+
+**Track page visit:**
+
+```bash
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "session_id": "test_session_001",
+    "event_type": "page_visit",
+    "event_data": {"page": "/wijnen"},
+    "device_type": "desktop",
+    "browser": "chrome"
+  }'
+# Expected: {"success":true,"data":{...}}
+```
+
+**Track product view:**
+
+```bash
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "session_id": "test_session_001",
+    "event_type": "product_viewed",
+    "event_data": {"product_id": "test-wine-123", "product_name": "Château Test"},
+    "device_type": "desktop",
+    "browser": "chrome"
+  }'
+```
+
+**Track full funnel journey:**
+
+```bash
+# 1. Visit
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"journey_001","event_type":"page_visit","event_data":{"page":"/"},"device_type":"mobile","browser":"safari"}'
+
+# 2. Product view
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"journey_001","event_type":"product_viewed","event_data":{"product_id":"wine-1","product_name":"Rioja"},"device_type":"mobile","browser":"safari"}'
+
+# 3. Add to cart
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"journey_001","event_type":"add_to_cart","event_data":{"product_id":"wine-1","quantity":2},"device_type":"mobile","browser":"safari"}'
+
+# 4. Checkout
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"journey_001","event_type":"checkout_started","event_data":{"cart_value":59.98,"item_count":2},"device_type":"mobile","browser":"safari"}'
+
+# 5. Order complete
+curl -X POST http://localhost:3000/api/analytics/funnel \
+  -H 'Content-Type: application/json' \
+  -d '{"session_id":"journey_001","event_type":"order_completed","event_data":{"order_id":"test-order-001","total_amount":59.98},"device_type":"mobile","browser":"safari"}'
+```
+
+### Verify Data in Database
+
+**Check events inserted:**
+
+```sql
+SELECT
+  session_id,
+  event_type,
+  device_type,
+  browser,
+  created_at
+FROM funnel_events
+ORDER BY created_at DESC
+LIMIT 10;
+```
+
+**Check funnel overview:**
+
+```sql
+SELECT * FROM funnel_overview
+WHERE date >= CURRENT_DATE - 7
+ORDER BY date DESC;
+```
+
+**Check device breakdown:**
+
+```sql
+SELECT * FROM funnel_by_device;
+-- Expected: mobile/desktop stats
+```
+
+**Check session journey:**
+
+```sql
+SELECT
+  session_id,
+  event_sequence,
+  event_count,
+  duration_minutes,
+  converted
+FROM session_journeys
+WHERE session_id = 'journey_001';
+-- Expected: ['page_visit', 'product_viewed', 'add_to_cart', 'checkout_started', 'order_completed']
+```
+
+**Test period comparison function:**
+
+```sql
+SELECT * FROM get_funnel_comparison(7);
+-- Returns current vs previous 7-day period
+```
+
+### Test Client-Side Tracker
+
+**In browser console (http://localhost:3000):**
+
+```javascript
+// Import tracker (add to page component first)
+import { FunnelTracker } from "@/lib/analytics/funnel-tracker";
+
+// Test page visit
+await FunnelTracker.pageVisit("/wijnen");
+
+// Test product view
+await FunnelTracker.productViewed("wine-123", "Rioja Reserva");
+
+// Test add to cart
+await FunnelTracker.addToCart("wine-123", 1);
+
+// Check localStorage session
+localStorage.getItem("vino12_session_id");
+// Expected: {"id":"session_...","timestamp":...}
+```
+
+**Verify in Network tab:**
+
+- POST to `/api/analytics/funnel`
+- Status: 201 Created
+- Response: `{"success":true,"data":{...}}`
+
+### Test React Hook
+
+**Add to any component:**
+
+```tsx
+"use client";
+import { useFunnelTracking } from "@/lib/analytics/funnel-tracker";
+
+export function TestComponent() {
+  const tracker = useFunnelTracking();
+
+  return (
+    <button onClick={() => tracker.pageVisit("/test")}>Track Page Visit</button>
+  );
+}
+```
+
+### Load Testing (Optional)
+
+**Generate 100 test events:**
+
+```bash
+for i in {1..100}; do
+  curl -X POST http://localhost:3000/api/analytics/funnel \
+    -H 'Content-Type: application/json' \
+    -d "{\"session_id\":\"load_test_$i\",\"event_type\":\"page_visit\",\"event_data\":{\"page\":\"/test\"},\"device_type\":\"desktop\",\"browser\":\"chrome\"}" \
+    > /dev/null 2>&1 &
+done
+wait
+echo "✓ Load test complete"
+```
+
+**Verify performance:**
+
+```sql
+-- Check event count
+SELECT COUNT(*) FROM funnel_events;
+
+-- Check query performance
+EXPLAIN ANALYZE
+SELECT * FROM funnel_overview;
+-- Expected: <100ms with indexes
+```
+
+### Metabase Integration Test
+
+1. **Start Metabase:**
+
+```bash
+docker-compose up -d metabase
+open http://localhost:3200
+```
+
+2. **Connect to Supabase** (follow `metabase-setup.md`)
+
+3. **Test queries:**
+   - Browse Data → VINO12 Supabase → `funnel_overview`
+   - Create simple question: "Show funnel overview for last 7 days"
+   - Verify data appears
+
+4. **Test Sankey visualization:**
+
+```sql
+SELECT * FROM funnel_sankey;
+-- Should return 4 rows (Visit→Product, Product→Cart, Cart→Checkout, Checkout→Paid)
+```
+
+### Expected Results Summary
+
+| Test                 | Expected Outcome                |
+| -------------------- | ------------------------------- |
+| API Health           | `{"status":"ok"}`               |
+| POST event           | `{"success":true}`              |
+| Database insert      | Row appears in `funnel_events`  |
+| Session journey      | Event sequence array populated  |
+| Device breakdown     | Mobile/desktop stats            |
+| Funnel overview      | Daily metrics with conversion % |
+| Period comparison    | Current vs previous period      |
+| Client-side tracking | Network POST → 201 response     |
+| Metabase queries     | Data appears in UI              |
+
+---
+
 ## Troubleshooting
 
 ### Events Not Tracking
