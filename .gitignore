@@ -78,6 +78,11 @@ docker-data/
 
 # Storybook
 storybook-static/
+.storybook/__snapshots__/__diff_output__/
+
+# Stryker mutation testing
+.stryker-tmp/
+reports/mutation/
 
 # OS
 Thumbs.db
