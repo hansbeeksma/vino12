@@ -17,6 +17,7 @@ export const Default: Story = {
 };
 
 export const WithContent: Story = {
+  args: { children: "Label" },
   render: () => (
     <div>
       <SectionLabel>Featured wines</SectionLabel>

@@ -60,6 +60,7 @@ export const NoHover: Story = {
 };
 
 export const WineProductCard: Story = {
+  args: { children: "Card" },
   render: () => (
     <BrutalCard className="max-w-sm">
       <div className="aspect-[3/4] bg-champagne flex items-center justify-center">

@@ -55,6 +55,7 @@ export const GoldBar: Story = {
 };
 
 export const TastingProfile: Story = {
+  args: { value: 3 },
   render: () => (
     <div className="space-y-3 max-w-md">
       <div>

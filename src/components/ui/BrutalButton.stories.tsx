@@ -77,6 +77,7 @@ export const AsLink: Story = {
 };
 
 export const AllVariants: Story = {
+  args: { children: "Button" },
   render: () => (
     <div className="flex flex-wrap gap-4 items-center">
       <BrutalButton variant="primary">Primary</BrutalButton>
@@ -88,6 +89,7 @@ export const AllVariants: Story = {
 };
 
 export const AllSizes: Story = {
+  args: { children: "Button" },
   render: () => (
     <div className="flex flex-wrap gap-4 items-center">
       <BrutalButton size="sm">Small</BrutalButton>

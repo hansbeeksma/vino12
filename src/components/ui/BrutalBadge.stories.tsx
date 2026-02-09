@@ -45,6 +45,7 @@ export const Champagne: Story = {
 };
 
 export const AllVariants: Story = {
+  args: { children: "Badge" },
   render: () => (
     <div className="flex flex-wrap gap-3">
       <BrutalBadge variant="wine">Piemonte</BrutalBadge>
