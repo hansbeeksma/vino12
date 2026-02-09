@@ -84,5 +84,8 @@ storybook-static/
 .stryker-tmp/
 reports/mutation/
 
+# Claude Code
+.claude/
+
 # OS
 Thumbs.db
