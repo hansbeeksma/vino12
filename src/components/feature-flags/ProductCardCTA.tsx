@@ -1,7 +1,7 @@
 "use client";
 
 import { useFeature } from "@growthbook/growthbook-react";
-import { Button } from "@/components/ui/button";
+import { BrutalButton } from "@/components/ui/BrutalButton";
 
 /**
  * Example A/B test component: Product Card CTA
@@ -30,11 +30,10 @@ export function ProductCardCTA({ productId }: { productId: string }) {
   const ctaText = experiment.value?.text || "Bekijk";
 
   return (
-    <Button
-      variant="outline"
+    <BrutalButton
+      variant="outline-solid"
       className="w-full"
       onClick={() => {
-        // Track click for analytics
         if (typeof window !== "undefined" && window.gtag) {
           window.gtag("event", "product_card_click", {
             product_id: productId,
@@ -44,6 +43,6 @@ export function ProductCardCTA({ productId }: { productId: string }) {
       }}
     >
       {ctaText}
-    </Button>
+    </BrutalButton>
   );
 }

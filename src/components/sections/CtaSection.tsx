@@ -2,8 +2,34 @@
 
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
+import { useFeature, FeatureFlags } from "@/lib/growthbook/useFeature";
 
+const CTA_VARIANTS = {
+  control: "Bekijk wijnen →",
+  variant_a: "Ontdek onze wijnen →",
+  variant_b: "Proef 12 curated wijnen →",
+} as const;
+
+type CtaVariant = keyof typeof CTA_VARIANTS;
+
+/**
+ * Homepage CTA with A/B experiment support.
+ *
+ * Experiment: homepage-cta-text (GrowthBook)
+ * - control: "Bekijk wijnen →"
+ * - variant_a: "Ontdek onze wijnen →"
+ * - variant_b: "Proef 12 curated wijnen →"
+ *
+ * Success metric: page_viewed on /wijnen (tracked by PageViewTracker).
+ * Experiment exposure is tracked automatically by GrowthBook SDK.
+ */
 export function CtaSection() {
+  const ctaVariant = useFeature<CtaVariant>(
+    FeatureFlags.HOMEPAGE_CTA_TEXT,
+    "control",
+  );
+  const ctaText = CTA_VARIANTS[ctaVariant] ?? CTA_VARIANTS.control;
+
   return (
     <section
       id="bestel"
@@ -26,7 +52,7 @@ export function CtaSection() {
 
           <div className="flex flex-col items-center gap-4">
             <BrutalButton variant="gold" size="lg" href="/wijnen">
-              Bekijk wijnen →
+              {ctaText}
             </BrutalButton>
             <p className="font-accent text-[10px] text-ink/40 uppercase tracking-widest">
               Levering binnen 3-5 werkdagen · 18+ verificatie bij levering

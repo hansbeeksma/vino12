@@ -1,8 +1,7 @@
 "use client";
 
 import { useFeature } from "@growthbook/growthbook-react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, ShoppingCart } from "lucide-react";
+import { BrutalButton } from "@/components/ui/BrutalButton";
 
 /**
  * Example feature flag component: New Checkout Flow
@@ -20,23 +19,16 @@ export function NewCheckoutButton() {
   const newCheckoutFlow = useFeature("new-checkout-flow");
 
   if (newCheckoutFlow.on) {
-    // New checkout experience (feature ON)
     return (
-      <Button
-        size="lg"
-        className="w-full bg-wine-600 hover:bg-wine-700 text-white"
-      >
-        <ShoppingCart className="mr-2 h-5 w-5" />
+      <BrutalButton variant="primary" size="lg" className="w-full">
         Veilig Afrekenen
-        <ArrowRight className="ml-2 h-5 w-5" />
-      </Button>
+      </BrutalButton>
     );
   }
 
-  // Default checkout button (feature OFF)
   return (
-    <Button size="lg" className="w-full">
+    <BrutalButton variant="outline-solid" size="lg" className="w-full">
       Naar Afrekenen
-    </Button>
+    </BrutalButton>
   );
 }

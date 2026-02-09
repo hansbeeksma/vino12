@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import { BrutalButton } from "@/components/ui/BrutalButton";
 import { WineCarousel } from "@/components/sections/WineCarousel";
 import { FeatureFlag } from "@/components/ui/FeatureFlag";
+import { HomepageCTA } from "@/components/experiments/HomepageCTA";
 import type { WineRow } from "@/lib/api/wines";
 
 const WineParticles = lazy(() =>
@@ -52,9 +53,7 @@ export function HeroSection({ wines }: HeroSectionProps) {
 
       <div className="container-brutal px-4 md:px-8 pt-8 pb-16 relative z-10">
         <div className="flex flex-wrap items-center gap-4">
-          <BrutalButton variant="primary" size="lg" href="/wijnen">
-            Ontdek de box →
-          </BrutalButton>
+          <HomepageCTA />
           <BrutalButton variant="outline-solid" size="lg" href="#collectie">
             Bekijk collectie ↓
           </BrutalButton>

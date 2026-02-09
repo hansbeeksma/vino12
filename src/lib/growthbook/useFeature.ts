@@ -38,8 +38,8 @@ export const FeatureFlags = {
   // Analytics
   ENABLE_DETAILED_TRACKING: "enable-detailed-tracking",
 
-  // MAWCM Experiment (first A/B test!)
-  MAWCM_EXPERIMENT_CTA: "mawcm-experiment-cta",
+  // Homepage CTA Experiment (first A/B test!)
+  HOMEPAGE_CTA_TEXT: "homepage-cta-text",
 } as const;
 
 export type FeatureFlagKey = (typeof FeatureFlags)[keyof typeof FeatureFlags];
