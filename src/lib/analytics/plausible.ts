@@ -67,3 +67,11 @@ export function trackWineView(wineSlug: string) {
 export function trackNewsletterSignup() {
   trackEvent("Newsletter Signup");
 }
+
+/** Homepage CTA click (A/B experiment tracking) */
+export function trackHomepageCTAClick(variant: string) {
+  trackEvent("Homepage CTA Click", {
+    variant,
+    experiment: "homepage-cta-text",
+  });
+}

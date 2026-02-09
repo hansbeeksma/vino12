@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Space_Mono, Darker_Grotesque } from "next/font/google";
 import { GrowthBookProvider } from "@/lib/growthbook/GrowthBookProvider";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import "./globals.css";
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -87,7 +88,10 @@ export default function RootLayout({
         )}
       </head>
       <body className="bg-offwhite text-ink antialiased">
-        <GrowthBookProvider>{children}</GrowthBookProvider>
+        <GrowthBookProvider>
+          <PageViewTracker />
+          {children}
+        </GrowthBookProvider>
       </body>
     </html>
   );
